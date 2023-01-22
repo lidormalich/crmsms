@@ -1,0 +1,144 @@
+{
+  "users": [
+    {
+      "id": 2,
+      "name": "lidor",
+      "email": "admin@crm.com",
+      "password": "12345678"
+    },
+    {
+      "email": "david@gmail.com",
+      "password": "12345678",
+      "name": "adaad",
+      "id": 3
+    },
+    {
+      "email": "david@gmail.com",
+      "password": "12345678",
+      "name": "adaad",
+      "id": 4
+    },
+    {
+      "email": "ad555min@gmail.com",
+      "password": "adminadmin",
+      "name": "Malich-Mi",
+      "id": 5
+    },
+    {
+      "email": "ad555min@gmail.com",
+      "password": "adminadmin",
+      "name": "Malich-Mi",
+      "id": 6
+    },
+    {
+      "email": "ad555min@gmail.com",
+      "password": "adminadmin",
+      "name": "Malich-Mi",
+      "id": 7
+    },
+    {
+      "email": "ad555min@gmail.com",
+      "password": "adminadmin",
+      "name": "Malich-Mi",
+      "id": 8
+    },
+    {
+      "email": "ad555min@gmail.com",
+      "password": "adminadmin",
+      "name": "Malich-Mi",
+      "id": 9
+    },
+    {
+      "email": "ad555min@gmail.com",
+      "password": "adminadmin",
+      "name": "Malich-Mi",
+      "id": 10
+    },
+    {
+      "email": "ad555min@gmail.com",
+      "password": "adminadmin",
+      "name": "Malich-Mi",
+      "id": 11
+    },
+    {
+      "email": "ad555min@gmail.com",
+      "password": "adminadmin",
+      "name": "Malich-Mi",
+      "id": 12
+    },
+    {
+      "email": "ad555min@gmail.com",
+      "password": "adminadmin",
+      "name": "Malich-Mi",
+      "id": 13
+    },
+    {
+      "email": "admiSSsn@gmail.com",
+      "password": "adminadmin",
+      "name": "Malich_Redmi",
+      "id": 14
+    },
+    {
+      "email": "admin@gmail.com",
+      "password": "adminadmin",
+      "name": "לידור מליח",
+      "id": 15
+    }
+  ],
+  "campaign": [
+    {
+      "id": 1,
+      "uuid": "55555",
+      "campaignName": "string",
+      "ownerName": "string",
+      "phone": "string",
+      "pepoleCome": [
+        {
+          "id": 1,
+          "phoneNumber": "+972526761204",
+          "firstName": "Lidor",
+          "lastName": "DEMO",
+          "NumberOfGuests": 5,
+          "NumberOfGuestsAccept": 4
+        }
+      ]
+    },
+    {
+      "campaignName": "יוחאי וירדן חתונה",
+      "ownerName": "ברכה",
+      "phone": "0525361195",
+      "uuid": "f5637f24-bdc7-4e6d-9eda-9a60ae9b5040",
+      "id": 2
+    },
+    {
+      "campaignName": "יוחאי וירדן חתונה",
+      "ownerName": "ברכה",
+      "phone": "0526761204",
+      "uuid": "1f9e9118-47f0-4cda-a9b4-895314d221dd",
+      "id": 3
+    }
+  ],
+  "books": [
+    {
+      "name": "NO BOOK",
+      "author": "J.K. Rolling",
+      "genre": "Novel",
+      "price": 207,
+      "id": 1
+    },
+    {
+      "name": "i dont know",
+      "author": "really?",
+      "genre": "Biography",
+      "price": 12,
+      "id": 5
+    },
+    {
+      "name": "new",
+      "author": "test",
+      "genre": "Kids",
+      "price": 555,
+      "id": 6
+    }
+  ]
+}
