@@ -83,6 +83,42 @@
       "password": "adminadmin",
       "name": "לידור מליח",
       "id": 15
+    },
+    {
+      "email": "fackmailtest@gmail.com",
+      "password": "12345678",
+      "name": "test",
+      "id": 16
+    },
+    {
+      "email": "fackmailtest@gmail.com",
+      "password": "12345678",
+      "name": "test",
+      "id": 17
+    },
+    {
+      "email": "fackmailtest1@gmail.com",
+      "password": "12345678",
+      "name": "Malich_Mi",
+      "id": 18
+    },
+    {
+      "email": "fackmailtest1@gmail.com",
+      "password": "12345678",
+      "name": "Malich_Mi",
+      "id": 19
+    },
+    {
+      "email": "fackmailtest1@gmail.com",
+      "password": "12345678",
+      "name": "Malich_Mi",
+      "id": 20
+    },
+    {
+      "email": "fackmailtest1@gmail.com",
+      "password": "12345678",
+      "name": "Malich_Mi",
+      "id": 21
     }
   ],
   "campaign": [
@@ -120,7 +156,7 @@
   ],
   "books": [
     {
-      "name": "NO BOOK",
+      "name": "NO BOOK2",
       "author": "J.K. Rolling",
       "genre": "Novel",
       "price": 207,

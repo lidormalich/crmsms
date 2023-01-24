@@ -4,7 +4,7 @@ import { useNavigate, Link } from "react-router-dom";
 import * as yup from "yup";
 import { date } from "yup/lib/locale";
 import User from "../interfaces/User";
-import { errorMessage, successMessage } from "../services/FeedbackService";
+import { errorMessage, successMessage as successMsg } from "../services/FeedbackService";
 import { addUser } from "../services/userServices";
 interface RegisterProps {
     isLogin: boolean;
@@ -16,45 +16,41 @@ const Register: FunctionComponent<RegisterProps> = ({ setIsLogIn }) => {
     let formik = useFormik({
         initialValues: { email: "", password: "", name: "" },
         validationSchema: yup.object({
+            name: yup.string().required().min(2),
             email: yup.string().required().email().min(5),
             password: yup.string().required().min(8),
-            name: yup.string().required().min(3),
         }),
         onSubmit: (values: User) => {
             addUser(values)
-                .then((res) => {
-                    if (res.data.length) {
-                        setIsLogIn(true);
-                        sessionStorage.setItem("IsLoggedIn", "true");
-                        sessionStorage.setItem("userName", res.data[0].name as string);
-                        successMessage("You Resgter now and Loged-In :)");
-                        navigate('/home')
-                    }
-                }).catch((e) => {
-                    errorMessage("Sorry! Something went wrong... try agin!");
-                    console.log(e);
-                });
-        }
-    })
-
-    return (<>
-        <div className="container mt-5 col-md-4">
-            <h5 className="display-5">Register</h5>
+                .then(() => {
+                    navigate("/home");
+                    sessionStorage.setItem(
+                        "userData",
+                        JSON.stringify({ isLoggedIn: true })
+                    );
+                    successMsg("You registered successfully!");
+                })
+                .catch((err) => console.log(err));
+        },
+    });
+    return (
+        <div className="container mt-3 col-md-4 text-center">
+            <h3 className="display-3">REGISTER</h3>
             <form onSubmit={formik.handleSubmit}>
                 <div className="form-floating mb-3">
                     <input
-                        type="name"
+                        type="text"
                         className="form-control"
-                        id="floatingName"
-                        placeholder="name@example.com"
+                        id="floatingInputName"
+                        placeholder="John"
                         name="name"
-                        value={formik.values.name}
                         onChange={formik.handleChange}
+                        value={formik.values.name}
                         onBlur={formik.handleBlur}
                     />
-                    <label htmlFor="floatingInput">Name</label>
+                    <label htmlFor="floatingInputName">Name</label>
                     {formik.touched.name && formik.errors.name && (
-                        <small className="text-danger">{formik.errors.name}</small>
+                        <p className="text-danger">{formik.errors.name}</p>
                     )}
                 </div>
                 <div className="form-floating mb-3">
@@ -64,16 +60,15 @@ const Register: FunctionComponent<RegisterProps> = ({ setIsLogIn }) => {
                         id="floatingInput"
                         placeholder="name@example.com"
                         name="email"
-                        value={formik.values.email}
                         onChange={formik.handleChange}
+                        value={formik.values.email}
                         onBlur={formik.handleBlur}
                     />
                     <label htmlFor="floatingInput">Email address</label>
                     {formik.touched.email && formik.errors.email && (
-                        <small className="text-danger">{formik.errors.email}</small>
+                        <p className="text-danger">{formik.errors.email}</p>
                     )}
                 </div>
-
                 <div className="form-floating">
                     <input
                         type="password"
@@ -81,22 +76,26 @@ const Register: FunctionComponent<RegisterProps> = ({ setIsLogIn }) => {
                         id="floatingPassword"
                         placeholder="Password"
                         name="password"
-                        value={formik.values.password}
                         onChange={formik.handleChange}
+                        value={formik.values.password}
                         onBlur={formik.handleBlur}
                     />
                     <label htmlFor="floatingPassword">Password</label>
                     {formik.touched.password && formik.errors.password && (
-                        <small className="text-danger">{formik.errors.password}</small>
+                        <p className="text-danger">{formik.errors.password}</p>
                     )}
                 </div>
-                <button type="submit" className="btn btn-success w-100 my-3"
-                    disabled={!formik.isValid || !formik.dirty}>Register</button>
+                <button
+                    type="submit"
+                    className="btn btn-secondary w-100 my-3"
+                    disabled={!formik.dirty || !formik.isValid}
+                >
+                    Register
+                </button>
             </form>
-            <Link to={"/"}>alreday in system? Log-In now</Link>
+            <Link to="/">Already have user? Login here</Link>
         </div>
-
-    </>);
-}
+    );
+};
 
 export default Register;

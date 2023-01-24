@@ -1,7 +1,8 @@
 import axios from "axios";
 import User from "../interfaces/User";
+import { API } from "../setting/conction";
 
-const api: string = process.env.REACT_APP_API_USERS + "/users";
+const api: string = API + "/users";
 
 // check user
 export function checkUser(usertoChack: User) {

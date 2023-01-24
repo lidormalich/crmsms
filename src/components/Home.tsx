@@ -11,6 +11,7 @@ interface HomeProps {
 const Home: FunctionComponent<HomeProps> = ({ isLogin, setIsLogIn }) => {
     // משתני עזר לרענון הקומפוננטה בלי רענון הדף
     let [booksChange, setBooksChanged] = useState<boolean>(false);
+
     return (<>
         <div className="container">
             {isLogin ? (<>

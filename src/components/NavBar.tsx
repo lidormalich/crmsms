@@ -36,8 +36,8 @@ const NavBar: FunctionComponent<NavBarProps> = ({ isLogin, setIsLogIn }) => {
                     {isLogin && <>
                         <Nav className="me-5">
                             <NavDropdown title={`Hi ${sessionStorage.getItem("userName")}`} id="collasible-nav-dropdown">
-                                <NavDropdown.Item href="#action/3.2">
-                                    Another action
+                                <NavDropdown.Item href="/profile">
+                                    Profile Info
                                 </NavDropdown.Item>
                                 <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
                                 <NavDropdown.Divider />
