@@ -14,15 +14,20 @@ interface RegisterProps {
 const Register: FunctionComponent<RegisterProps> = ({ setIsLogIn }) => {
     let navigate = useNavigate();
     let formik = useFormik({
-        initialValues: { email: "", password: "", name: "" },
+        initialValues: { email: "", password: "", first_name: "", last_name: "" },
         validationSchema: yup.object({
-            name: yup.string().required().min(2),
+            first_name: yup.string().required().min(2),
+            last_name: yup.string().required().min(2),
             email: yup.string().required().email().min(5),
             password: yup.string().required().min(8),
         }),
         onSubmit: (values: User) => {
             addUser(values)
                 .then(() => {
+                    console.log("Hare");
+
+                    console.log(values);
+
                     navigate("/home");
                     sessionStorage.setItem(
                         "userData",
@@ -41,16 +46,32 @@ const Register: FunctionComponent<RegisterProps> = ({ setIsLogIn }) => {
                     <input
                         type="text"
                         className="form-control"
-                        id="floatingInputName"
+                        id="floatingInputfirstName"
                         placeholder="John"
-                        name="name"
+                        name="first_name"
                         onChange={formik.handleChange}
-                        value={formik.values.name}
+                        value={formik.values.first_name}
                         onBlur={formik.handleBlur}
                     />
-                    <label htmlFor="floatingInputName">Name</label>
-                    {formik.touched.name && formik.errors.name && (
-                        <p className="text-danger">{formik.errors.name}</p>
+                    <label htmlFor="floatingInputfirstName">first_name</label>
+                    {formik.touched.first_name && formik.errors.first_name && (
+                        <p className="text-danger">{formik.errors.first_name}</p>
+                    )}
+                </div>
+                <div className="form-floating mb-3">
+                    <input
+                        type="text"
+                        className="form-control"
+                        id="floatingInputlastName"
+                        placeholder="John"
+                        name="last_name"
+                        onChange={formik.handleChange}
+                        value={formik.values.last_name}
+                        onBlur={formik.handleBlur}
+                    />
+                    <label htmlFor="floatingInputlastName">last_name</label>
+                    {formik.touched.last_name && formik.errors.last_name && (
+                        <p className="text-danger">{formik.errors.last_name}</p>
                     )}
                 </div>
                 <div className="form-floating mb-3">

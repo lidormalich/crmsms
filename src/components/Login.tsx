@@ -5,7 +5,7 @@ import * as yup from "yup";
 import { date } from "yup/lib/locale";
 import User from "../interfaces/User";
 import { errorMessage, successMessage } from "../services/FeedbackService";
-import { checkUser, checkUserreturnName } from "../services/userServices";
+import { checkUser } from "../services/userServices";
 
 interface LoginProps {
     setIsLogIn: Function;
@@ -20,17 +20,21 @@ const Login: FunctionComponent<LoginProps> = ({ setIsLogIn }) => {
             password: yup.string().required().min(8)
         }),
         onSubmit: (values: User) => {
-            checkUser(values).then((res) => {
-                if (res.data.length) {
-                    setIsLogIn(true);
-                    sessionStorage.setItem("IsLoggedIn", "true");
-                    sessionStorage.setItem("userName", res.data[0].name as string);
-                    successMessage("You Loged-In :)");
-                    navigate('/home');
-                }
-                else { navigate('/'); }
-            }).catch((e) => { errorMessage("Wrong info"); console.log(e); }
-            );
+            checkUser(values)
+                .then((res) => {
+                    console.log(res.data);
+                    console.log(res.data.error);
+
+                    if (res.data.error == false) {
+                        setIsLogIn(true);
+                        sessionStorage.setItem("IsLoggedIn", "true");
+                        sessionStorage.setItem("userName", res.data.first_name as string);
+                        successMessage("You Loged-In :)");
+                        navigate('/home');
+                    }
+                    else { navigate('/'); }
+                }).catch((e) => { errorMessage("Wrong info"); console.log(e); }
+                );
         }
     })
 

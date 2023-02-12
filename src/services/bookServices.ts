@@ -1,9 +1,8 @@
 import axios from "axios";
 import Book from "../interfaces/Book";
-import { API } from "../setting/conction";
 
 
-const api: string = API + "/books";
+const api: string = `${process.env.REACT_APP_API}/books` || "";
 
 // get all books
 export function getBook() {

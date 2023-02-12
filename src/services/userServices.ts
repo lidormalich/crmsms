@@ -1,18 +1,17 @@
 import axios from "axios";
 import User from "../interfaces/User";
-import { API } from "../setting/conction";
 
-const api: string = API + "/users";
+const api: string = process.env.REACT_APP_API || "";
 
 // check user
 export function checkUser(usertoChack: User) {
-    return axios.get(`${api}?email=${usertoChack.email}&password=${usertoChack.password}`);
+    return axios.post(`${api}/login`, usertoChack);
 }
-export function checkUserreturnName(usertoChack: User) {
-    return axios.get(`${api}?email=${usertoChack.email}&password=${usertoChack.password}`)
-}
+// export function checkUserreturnName(usertoChack: User) {
+//     return axios.post(`${api}/login`, usertoChack);
+// }
 
 // add user
 export function addUser(userToAdd: User) {
-    return axios.post(api, userToAdd);
+    return axios.post(`${api}/register`, userToAdd);
 }

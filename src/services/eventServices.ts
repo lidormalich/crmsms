@@ -1,8 +1,8 @@
 import axios from "axios";
 import EventInterface from "../interfaces/EventInterface";
-import { API } from "../setting/conction";
 
-const api: string = API + "/campaign";
+const api: string = `${process.env.REACT_APP_API}/campaign` || "";
+
 
 // get all Events
 export function getEvent() {
