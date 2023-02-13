@@ -35,8 +35,8 @@ function App() {
             <Route path='/NewCampaign' element={<CreatNewCamp />} />
             <Route path='/campaign/:eventId' element={<p>not have 2222access</p>} />
             <Route path='/:eventId/:phone' element={<NotHaveAccess />} />
-            <Route path='/NotHaveAccess' element={<NotHaveAccess />} />
-            <Route path='/Invitation' element={<WeddingInvitation />} />
+            <Route path='/nothaveaccess' element={<NotHaveAccess />} />
+            <Route path='/invitation' element={<WeddingInvitation />} />
             <Route path='*' element={<PagenotFound />} />
           </Routes>
         </Router>
