@@ -22,9 +22,6 @@ const Login: FunctionComponent<LoginProps> = ({ setIsLogIn }) => {
         onSubmit: (values: User) => {
             checkUser(values)
                 .then((res) => {
-                    console.log(res.data);
-                    console.log(res.data.error);
-
                     if (res.data.error == false) {
                         setIsLogIn(true);
                         sessionStorage.setItem("IsLoggedIn", "true");
@@ -32,7 +29,7 @@ const Login: FunctionComponent<LoginProps> = ({ setIsLogIn }) => {
                         successMessage("You Loged-In :)");
                         navigate('/home');
                     }
-                    else { navigate('/'); }
+                    else { navigate('/'); errorMessage("Wrong info"); }
                 }).catch((e) => { errorMessage("Wrong info"); console.log(e); }
                 );
         }

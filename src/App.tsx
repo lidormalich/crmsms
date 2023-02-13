@@ -12,6 +12,7 @@ import { ToastContainer } from 'react-toastify';
 import NewCampaign from './components/NewCampaign';
 import NotHaveAccess from './components/NotHaveAccess';
 import CreatNewCamp from './components/CreatNewCamp';
+import WeddingInvitation from './components/WeddingInvitation/WeddingInvitation';
 
 export let siteTheme = React.createContext(false);
 function App() {
@@ -35,6 +36,7 @@ function App() {
             <Route path='/campaign/:eventId' element={<p>not have 2222access</p>} />
             <Route path='/:eventId/:phone' element={<NotHaveAccess />} />
             <Route path='/NotHaveAccess' element={<NotHaveAccess />} />
+            <Route path='/Invitation' element={<WeddingInvitation />} />
             <Route path='*' element={<PagenotFound />} />
           </Routes>
         </Router>

@@ -53,7 +53,7 @@ const Register: FunctionComponent<RegisterProps> = ({ setIsLogIn }) => {
                         value={formik.values.first_name}
                         onBlur={formik.handleBlur}
                     />
-                    <label htmlFor="floatingInputfirstName">first_name</label>
+                    <label htmlFor="floatingInputfirstName">First Name</label>
                     {formik.touched.first_name && formik.errors.first_name && (
                         <p className="text-danger">{formik.errors.first_name}</p>
                     )}
@@ -69,7 +69,7 @@ const Register: FunctionComponent<RegisterProps> = ({ setIsLogIn }) => {
                         value={formik.values.last_name}
                         onBlur={formik.handleBlur}
                     />
-                    <label htmlFor="floatingInputlastName">last_name</label>
+                    <label htmlFor="floatingInputlastName">Last Name</label>
                     {formik.touched.last_name && formik.errors.last_name && (
                         <p className="text-danger">{formik.errors.last_name}</p>
                     )}
