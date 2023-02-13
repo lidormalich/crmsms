@@ -20,11 +20,11 @@ const WeddingInvitation: FunctionComponent<WeddingInvitationProps> = () => {
                 <div className="col-md-12">
                     <div className="card davetiye shadow">
                         <div className="card-body text-center">
-                            <h1 className="isimler">Berkay<br /><span className="isimve">&</span><br />Özlem</h1>
-                            <h5 className="ust_text">Düğünümüze Davetlisin</h5>
+                            <h1 className="isimler">לידור<br /><span className="isimve">&</span><br />טליה</h1>
+                            <h5 className="ust_text">מזמינים אתכם לחתונתם</h5>
                             <div className="row mt-4" style={{ fontSize: "13px;" }}>
                                 <div className="col">
-                                    <p className="mb-0">Alper - Gülhan</p>
+                                    <p className="mb-0">מליח-אנג'ל</p>
                                     <p>Kara</p>
                                 </div>
                                 <div className="col">
