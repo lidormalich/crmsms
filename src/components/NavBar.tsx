@@ -19,8 +19,8 @@ const NavBar: FunctionComponent<NavBarProps> = ({ isLogin, setIsLogIn }) => {
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                 <Navbar.Collapse id="responsive-navbar-nav">
                     <Nav className="me-auto">
-                        <Nav.Link href="/NewCampaign">New Campaign</Nav.Link>
-                        <Nav.Link href="/Invitation">Invitation</Nav.Link>
+                        <Nav.Link href="/newcampaign">New Campaign</Nav.Link>
+                        <Nav.Link href="/invitation">Invitation</Nav.Link>
                         <Nav.Link href="#pricing">Pricing</Nav.Link>
                         <NavDropdown title="Dropdown" id="collasible-nav-dropdown">
                             <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
