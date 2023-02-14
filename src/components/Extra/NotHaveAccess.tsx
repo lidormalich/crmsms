@@ -1,4 +1,5 @@
 import { FunctionComponent } from "react";
+import { Link } from "react-router-dom";
 import './NotHaveAccess.css';
 
 interface NotHaveAccessProps {
@@ -19,6 +20,8 @@ const NotHaveAccess: FunctionComponent<NotHaveAccessProps> = () => {
         {/* <div className="forbidden">
             <h2> <i className="fa fa-exclamation-triangle logo">  </i> 403 Forbidden </h2>
         </div> */}
+        <Link to="/login">To do so, you need to Log-In.</Link>
+
     </>);
 }
 

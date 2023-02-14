@@ -5,29 +5,32 @@ import { useFormik } from "formik";
 import Book from "../interfaces/Book";
 import { Button } from "react-bootstrap";
 import { successMessage } from "../services/FeedbackService";
+import People from "../interfaces/People";
+import { updatePeopleInEvent } from "../services/eventServices";
 
 interface UpdateBookProps {
-    id: number;
+    id: string;
     refresh: Function;
     onHide: Function;
 }
 
 const UpdateBook: FunctionComponent<UpdateBookProps> = ({ id, refresh, onHide }) => {
-    let [userBook, setUserBook] = useState<Book>({
-        name: "",
-        author: "",
-        genre: "",
-        price: 0,
+    let [userBook, setUserBook] = useState<People>({
+        // id?: number,
+        phoneNumber: "",
+        firstName: "",
+        lastName: "",
+        NumberOfGuests: 0,
+        NumberOfGuestsAccept: 0,
     });
     useEffect(() => {
-        getBookByID(id).then((res) => setUserBook(res.data)).catch((e) => console.log(e));
-        formik.setFieldValue("price", "")
+        // getBookByID(id).then((res) => setUserBook(res.data)).catch((e) => console.log(e));
     }, []);
 
 
 
     let formik = useFormik({
-        initialValues: { name: userBook.name as string, author: userBook.author as string, genre: userBook.genre as string, price: userBook.price as number },
+        initialValues: { phoneNumber: "", firstName: "", lastName: "", NumberOfGuests: 0, NumberOfGuestsAccept: 0 },
         enableReinitialize: true,
         validationSchema: yup.object({
             name: yup.string().required().min(2),
@@ -35,8 +38,8 @@ const UpdateBook: FunctionComponent<UpdateBookProps> = ({ id, refresh, onHide })
             genre: yup.string().required().min(2),
             price: yup.number().required().positive(),
         }),
-        onSubmit: (values: Book) => {
-            updateBook(id, values).then((res) => {
+        onSubmit: (values: People) => {
+            updatePeopleInEvent(id + "", values).then((res) => {
                 onHide();
                 successMessage("Book data change and save");
                 refresh();
@@ -46,75 +49,86 @@ const UpdateBook: FunctionComponent<UpdateBookProps> = ({ id, refresh, onHide })
     })
     return (<>
         <div>
-            <h5 className="display-5"> Update Book {userBook.name}</h5>
-            <form onSubmit={formik.handleSubmit} className="">
+            <h5 className="display-5"> Update Book { }</h5>
+            <form onSubmit={formik.handleSubmit}>
                 <div className="form-floating mb-3">
                     <input
-                        type="text"
+                        type="tel"
                         className="form-control"
-                        id="bookname"
+                        id="phoneNumber"
                         placeholder="Harry Potter"
-                        name="name"
-                        value={formik.values.name}
+                        name="phoneNumber"
+                        value={formik.values.phoneNumber}
                         onChange={formik.handleChange}
                         onBlur={formik.handleBlur}
                     />
-                    <label htmlFor="bookname">Book Name</label>
-                    {formik.touched.name && formik.errors.name && (
-                        <small className="text-danger">{formik.errors.name}</small>
+                    <label htmlFor="bookname">Phone Number</label>
+                    {formik.touched.phoneNumber && formik.errors.phoneNumber && (
+                        <small className="text-danger">{formik.errors.phoneNumber}</small>
                     )}
                 </div>
                 <div className="form-floating mb-3">
                     <input
                         type="text"
                         className="form-control"
-                        id="author"
+                        id="firstName"
                         placeholder="textme"
-                        name="author"
-                        value={formik.values.author}
+                        name="firstName"
+                        value={formik.values.firstName}
                         onChange={formik.handleChange}
                         onBlur={formik.handleBlur}
                     />
-                    <label htmlFor="author">Book Author</label>
-                    {formik.touched.author && formik.errors.author && (
-                        <small className="text-danger">{formik.errors.author}</small>
+                    <label htmlFor="firstName">First Name</label>
+                    {formik.touched.firstName && formik.errors.firstName && (
+                        <small className="text-danger">{formik.errors.firstName}</small>
                     )}
                 </div>
                 <div className="form-floating mb-3">
-
-                    <select className="form-select"
-                        id="genre"
-                        placeholder="name@example.com"
-                        name="genre"
-                        value={formik.values.genre}
+                    <input
+                        type="text"
+                        className="form-control"
+                        id="lastName"
+                        placeholder="textme"
+                        name="lastName"
+                        value={formik.values.lastName}
                         onChange={formik.handleChange}
                         onBlur={formik.handleBlur}
-                        aria-label="Default select example">
-                        {/* הסתרה וגם בחירה */}
-                        <option hidden selected>Select Book Genre</option>
-                        <option value="Novel">Novel</option>
-                        <option value="Biography">Biography</option>
-                        <option value="Kids">Kids</option>
-                    </select>
-                    <label htmlFor="genre">Book Genre</label>
-                    {formik.touched.genre && formik.errors.genre && (
-                        <small className="text-danger">{formik.errors.genre}</small>
+                    />
+                    <label htmlFor="lastName">Last Name</label>
+                    {formik.touched.lastName && formik.errors.lastName && (
+                        <small className="text-danger">{formik.errors.lastName}</small>
                     )}
                 </div>
                 <div className="form-floating mb-3">
                     <input
                         type="number"
                         className="form-control"
-                        id="price"
-                        placeholder="name@example.com"
-                        name="price"
-                        value={formik.values.price}
+                        id="NumberOfGuests"
+                        placeholder="textme"
+                        name="NumberOfGuests"
+                        value={formik.values.NumberOfGuests}
                         onChange={formik.handleChange}
                         onBlur={formik.handleBlur}
                     />
-                    <label htmlFor="price">Book Price</label>
-                    {formik.touched.price && formik.errors.price && (
-                        <small className="text-danger">{formik.errors.price}</small>
+                    <label htmlFor="NumberOfGuests">Number Of Guests Accept</label>
+                    {formik.touched.NumberOfGuests && formik.errors.NumberOfGuests && (
+                        <small className="text-danger">{formik.errors.NumberOfGuests}</small>
+                    )}
+                </div>
+                <div className="form-floating mb-3">
+                    <input
+                        type="number"
+                        className="form-control"
+                        id="NumberOfGuestsAccept"
+                        placeholder="textme"
+                        name="NumberOfGuestsAccept"
+                        value={formik.values.NumberOfGuestsAccept}
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                    />
+                    <label htmlFor="NumberOfGuestsAccept">Number Of Guests Accept</label>
+                    {formik.touched.NumberOfGuestsAccept && formik.errors.NumberOfGuestsAccept && (
+                        <small className="text-danger">{formik.errors.NumberOfGuestsAccept}</small>
                     )}
                 </div>
 

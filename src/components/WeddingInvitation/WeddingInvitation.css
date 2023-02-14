@@ -1,76 +1,145 @@
 @import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,400;1,400;1,500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bellefair&family=Orbitron&family=Solitreo&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bona+Nova&display=swap');
 
-.davetiye {
+@font-face {
+    font-family: yiddishkeit;
+    /* font-weight: ; */
+    src: url("../../Font/yiddishkeit.otf") format("opentype");
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+}
+
+.body {
+    background-color: #f2f2f2;
+}
+
+.basad {
+    font-family: 'Bona Nova';
+}
+
+.invitation-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+}
+
+.invitation {
+    box-shadow: 0 0.5rem 1rem rgb(0 0 0 / 15%);
+    width: 100%;
+    height: 100%;
+    max-width: 528px;
+    position: relative;
     background-image: url(https://i.hizliresim.com/isC2JF.png);
     background-repeat: no-repeat;
-    background-size: contain;
     background-position: center;
-    width: 500px;
-    height: 685px;
-    border: none;
-    background-color: #F9F5F3;
+    background-color: #f9f5f3;
+    /* text-align: center; */
 }
 
-.wedding {
-    /* background-color: #EFC4BD; */
-    font-family: 'Oxygen', sans-serif;
+.invite-body {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 90%;
+    flex-direction: column;
+    gap: 16px;
+    padding: 16px;
 }
 
-.title {
-    font-family: 'Vidaloka', cursive;
-    font-weight: normal;
-    font-size: 5em;
-    line-height: 1.2em;
+.invite-title {
+    font-weight: 700;
     color: #b16908;
-    margin-bottom: 50px;
+    font-size: 3.5rem;
+    font-family: rubik;
 }
 
-.secondary {
-    font-family: 'Pinyon Script', cursive;
-    font-weight: normal;
-    color: #cccdce;
-    font-size: 1.5em;
+.title-curved-text {
+    font-family: Arial, Helvetica, sans-serif;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    right: 50%;
+    transform: translateX(50%);
 }
 
-.ust_text {
-    margin-top: 41px;
+.subtitle {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: rubik;
+}
+
+.time-hour {
+    font-family: Orbitron;
+    font-size: 1.7rem;
+    position: relative;
+}
+
+.time-hour::after {
+    content: "";
+    position: absolute;
+    background-color: #e0dcda;
+    width: 100%;
+    bottom: 15px;
+    left: 0;
+    height: 2px;
+}
+
+.time {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    gap: 22px;
+    flex-direction: row-reverse;
+}
+
+.details {
     font-size: 14px;
-    color: #2b2b2b;
 }
 
-.isimler {
-    /* font-family: 'Dancing Script', cursive !important; */
-    font-family: rubik !important;
-    line-height: 42px;
-    font-size: 78px;
-    margin-top: 87px;
-    color: #b16908;
-
+.opposite {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    transform: rotate(-90deg);
+    position: relative;
+    font-weight: 600;
+    font-size: 12px;
 }
 
-.isimve {
-    margin-right: -73px;
-    font-size: 42px;
+
+
+/* .opposite::after {
+    content: "";
+    position: absolute;
+    background-color: #e0dcda;
+    width: 100%;
+    bottom: 15px;
+    left: 0;
+    height: 2px;
+} */
+
+.times {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
 }
 
-.kina {
-    font-family: 'Dancing Script', cursive !important;
-    transform: rotate(270deg);
-    font-size: 25px;
-    border-bottom: 1px solid #e0dcda;
-    margin-top: 21px;
+.parents {
+    color: #18ed66;
+    font-weight: 400;
+    display: flex;
+    justify-content: space-between;
+    width: 90%;
+    margin-top: 20px;
 }
 
-.gun {
-    font-size: 51px;
-    margin-right: 9px;
-    margin-left: 9px;
-
-
-}
-
-.zaman {
-    font-size: 11px;
-    text-align: left;
-    margin-top: 16px;
+.parentsdetails {
+    text-align: center;
 }

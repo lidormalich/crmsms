@@ -6,7 +6,7 @@ interface UpdateModalProps {
     show: boolean;
     onHide: Function;
     refresh: Function;
-    id: number;
+    id: string;
 }
 
 const UpdateModal: FunctionComponent<UpdateModalProps> = ({ show, onHide, id, refresh }) => {

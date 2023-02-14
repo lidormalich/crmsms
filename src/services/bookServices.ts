@@ -23,6 +23,6 @@ export function updateBook(id: number, bookToUpdate: Book) {
     return axios.put(`${api}/${id}`, bookToUpdate);
 }
 // delete book
-export function deleteBook(id: number) {
+export function deleteBook(id: string) {
     return axios.delete(`${api}/${id}`);
 }

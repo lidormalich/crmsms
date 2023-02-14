@@ -1,85 +1,78 @@
 import { FunctionComponent } from "react";
+import EventInterface from "../../interfaces/EventInterface";
 import "./WeddingInvitation.css";
 
 interface WeddingInvitationProps {
-
+    eventInfo: EventInterface;
 }
 
-const WeddingInvitation: FunctionComponent<WeddingInvitationProps> = () => {
-
-    // <h1>Lloyd &amp; Diane's <span class="secondary">Wedding</span></h1>
+const WeddingInvitation: FunctionComponent<WeddingInvitationProps> = ({ eventInfo }) => {
 
 
     return (<>
+        <div className="body">
+            <div className="invitation-container">
+                <div className="invitation">
+                    <svg viewBox="0 0 500 500" className="title-curved-text">
+                        <path fill="transparent" id="curve"
+                            d="M73.2,148.6c4-6.1,65.5-96.8,178.6-95.6c111.3,1.2,170.8,90.3,175.1,97" />
+                        <text fill="black">
+                            <textPath xlinkHref="#curve" startOffset="50%" textAnchor="middle" style={{ fontFamily: "yiddishkeit" }}>
+                                "עוד ישמע בערי יהודה ובחוצות ירושלים קול ששון וקול שמחה קול חתן וקול כלה"
+                            </textPath>
+                        </text>
+                    </svg>
+                    <small className="basad">בס"ד</small>
+                    <div className="invite-body">
+                        <h1 className="invite-title">
+                            {eventInfo.bride}
+                            <img src="https://e.unicode-table.com/orig/c8/8d8213fdfc319115454d1a34b7b36e.png" alt=""
+                                height="35" />
+                            {eventInfo.groom}
+                        </h1>
+                        <div className="subtitle">
+                            <img src="https://em-content.zobj.net/source/noto-emoji-animations/344/revolving-hearts_1f49e.gif"
+                                alt="" height="20" />
+                            מזמינים אתכם לחתונתם
+                            <img src="https://em-content.zobj.net/source/noto-emoji-animations/344/revolving-hearts_1f49e.gif"
+                                alt="" height="20" />
+                        </div>
+                        <div className="times">
+                            <div className="time">
+                                <div className="opposite">קבלת <br />פנים<br /><img src="https://cdn-icons-png.flaticon.com/512/9194/9194869.png" alt="" height="20" style={{ transform: "rotate(90deg)", marginLeft: "5px" }} /></div>
+                                <div className="time-hour">19:00</div>
+                                <div className="details">יום שישי, יוני 2021 שעה: 19:00 - 23:00<br />אולם החתונות SIMAY<br />כתובת
+                                    אולם</div>
+                            </div>
+                            <div className="time">
+                                <div className="opposite">חופה <br /> וקידושין<br /><img src="https://cdn-icons-png.flaticon.com/512/4154/4154967.png" alt="" height="20" /></div>
+                                <div className="time-hour">20:00</div>
+                                <div className="details">יום שישי, יוני 2021 שעה: 19:00 - 23:00<br />אולם החתונות SIMAY<br />כתובת
+                                    אולם</div>
+                            </div>
+                            <div className="time">
+                                <div className="opposite">עושים<br /> שמח <br /><img src="https://cdn-icons-png.flaticon.com/512/562/562678.png" alt="" height="20" /></div>
+                                <div className="time-hour" dir="rtl">20:00 עד הסוף</div>
+                                <div className="details">יום שישי, יוני 2021 שעה: 19:00 - 23:00<br />אולם החתונות SIMAY<br />כתובת
+                                    אולם</div>
+                            </div>
+                        </div>
+                        <div className="subtitle">
+                            <span>
+                                <img src="https://e.unicode-table.com/orig/c8/8d8213fdfc319115454d1a34b7b36e.png" alt="" height="20" />
+                                נשמח לראותכם בין אורחינו
+                                <img src="https://e.unicode-table.com/orig/c8/8d8213fdfc319115454d1a34b7b36e.png" alt="" height="20" />
+                            </span>
+                        </div>
 
-        <div className="container wedding" style={{ textAlign: "center" }}        >
-            <header>
-                <h1 className="title">Lloyd &amp; Diane's <span className="secondary">Wedding</span></h1>
-            </header>
-            <div className="row">
-                <div className="col-md-12">
-                    <div className="card davetiye shadow">
-                        <div className="card-body text-center">
-                            <h1 className="isimler">לידור<br /><span className="isimve">&</span><br />טליה</h1>
-                            <h5 className="ust_text">מזמינים אתכם לחתונתם</h5>
-                            <div className="row mt-4" style={{ fontSize: "13px;" }}>
-                                <div className="col">
-                                    <p className="mb-0">מליח-אנג'ל</p>
-                                    <p>Kara</p>
-                                </div>
-                                <div className="col">
-                                    <p className="mb-0">Abdullah - Gülşen</p>
-                                    <p>Ayata</p>
-                                </div>
-                            </div>
-                            <div className="row mt-3 justify-content-center">
-                                <div className="col-md-12">
-                                    <div className="row" style={{ alignItems: "center" }}>
-                                        <div className="col-md-12 d-flex"
-                                        // style={justify-content: "center;place-items: flex-start;"}
-                                        >
-                                            <p className="kina mb-0">
-                                                Kına
-                                            </p>
-                                            <p className="mb-0 gun">
-                                                10
-                                            </p>
-                                            <p className="mb-0 zaman">
-                                                HAZİRAN 2021 CUMA SAAT : 19:00 - 23:00
-                                                <br />
-                                                SİMAY DÜĞÜN SALONU
-                                                <br />
-                                                MERKEZ MAH. ATATÜRK CAD. NO:18
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="col-md-12">
-                                    <div className="row" style={{ alignItems: "center" }}>
-                                        <div className="col-md-12 d-flex"
-                                        // style="justify-content: center;place-items: flex-start;"
-                                        >
-                                            <p className="kina mb-0"
-                                            // style="margin-left: 12px;"
-                                            >
-                                                Düğün
-                                            </p>
-                                            <p className="mb-0 gun">
-                                                11
-                                            </p>
-                                            <p className="mb-0 zaman">
-                                                HAZİRAN 2021 CUMARTESİ SAAT : 19:00 - 23:00<br />SİMAY DÜĞÜN SALONU<br />MERKEZ MAH. ATATÜRK CAD. NO:18
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                        <div className="parents">
+                            <div className="parentsdetails">הורי הכלה<br />שלמה ומזל<br />אנג'ל</div>
+                            <div className="parentsdetails">הורי החתן<br />אהרון ואורה<br />מליח</div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
     </>);
 }
 

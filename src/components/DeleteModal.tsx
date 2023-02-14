@@ -5,7 +5,7 @@ import { errorMessage, successMessage } from "../services/FeedbackService";
 
 interface DeleteModalProps {
     show: boolean;
-    id: number;
+    id: string;
     onHide: Function;
     refresh: Function;
 

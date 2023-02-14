@@ -2,79 +2,125 @@ import { FunctionComponent, useEffect } from "react";
 import { useFormik } from "formik";
 import { useNavigate } from "react-router-dom";
 import * as yup from "yup";
-import Book from "../interfaces/Book";
-import { addBook } from "../services/bookServices";
 import { successMessage } from "../services/FeedbackService";
+import People from "../interfaces/People";
+import { addPeopleToEvent } from "../services/eventServices";
 
 interface AddbookProps {
-    setBooksChanged: Function;
-    booksChange: boolean;
+    setpeopleChanged: Function;
+    peopleChange: boolean;
+    id: string;
 }
 
-const Addbook: FunctionComponent<AddbookProps> = ({ setBooksChanged, booksChange }) => {
+const Addbook: FunctionComponent<AddbookProps> = ({ setpeopleChanged, peopleChange, id }) => {
     let formik = useFormik({
-        initialValues: { name: "", author: "", genre: "", price: 0 },
+        initialValues: { phoneNumber: "", firstName: "", lastName: "", NumberOfGuests: 0, NumberOfGuestsAccept: 0 },
         validationSchema: yup.object({
-            name: yup.string().required().min(2),
-            author: yup.string().required().min(2),
-            genre: yup.string().required().min(2),
-            price: yup.number().required().positive(),
+            phoneNumber: yup.string().required().min(2),
+            firstName: yup.string().required().min(2),
+            lastName: yup.string().required().min(2),
+            NumberOfGuests: yup.number().required().positive(),
+            NumberOfGuestsAccept: yup.number().required().positive(),
 
         }),
-        onSubmit: (values: Book, { resetForm }) => {
-            addBook(values).then((res) => {
+        onSubmit: (values: People, { resetForm }) => {
+            addPeopleToEvent(id, values).then((res) => {
                 successMessage("Event Added");
                 resetForm();
-                // שינוי תצוגה מ0 אל כלום
-                formik.setFieldValue("price", "")
+
                 // רענון
-                setBooksChanged(!booksChange);
+                setpeopleChanged(!peopleChange);
             })
                 .catch((e) => console.log(e))
         }
     })
 
-    // שינוי תצוגה מ0 אל כלום
-    useEffect(() => {
-        formik.setFieldValue("price", "")
-    }, []);
+
     return (<>
         <div>
-            <h5 className="display-5">Add Book</h5>
+            <h5 className="">Add Guest- pepole interface</h5>
             <form onSubmit={formik.handleSubmit}>
                 <div className="form-floating mb-3">
                     <input
-                        type="text"
+                        type="tel"
                         className="form-control"
-                        id="bookname"
+                        id="phoneNumber"
                         placeholder="Harry Potter"
-                        name="name"
-                        value={formik.values.name}
+                        name="phoneNumber"
+                        value={formik.values.phoneNumber}
                         onChange={formik.handleChange}
                         onBlur={formik.handleBlur}
                     />
-                    <label htmlFor="bookname">Book Name</label>
-                    {formik.touched.name && formik.errors.name && (
-                        <small className="text-danger">{formik.errors.name}</small>
+                    <label htmlFor="bookname">Phone Number</label>
+                    {formik.touched.phoneNumber && formik.errors.phoneNumber && (
+                        <small className="text-danger">{formik.errors.phoneNumber}</small>
                     )}
                 </div>
                 <div className="form-floating mb-3">
                     <input
                         type="text"
                         className="form-control"
-                        id="author"
+                        id="firstName"
                         placeholder="textme"
-                        name="author"
-                        value={formik.values.author}
+                        name="firstName"
+                        value={formik.values.firstName}
                         onChange={formik.handleChange}
                         onBlur={formik.handleBlur}
                     />
-                    <label htmlFor="author">Book Author</label>
-                    {formik.touched.author && formik.errors.author && (
-                        <small className="text-danger">{formik.errors.author}</small>
+                    <label htmlFor="firstName">First Name</label>
+                    {formik.touched.firstName && formik.errors.firstName && (
+                        <small className="text-danger">{formik.errors.firstName}</small>
                     )}
                 </div>
                 <div className="form-floating mb-3">
+                    <input
+                        type="text"
+                        className="form-control"
+                        id="lastName"
+                        placeholder="textme"
+                        name="lastName"
+                        value={formik.values.lastName}
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                    />
+                    <label htmlFor="lastName">Last Name</label>
+                    {formik.touched.lastName && formik.errors.lastName && (
+                        <small className="text-danger">{formik.errors.lastName}</small>
+                    )}
+                </div>
+                <div className="form-floating mb-3">
+                    <input
+                        type="number"
+                        className="form-control"
+                        id="NumberOfGuests"
+                        placeholder="textme"
+                        name="NumberOfGuests"
+                        value={formik.values.NumberOfGuests}
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                    />
+                    <label htmlFor="NumberOfGuests">Number Of Guests Accept</label>
+                    {formik.touched.NumberOfGuests && formik.errors.NumberOfGuests && (
+                        <small className="text-danger">{formik.errors.NumberOfGuests}</small>
+                    )}
+                </div>
+                <div className="form-floating mb-3">
+                    <input
+                        type="number"
+                        className="form-control"
+                        id="NumberOfGuestsAccept"
+                        placeholder="textme"
+                        name="NumberOfGuestsAccept"
+                        value={formik.values.NumberOfGuestsAccept}
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                    />
+                    <label htmlFor="NumberOfGuestsAccept">Number Of Guests Accept</label>
+                    {formik.touched.NumberOfGuestsAccept && formik.errors.NumberOfGuestsAccept && (
+                        <small className="text-danger">{formik.errors.NumberOfGuestsAccept}</small>
+                    )}
+                </div>
+                {/* <div className="form-floating mb-3">
 
                     <select className="form-select"
                         id="genre"
@@ -84,7 +130,7 @@ const Addbook: FunctionComponent<AddbookProps> = ({ setBooksChanged, booksChange
                         onChange={formik.handleChange}
                         onBlur={formik.handleBlur}
                         aria-label="Default select example">
-                        {/* הסתרה וגם בחירה */}
+                        //  הסתרה וגם בחירה 
                         <option hidden selected>Select Book Genre</option>
                         <option value="Novel">Novel</option>
                         <option value="Biography">Biography</option>
@@ -94,23 +140,8 @@ const Addbook: FunctionComponent<AddbookProps> = ({ setBooksChanged, booksChange
                     {formik.touched.genre && formik.errors.genre && (
                         <small className="text-danger">{formik.errors.genre}</small>
                     )}
-                </div>
-                <div className="form-floating mb-3">
-                    <input
-                        type="number"
-                        className="form-control"
-                        id="price"
-                        placeholder="name@example.com"
-                        name="price"
-                        value={formik.values.price}
-                        onChange={formik.handleChange}
-                        onBlur={formik.handleBlur}
-                    />
-                    <label htmlFor="price">Book Price</label>
-                    {formik.touched.price && formik.errors.price && (
-                        <small className="text-danger">{formik.errors.price}</small>
-                    )}
-                </div>
+                </div> */}
+
 
 
                 <button type="submit" className="btn btn-warning w-100 my-3"

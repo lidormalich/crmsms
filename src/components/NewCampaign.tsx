@@ -18,24 +18,27 @@ const NewCampaign: FunctionComponent<NewCampaignProps> = () => {
     let campaignId: number = 5;
     let formik = useFormik({
         initialValues: {
-            campaignName: "", ownerName: "", phone: "", uuid: uuidLidor
-        },
-
-        validationSchema: yup.object({
+            campaignName: "", ownerName: "", phone: "", uuid: uuidLidor, bride: "", groom: ""
+        }, validationSchema: yup.object({
             campaignName: yup.string().required("Campaign name is a required field").min(2),
+            bride: yup.string().required("brige name is a required field").min(2),
+            groom: yup.string().required("groom name is a required field").min(2),
             phone: yup.number().required("Phone number is a required field").min(10).positive(),
             ownerName: yup.string().required("Owner Campaign is a required field").min(2)
         }),
         onSubmit: (values: Event, { resetForm }) => {
             addEvent(values).then((res) => {
+                // console.log(res.data);
+                // console.log(res.data._id);
+
                 successMessage("Event Added");
                 resetForm();
                 // שינוי תצוגה מ0 אל כלום
                 formik.setFieldValue("phone", "");
                 localStorage.removeItem("uuid");
-                localStorage.setItem("uuid", JSON.stringify(values));
+                localStorage.setItem("uuid", JSON.stringify(res.data._id));
 
-                navigate(`/campaign/${uuidLidor}`)
+                navigate(`/campaign/${res.data._id}`)
             })
                 .catch((e) => console.log(e))
             console.log(values);
@@ -84,6 +87,38 @@ const NewCampaign: FunctionComponent<NewCampaignProps> = () => {
                     )}
                 </div>
 
+                <div className="form-floating mb-3">
+                    <input
+                        type="text"
+                        className="form-control"
+                        id="groom"
+                        placeholder="textme"
+                        name="groom"
+                        value={formik.values.groom}
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                    />
+                    <label htmlFor="groom">groom חתן</label>
+                    {formik.touched.groom && formik.errors.groom && (
+                        <small className="text-danger">{formik.errors.groom}</small>
+                    )}
+                </div>
+                <div className="form-floating mb-3">
+                    <input
+                        type="text"
+                        className="form-control"
+                        id="bride"
+                        placeholder="textme"
+                        name="bride"
+                        value={formik.values.bride}
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                    />
+                    <label htmlFor="bride">bride</label>
+                    {formik.touched.bride && formik.errors.bride && (
+                        <small className="text-danger">{formik.errors.bride}</small>
+                    )}
+                </div>
                 <div className="form-floating mb-3">
                     <input
                         type="tel"
