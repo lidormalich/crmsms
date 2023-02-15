@@ -2,6 +2,7 @@ import { FunctionComponent, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import EventInterface from "../interfaces/EventInterface";
 import { getAllEvent } from "../services/eventServices";
+import Dashboard from "./Extra/Dashboard";
 import Loading from "./Extra/Loading";
 
 interface AllCampaignProps {
@@ -17,29 +18,33 @@ const AllCampaign: FunctionComponent<AllCampaignProps> = () => {
     }, []);
     return (<>
 
-        {allEvent.length ? (<table className="table">
-            <thead>
-                <tr>
-                    <th>#</th>
-                    <th>Campaign ID</th>
-                    <th>Link</th>
-                    <th>Info</th>
+        <div className="container">
+            <h3 className="display-3">Details</h3>
+            <Dashboard letA="alll" letb={allEvent.length + ""} letC="5555" />
+            {allEvent.length ? (<table className="table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Campaign ID</th>
+                        <th>Info | Campaign Name</th>
+                        <th>Link</th>
 
-                </tr>
-            </thead>
-            <tbody>
-                {allEvent.map((eventItem: EventInterface) => <tr key={counter}>
-                    <td>{counter++}</td>
-                    <td>{eventItem._id}</td>
-                    <td><Link to={`/campaign/${eventItem._id}`}>Manage</Link></td>
-                    <td>{eventItem.campaignName}</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    {allEvent.map((eventItem: EventInterface) => <tr key={counter}>
+                        <td>{counter++}</td>
+                        <td>{eventItem._id}</td>
+                        <td>{eventItem.campaignName}</td>
+                        <td><Link to={`/campaign/${eventItem._id}`}>Manage</Link></td>
 
-                </tr>)}
-            </tbody>
-        </table>) :
-            <>
-                <Loading stringToShow={"no data to show- pls add"} /></>
-        }
+                    </tr>)}
+                </tbody>
+            </table>) :
+                <>
+                    <Loading stringToShow={"no data to show- pls add"} /></>
+            }
+        </div>
 
     </>);
 }

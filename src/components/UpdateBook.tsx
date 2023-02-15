@@ -1,30 +1,37 @@
 import { FunctionComponent, useEffect, useState } from "react";
-import { getBookByID, updateBook } from "../services/bookServices";
 import * as yup from "yup";
 import { useFormik } from "formik";
 import Book from "../interfaces/Book";
 import { Button } from "react-bootstrap";
 import { successMessage } from "../services/FeedbackService";
 import People from "../interfaces/People";
-import { updatePeopleInEvent } from "../services/eventServices";
+import { getPeopleInfoByPhone, updatePeopleInEvent } from "../services/eventServices";
 
 interface UpdateBookProps {
-    id: string;
+    eventId: string;
+    phoneNum: string;
     refresh: Function;
     onHide: Function;
 }
 
-const UpdateBook: FunctionComponent<UpdateBookProps> = ({ id, refresh, onHide }) => {
-    let [userBook, setUserBook] = useState<People>({
-        // id?: number,
-        phoneNumber: "",
-        firstName: "",
-        lastName: "",
-        NumberOfGuests: 0,
-        NumberOfGuestsAccept: 0,
-    });
+const UpdateBook: FunctionComponent<UpdateBookProps> = ({ eventId, refresh, onHide, phoneNum }) => {
+    let [userBook, setUserBook] = useState<any>();
+    let [people, setpoepole1] = useState<any>();
     useEffect(() => {
-        // getBookByID(id).then((res) => setUserBook(res.data)).catch((e) => console.log(e));
+        console.log(eventId, phoneNum);
+        getPeopleInfoByPhone(eventId, phoneNum).then((res) => {
+            setpoepole1(res.data);
+            setTimeout(() => {
+                console.log("USER STATE");
+                console.log(people);
+                console.log("RES DATA");
+                console.log(res.data);
+            }, 1000);
+
+
+
+        })
+            .catch((e) => console.log(e));
     }, []);
 
 
@@ -39,7 +46,7 @@ const UpdateBook: FunctionComponent<UpdateBookProps> = ({ id, refresh, onHide })
             price: yup.number().required().positive(),
         }),
         onSubmit: (values: People) => {
-            updatePeopleInEvent(id + "", values).then((res) => {
+            updatePeopleInEvent(eventId, values).then((res) => {
                 onHide();
                 successMessage("Book data change and save");
                 refresh();
@@ -110,7 +117,7 @@ const UpdateBook: FunctionComponent<UpdateBookProps> = ({ id, refresh, onHide })
                         onChange={formik.handleChange}
                         onBlur={formik.handleBlur}
                     />
-                    <label htmlFor="NumberOfGuests">Number Of Guests Accept</label>
+                    <label htmlFor="NumberOfGuests">Number Of Guests</label>
                     {formik.touched.NumberOfGuests && formik.errors.NumberOfGuests && (
                         <small className="text-danger">{formik.errors.NumberOfGuests}</small>
                     )}

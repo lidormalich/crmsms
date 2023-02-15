@@ -6,13 +6,13 @@ import { successMessage } from "../services/FeedbackService";
 import People from "../interfaces/People";
 import { addPeopleToEvent } from "../services/eventServices";
 
-interface AddbookProps {
+interface AddPeopleProps {
     setpeopleChanged: Function;
     peopleChange: boolean;
     id: string;
 }
 
-const Addbook: FunctionComponent<AddbookProps> = ({ setpeopleChanged, peopleChange, id }) => {
+const AddPeople: FunctionComponent<AddPeopleProps> = ({ setpeopleChanged, peopleChange, id }) => {
     let formik = useFormik({
         initialValues: { phoneNumber: "", firstName: "", lastName: "", NumberOfGuests: 0, NumberOfGuestsAccept: 0 },
         validationSchema: yup.object({
@@ -152,4 +152,4 @@ const Addbook: FunctionComponent<AddbookProps> = ({ setpeopleChanged, peopleChan
     </>);
 }
 
-export default Addbook;
+export default AddPeople;

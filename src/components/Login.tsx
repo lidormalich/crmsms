@@ -24,10 +24,12 @@ const Login: FunctionComponent<LoginProps> = ({ setIsLogIn }) => {
                 .then((res) => {
                     if (res.data.error == false) {
                         setIsLogIn(true);
-                        sessionStorage.setItem("IsLoggedIn", "true");
-                        sessionStorage.setItem("userName", res.data.first_name as string);
+                        sessionStorage.setItem(
+                            "userData",
+                            JSON.stringify({ isLoggedIn: true })
+                        );
                         successMessage("You Loged-In :)");
-                        navigate('/home');
+                        navigate('/');
                     }
                     else { navigate('/'); errorMessage("Wrong info"); }
                 }).catch((e) => { errorMessage("Wrong info"); console.log(e); }

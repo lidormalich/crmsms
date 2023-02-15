@@ -1,17 +1,19 @@
 import { FunctionComponent } from "react";
 import { Button, Modal } from "react-bootstrap";
-import { deleteBook } from "../services/bookServices";
+import People from "../interfaces/People";
+import { deletePepoleFromEvent } from "../services/eventServices";
 import { errorMessage, successMessage } from "../services/FeedbackService";
 
 interface DeleteModalProps {
     show: boolean;
-    id: string;
+    phoneNum: string;
+    eventId: string;
     onHide: Function;
     refresh: Function;
 
 }
 
-const DeleteModal: FunctionComponent<DeleteModalProps> = ({ show, onHide, id, refresh }) => {
+const DeleteModal: FunctionComponent<DeleteModalProps> = ({ show, onHide, phoneNum, refresh, eventId }) => {
     return (<>
         <Modal
             show={show}
@@ -27,14 +29,16 @@ const DeleteModal: FunctionComponent<DeleteModalProps> = ({ show, onHide, id, re
             </Modal.Header>
             <Modal.Body>
                 <h5>Are You Sure?</h5>
-
             </Modal.Body>
             <Modal.Footer>
                 <Button onClick={() => onHide()}>Cancle</Button>
                 <Button variant="danger" onClick={() => {
-                    deleteBook(id).then((res) => {
-                        successMessage("Book Deleted");
-                        refresh()
+                    deletePepoleFromEvent(phoneNum, eventId).then((res) => {
+                        console.log("deleted phoneNum");
+                        console.log(phoneNum);
+
+                        successMessage("Men Deleted");
+                        refresh();
                     }).catch((e) => {
                         errorMessage("Sorry! Something went wrong...");
                         console.log(e)

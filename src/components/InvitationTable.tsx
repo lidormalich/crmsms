@@ -1,8 +1,6 @@
 import { FunctionComponent, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import Book from "../interfaces/Book";
 import People from "../interfaces/People";
-import { getBook } from "../services/bookServices";
 import { getPeopleInEventByID } from "../services/eventServices";
 import DeleteModal from "./DeleteModal";
 import UpdateModal from "./UpdateModal";
@@ -20,6 +18,7 @@ const InvitationTable: FunctionComponent<InvitationTableProps> = ({ peopleChange
     let [opendeleteModal, setOpendeleteModal] = useState<boolean>(false);
     let [openUpdateModal, setOpenUpdateModal] = useState<boolean>(false);
     let [idPeople, setIdPepole] = useState<string>("");
+    let [peopleItemPhoneNum, setItemPepole] = useState<string>("");
 
     let refresh = () => {
         setPeopleChanged(!peopleChanged);
@@ -44,17 +43,17 @@ const InvitationTable: FunctionComponent<InvitationTableProps> = ({ peopleChange
 
 
     return (<>
-        <h5 className="">Guest list for the event</h5>
+        <h5 className="">{peopleArr.length}  Guest list for the event</h5>
 
         {peopleArr.length ? (<table className="table">
             <thead>
                 <tr>
                     <th>#</th>
-                    <th>#</th>
-                    <th>Name</th>
-                    <th>Author</th>
-                    <th>Genre</th>
-                    <th>Price</th>
+                    <th>Fisrt Name</th>
+                    <th>Last Name</th>
+                    <th>Phone Number</th>
+                    <th><i className="fa-regular fa-circle-check" style={{ color: "blue" }}></i> Invited Guests</th>
+                    <th><i className="fa-regular fa-circle-check" style={{ color: "green" }}></i> ACCEPT Guests</th>
                     <th>Edit</th>
                     <th>Delete</th>
                 </tr>
@@ -62,24 +61,24 @@ const InvitationTable: FunctionComponent<InvitationTableProps> = ({ peopleChange
             <tbody>
                 {peopleArr.map((people: People) => <tr key={counter}>
                     <td>{counter++}</td>
-                    <td>{people.NumberOfGuests}</td>
-                    <td>{people.NumberOfGuestsAccept}</td>
                     <td>{people.firstName}</td>
                     <td>{people.lastName}</td>
                     <td>{people.phoneNumber}</td>
+                    <td>{people.NumberOfGuests}</td>
+                    <td><span style={{ color: "green" }}>{people.NumberOfGuestsAccept}<i className="fa-solid fa-person"  ></i></span></td>
                     <td onClick={() => {
-                        setIdPepole(people.phoneNumber as string)
+                        setItemPepole(people.phoneNumber)
                         setOpenUpdateModal(true);
                     }}><i className="fa-solid fa-pen text-success"></i></td>
                     <td onClick={() => {
-                        setIdPepole(people.phoneNumber as string);
+                        setItemPepole(people.phoneNumber);
                         setOpendeleteModal(true);
                     }}><i className="fa-solid fa-trash-can text-danger"></i></td>
                 </tr>)}
             </tbody>
         </table>) : (<h3> No peoples</h3>)}
-        <DeleteModal show={opendeleteModal} onHide={() => setOpendeleteModal(false)} id={idPeople} refresh={refresh} />
-        <UpdateModal show={openUpdateModal} onHide={() => setOpenUpdateModal(false)} id={idPeople} refresh={refresh} />
+        <DeleteModal show={opendeleteModal} onHide={() => setOpendeleteModal(false)} phoneNum={peopleItemPhoneNum} eventId={eventId as string} refresh={refresh} />
+        <UpdateModal show={openUpdateModal} onHide={() => setOpenUpdateModal(false)} eventId={eventId as string} phoneNum={peopleItemPhoneNum} refresh={refresh} />
     </>);
 }
 

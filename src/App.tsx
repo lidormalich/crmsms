@@ -15,6 +15,9 @@ import Booktable from './components/InvitationTable';
 import Invitation from './components/WeddingInvitation/Invitation';
 import Loading from './components/Extra/Loading';
 import AllCampaign from './components/AllCampaign';
+import Home from './components/Home';
+import Dashboard from './components/Extra/Dashboard';
+import Profile from './components/Extra/Profile/Profile';
 
 export let siteTheme = React.createContext(false);
 function App() {
@@ -32,17 +35,20 @@ function App() {
         <Router>
           <NavBar isLogin={isLogin} setIsLogIn={setIsLogIn} />
           <Routes>
-            <Route path='/' element={<Login setIsLogIn={setIsLogIn} />} />
+            <Route path='/' element={<Home setIsLogIn={setIsLogIn} isLogin={isLogin} />} />
             <Route path='/register' element={<Register setIsLogIn={setIsLogIn} isLogin={isLogin} />} />
             <Route path='/login' element={<Login setIsLogIn={setIsLogIn} />} />
             {/* <Route path='/InvitationTable' element={<InvitationTable isLogin={isLogin} setIsLogIn={setIsLogIn} setpeopleChanged={setpeopleChanged} peopleChange={peopleChange} />} /> */}
             <Route path='/NewCampaign' element={<CreatNewCamp />} />
+            <Route path='/profile' element={<Profile />} />
             <Route path='/allcampaign' element={<AllCampaign />} />
             <Route path='/campaign/:eventId' element={<InvitationTable isLogin={isLogin} setIsLogIn={setIsLogIn} setpeopleChanged={setpeopleChanged} peopleChange={peopleChange} />} />
             <Route path='/book' element={<Booktable peopleChanged={peopleChange} setPeopleChanged={setpeopleChanged} />} />
             <Route path='/:eventId/:phone' element={<NotHaveAccess />} />
+            <Route path='/9090' element={<NotHaveAccess />} />
             <Route path='/invitation/:eventId' element={<Invitation />} />
             <Route path='/nothaveaccess' element={<NotHaveAccess />} />
+            <Route path='/dashboard' element={<Dashboard letA='lidor' letC='500' letb='400' />} />
             {/* <Route path='/invitation' element={<WeddingInvitation />} /> */}
 
             <Route path='/loading' element={<Loading stringToShow={"BLOCKED ID"} />} />

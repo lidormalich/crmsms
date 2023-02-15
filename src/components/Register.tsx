@@ -24,11 +24,7 @@ const Register: FunctionComponent<RegisterProps> = ({ setIsLogIn }) => {
         onSubmit: (values: User) => {
             addUser(values)
                 .then(() => {
-                    console.log("Hare");
-
-                    console.log(values);
-
-                    navigate("/home");
+                    navigate("/");
                     sessionStorage.setItem(
                         "userData",
                         JSON.stringify({ isLoggedIn: true })

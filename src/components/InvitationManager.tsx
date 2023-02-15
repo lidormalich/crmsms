@@ -1,17 +1,17 @@
 import { FunctionComponent, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import Addbook from "./Addbook";
+import AddPeople from "./AddPeople";
 import InvitationTable from "./InvitationTable";
 import Login from "./Login";
 
-interface HomeProps {
+interface InvitationManagerProps {
     isLogin: boolean;
     peopleChange: boolean;
     setIsLogIn: Function;
     setpeopleChanged: Function;
 }
 
-const Home: FunctionComponent<HomeProps> = ({ isLogin, setIsLogIn, peopleChange, setpeopleChanged }) => {
+const InvitationManager: FunctionComponent<InvitationManagerProps> = ({ isLogin, setIsLogIn, peopleChange, setpeopleChanged }) => {
     // משתני עזר לרענון הקומפוננטה בלי רענון הדף
     // eventId
     let { eventId } = useParams();
@@ -27,7 +27,7 @@ const Home: FunctionComponent<HomeProps> = ({ isLogin, setIsLogIn, peopleChange,
                 <div className="row">
 
                     <div className="col-md-4">
-                        <Addbook setpeopleChanged={setpeopleChanged} peopleChange={peopleChange} id={eventId as string} />
+                        <AddPeople setpeopleChanged={setpeopleChanged} peopleChange={peopleChange} id={eventId as string} />
                     </div>
                     <div className="col-md-8">
                         <InvitationTable peopleChanged={peopleChange} setPeopleChanged={setpeopleChanged} />
@@ -39,4 +39,4 @@ const Home: FunctionComponent<HomeProps> = ({ isLogin, setIsLogIn, peopleChange,
     </>);
 }
 
-export default Home;
+export default InvitationManager;

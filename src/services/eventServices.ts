@@ -12,13 +12,15 @@ export function getAllEvent() {
 
 // get Event by id OKKKKKKKKKKKKKKKKKKKK
 export function getPeopleInEventByID(id: string) {
-    // return axios.get(`${api}/${id}`);
     return axios.get(`${api}/getPeople/${id}`);
 }
 // get Event by id OKKKKKKKKKKKKKKKKKKKK
 export function getEventInfoByID(id: string) {
-    // return axios.get(`${api}/${id}`);
     return axios.get(`${api}/eventinfo/${id}`);
+}
+// get one People Info by Event id  and Phone OKKKKKKKKKKKKKKKKKKKK
+export function getPeopleInfoByPhone(id: string, phone: string) {
+    return axios.get(`${api}/getoneepepole/${id}`, { data: { phoneNumber: phone } });
 }
 
 // add new Event
@@ -41,6 +43,7 @@ export function updatePeopleInEvent(id: string, peopoleToUpdate: People) {
 export function deleteEvent(id: string) {
     return axios.delete(`${api}/deleteEvent/${id}`);
 }
-export function deletePepoleFromEvent(pepole: People) {
-    return axios.patch(`${api}/deletepepole/:id`);
+// delete pepole by phone from event-OKKKKKKKKKKKK
+export function deletePepoleFromEvent(phoneNum: string, id: string) {
+    return axios.patch(`${api}/deletepepole/${id}`, phoneNum);
 }
