@@ -20,20 +20,21 @@ const Dashboard: FunctionComponent<DashboardProps> = ({ letA, letb, letC }) => {
                 </div>
 
                 <div className="dashCard">
-                    <div className="title">NUM OF EVENT</div>
+                    {/* צבע ירוק לאישור */}
+                    <div className="title">כמה אישרו הגעה</div>
                     <div className="cardbody">
                         <div className="icon">
-                            <i className="fa-regular fa-circle-check" ></i>
+                            <i className="fa-regular fa-circle-check" style={{ color: "green" }}></i>
                         </div>
-                        <div className="value">{letb}<span style={{ fontSize: ".5em" }}> Events</span></div>
+                        <div className="value">300 <span style={{ fontSize: ".5em" }}> מוזמנים</span></div>
                     </div>
                 </div>
 
                 <div className="dashCard">
-                    <div className="title">ACCEPT Guests</div>
+                    <div className="title">כמה מגיעים</div>
                     <div className="cardbody">
                         <div className="icon"><i className="fa-regular fa-circle-check" ></i></div>
-                        <div className="value">{letA}<span style={{ fontSize: ".5em" }}>/{letC}</span></div>
+                        <div className="value">600<span style={{ fontSize: ".5em" }}>/700</span></div>
                     </div>
                 </div>
             </div>

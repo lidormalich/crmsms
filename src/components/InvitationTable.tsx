@@ -1,5 +1,5 @@
 import { FunctionComponent, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import People from "../interfaces/People";
 import { getPeopleInEventByID } from "../services/eventServices";
 import DeleteModal from "./DeleteModal";
@@ -25,6 +25,7 @@ const InvitationTable: FunctionComponent<InvitationTableProps> = ({ peopleChange
     }
     let { eventId } = useParams();
     let counter: number = 0;
+    let navigate = useNavigate();
 
     // רענון --הוספת הדיפנדנסיס בלבד
     useEffect(() => {
@@ -51,18 +52,21 @@ const InvitationTable: FunctionComponent<InvitationTableProps> = ({ peopleChange
                     <th>#</th>
                     <th>Fisrt Name</th>
                     <th>Last Name</th>
+                    <th>Gruop</th>
                     <th>Phone Number</th>
                     <th><i className="fa-regular fa-circle-check" style={{ color: "blue" }}></i> Invited Guests</th>
                     <th><i className="fa-regular fa-circle-check" style={{ color: "green" }}></i> ACCEPT Guests</th>
                     <th>Edit</th>
                     <th>Delete</th>
+                    <th>Client</th>
                 </tr>
             </thead>
             <tbody>
                 {peopleArr.map((people: People) => <tr key={counter}>
-                    <td>{counter++}</td>
+                    <td>{++counter}</td>
                     <td>{people.firstName}</td>
                     <td>{people.lastName}</td>
+                    <td>{people.eventGroupName}</td>
                     <td>{people.phoneNumber}</td>
                     <td>{people.NumberOfGuests}</td>
                     <td><span style={{ color: "green" }}>{people.NumberOfGuestsAccept}<i className="fa-solid fa-person"  ></i></span></td>
@@ -74,6 +78,9 @@ const InvitationTable: FunctionComponent<InvitationTableProps> = ({ peopleChange
                         setItemPepole(people.phoneNumber);
                         setOpendeleteModal(true);
                     }}><i className="fa-solid fa-trash-can text-danger"></i></td>
+                    <td onClick={() => {
+                        navigate(`/event/${eventId}/${people.phoneNumber}`)
+                    }}><i className="fa-solid fa-phone"></i></td>
                 </tr>)}
             </tbody>
         </table>) : (<h3> No peoples</h3>)}

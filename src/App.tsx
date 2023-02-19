@@ -18,34 +18,40 @@ import AllCampaign from './components/AllCampaign';
 import Home from './components/Home';
 import Dashboard from './components/Extra/Dashboard';
 import Profile from './components/Extra/Profile/Profile';
+import AddGroup from './components/MangeGroup/AddGroup';
+import InvitationComponent from './components/InvitationComponent';
+import ClientUpdateGuost from './components/ClientUpadteGuostPage/ClientUpdateGuost';
+import ClientPage from './components/ClientUpadteGuostPage/ClientPage';
 
 export let siteTheme = React.createContext(false);
+export let isLoginGlobal = React.createContext<boolean>(false);
+
 function App() {
   let [isLogin, setIsLogIn] = useState<boolean>(sessionStorage.getItem("IsLoggedIn") == "true" ? true : false);
   let [peopleChange, setpeopleChanged] = useState<boolean>(false);
 
-
-
   return (
+
     <div className="App">
 
 
       <ToastContainer />
-      <siteTheme.Provider value={isLogin}>
+      <isLoginGlobal.Provider value={isLogin}>
+
         <Router>
-          <NavBar isLogin={isLogin} setIsLogIn={setIsLogIn} />
+          <NavBar setIsLogIn={setIsLogIn} />
           <Routes>
-            <Route path='/' element={<Home setIsLogIn={setIsLogIn} isLogin={isLogin} />} />
-            <Route path='/register' element={<Register setIsLogIn={setIsLogIn} isLogin={isLogin} />} />
+            <Route path='/' element={<Home setIsLogIn={setIsLogIn} />} />
+            <Route path='/register' element={<Register setIsLogIn={setIsLogIn} />} />
             <Route path='/login' element={<Login setIsLogIn={setIsLogIn} />} />
-            {/* <Route path='/InvitationTable' element={<InvitationTable isLogin={isLogin} setIsLogIn={setIsLogIn} setpeopleChanged={setpeopleChanged} peopleChange={peopleChange} />} /> */}
+            {/* <Route path='/InvitationTable' element={<InvitationTable  setIsLogIn={setIsLogIn} setpeopleChanged={setpeopleChanged} peopleChange={peopleChange} />} /> */}
             <Route path='/NewCampaign' element={<CreatNewCamp />} />
             <Route path='/profile' element={<Profile />} />
             <Route path='/allcampaign' element={<AllCampaign />} />
-            <Route path='/campaign/:eventId' element={<InvitationTable isLogin={isLogin} setIsLogIn={setIsLogIn} setpeopleChanged={setpeopleChanged} peopleChange={peopleChange} />} />
-            <Route path='/book' element={<Booktable peopleChanged={peopleChange} setPeopleChanged={setpeopleChanged} />} />
-            <Route path='/:eventId/:phone' element={<NotHaveAccess />} />
-            <Route path='/9090' element={<NotHaveAccess />} />
+            <Route path='/campaign/:eventId' element={<InvitationComponent setIsLogIn={setIsLogIn} setpeopleChanged={setpeopleChanged} peopleChange={peopleChange} />} />
+            <Route path='/addgruop/:eventId' element={<AddGroup setIsLogIn={setIsLogIn} />} />
+            <Route path='/event/:eventId/:phoneNum' element={<ClientPage />} />
+            {/* <Route path='/9090' element={<AddGroup />} /> */}
             <Route path='/invitation/:eventId' element={<Invitation />} />
             <Route path='/nothaveaccess' element={<NotHaveAccess />} />
             <Route path='/dashboard' element={<Dashboard letA='lidor' letC='500' letb='400' />} />
@@ -55,7 +61,7 @@ function App() {
             <Route path='*' element={<PagenotFound />} />
           </Routes>
         </Router>
-      </siteTheme.Provider>
+      </isLoginGlobal.Provider>
     </div >
   );
 }

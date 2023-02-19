@@ -1,54 +1,54 @@
 import { FunctionComponent, useEffect, useState } from "react";
 import * as yup from "yup";
-import { useFormik } from "formik";
-import Book from "../interfaces/Book";
 import { Button } from "react-bootstrap";
 import { successMessage } from "../services/FeedbackService";
 import People from "../interfaces/People";
 import { getPeopleInfoByPhone, updatePeopleInEvent } from "../services/eventServices";
+import { useFormik } from "formik";
+import Group from "../interfaces/Group";
+import { getAllGroup } from "../services/GruopServices";
 
-interface UpdateBookProps {
+
+interface UpdatePeopleToInvitationProps {
     eventId: string;
     phoneNum: string;
     refresh: Function;
     onHide: Function;
 }
 
-const UpdateBook: FunctionComponent<UpdateBookProps> = ({ eventId, refresh, onHide, phoneNum }) => {
-    let [userBook, setUserBook] = useState<any>();
-    let [people, setpoepole1] = useState<any>();
+const UpdatePeopleToInvitation: FunctionComponent<UpdatePeopleToInvitationProps> = ({ eventId, refresh, onHide, phoneNum }) => {
+    let [people, setpoepole] = useState<People>({ phoneNumber: "", firstName: "", lastName: "", NumberOfGuests: 0, NumberOfGuestsAccept: 0, eventGroupName: "" });
+    let [allGroup, setAllGruop] = useState<Group[]>([]);
     useEffect(() => {
-        console.log(eventId, phoneNum);
-        getPeopleInfoByPhone(eventId, phoneNum).then((res) => {
-            setpoepole1(res.data);
-            setTimeout(() => {
-                console.log("USER STATE");
-                console.log(people);
-                console.log("RES DATA");
-                console.log(res.data);
-            }, 1000);
-
-
-
-        })
+        // console.log(eventId, phoneNum);
+        getPeopleInfoByPhone(eventId, phoneNum)
+            .then((res) => setpoepole(res.data))
             .catch((e) => console.log(e));
+        getAllGroup(eventId).then((res) => setAllGruop(res.data)).catch((e) => console.log(e));
     }, []);
 
 
 
+    let counter: number = 0;
+
     let formik = useFormik({
-        initialValues: { phoneNumber: "", firstName: "", lastName: "", NumberOfGuests: 0, NumberOfGuestsAccept: 0 },
+        initialValues: { phoneNumber: people?.phoneNumber, firstName: people?.firstName, lastName: people?.lastName, NumberOfGuests: people?.NumberOfGuests, NumberOfGuestsAccept: people?.NumberOfGuestsAccept, eventGroupName: people?.eventGroupName },
         enableReinitialize: true,
         validationSchema: yup.object({
-            name: yup.string().required().min(2),
-            author: yup.string().required().min(2),
-            genre: yup.string().required().min(2),
-            price: yup.number().required().positive(),
+            phoneNumber: yup.string().required().min(2),
+            firstName: yup.string().required().min(2),
+            lastName: yup.string().required().min(2),
+            NumberOfGuests: yup.number().required().positive(),
+            NumberOfGuestsAccept: yup.number().required().positive(),
+            eventGroupName: yup.string().required()
         }),
         onSubmit: (values: People) => {
+            console.log(values);
+
+
             updatePeopleInEvent(eventId, values).then((res) => {
                 onHide();
-                successMessage("Book data change and save");
+                successMessage("People data change and save");
                 refresh();
             })
                 .catch((e) => console.log(e))
@@ -56,7 +56,7 @@ const UpdateBook: FunctionComponent<UpdateBookProps> = ({ eventId, refresh, onHi
     })
     return (<>
         <div>
-            <h5 className="display-5"> Update Book { }</h5>
+            <h5 className="display-5"> Update Guost{`=> ${people.firstName} ${people.lastName}`}</h5>
             <form onSubmit={formik.handleSubmit}>
                 <div className="form-floating mb-3">
                     <input
@@ -69,7 +69,7 @@ const UpdateBook: FunctionComponent<UpdateBookProps> = ({ eventId, refresh, onHi
                         onChange={formik.handleChange}
                         onBlur={formik.handleBlur}
                     />
-                    <label htmlFor="bookname">Phone Number</label>
+                    <label htmlFor="phoneNumber">Phone Number</label>
                     {formik.touched.phoneNumber && formik.errors.phoneNumber && (
                         <small className="text-danger">{formik.errors.phoneNumber}</small>
                     )}
@@ -107,6 +107,26 @@ const UpdateBook: FunctionComponent<UpdateBookProps> = ({ eventId, refresh, onHi
                     )}
                 </div>
                 <div className="form-floating mb-3">
+                    <select defaultValue={'DEFAULT'}
+
+                        className="form-control"
+                        id="eventGroupName"
+                        placeholder="textme"
+                        name="eventGroupName"
+                        value={formik.values.eventGroupName}
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}>
+
+                        <option value="DEFAULT" hidden >Choose a Gruop...</option>
+                        {allGroup.map((groupname: Group) => <option key={counter++} value={groupname.eventGroupName}> {groupname.eventGroupName}</option>)}
+
+                    </select>
+                    <label htmlFor="eventGroupName">Gruop</label>
+                    {formik.touched.eventGroupName && formik.errors.eventGroupName && (
+                        <small className="text-danger">{formik.errors.eventGroupName}</small>
+                    )}
+                </div>
+                <div className="form-floating mb-3">
                     <input
                         type="number"
                         className="form-control"
@@ -141,12 +161,16 @@ const UpdateBook: FunctionComponent<UpdateBookProps> = ({ eventId, refresh, onHi
 
                 <hr />
 
-                <Button variant="success" type="submit" className="btn btn-success w-100 my-3"
-                    disabled={!formik.isValid || !formik.dirty}><i className="fa-solid fa-floppy-disk"></i>  Save Change</Button>
+                {/* <button type="submit" className="btn btn-success w-100 my-3" onClick={() => { console.log("Clicked"); }
+                }
+                >TRY</button> */}
+                <button type="submit" className="btn btn-success w-100 my-3"
+                // disabled={!formik.isValid || !formik.dirty}
+                ><i className="fa-solid fa-floppy-disk"></i>  Save Change</button>
             </form>
         </div>
 
     </>);
 }
 
-export default UpdateBook;
+export default UpdatePeopleToInvitation;

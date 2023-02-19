@@ -7,7 +7,6 @@ import User from "../interfaces/User";
 import { errorMessage, successMessage as successMsg } from "../services/FeedbackService";
 import { addUser } from "../services/userServices";
 interface RegisterProps {
-    isLogin: boolean;
     setIsLogIn: Function;
 }
 
@@ -25,10 +24,7 @@ const Register: FunctionComponent<RegisterProps> = ({ setIsLogIn }) => {
             addUser(values)
                 .then(() => {
                     navigate("/");
-                    sessionStorage.setItem(
-                        "userData",
-                        JSON.stringify({ isLoggedIn: true })
-                    );
+                    sessionStorage.setItem("IsLoggedIn", "false");
                     successMsg("You registered successfully!");
                 })
                 .catch((err) => console.log(err));

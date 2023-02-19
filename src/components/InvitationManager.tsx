@@ -1,31 +1,32 @@
-import { FunctionComponent, useState } from "react";
+import { FunctionComponent, useContext, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import AddPeople from "./AddPeople";
 import InvitationTable from "./InvitationTable";
 import Login from "./Login";
+import { isLoginGlobal } from "../App";
+import Dashboard from "./Extra/Dashboard";
+
 
 interface InvitationManagerProps {
-    isLogin: boolean;
     peopleChange: boolean;
     setIsLogIn: Function;
     setpeopleChanged: Function;
 }
 
-const InvitationManager: FunctionComponent<InvitationManagerProps> = ({ isLogin, setIsLogIn, peopleChange, setpeopleChanged }) => {
+const InvitationManager: FunctionComponent<InvitationManagerProps> = ({ setIsLogIn, peopleChange, setpeopleChanged }) => {
     // משתני עזר לרענון הקומפוננטה בלי רענון הדף
-    // eventId
     let { eventId } = useParams();
+    let isLogin = useContext<boolean>(isLoginGlobal);
 
     return (<>
-        {/* {console.log(eventId)} */}
         <div className="container">
             {isLogin ? (<>
+
                 <div className="d-flex justify-content-center align-items-center">
                     <Link to={`/invitation/${eventId}`}>Online -Invitation</Link>
                     <h5 className="display-5">Guest for event</h5>
                 </div>
                 <div className="row">
-
                     <div className="col-md-4">
                         <AddPeople setpeopleChanged={setpeopleChanged} peopleChange={peopleChange} id={eventId as string} />
                     </div>

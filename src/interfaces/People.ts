@@ -5,4 +5,5 @@ export default interface People {
     lastName: string,
     NumberOfGuests: number, //מספר אורחים מוזמנים
     NumberOfGuestsAccept: number, //מספר אורחים שמגיעים
+    eventGroupName: string,
 }

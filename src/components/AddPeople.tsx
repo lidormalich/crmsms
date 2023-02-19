@@ -1,10 +1,12 @@
-import { FunctionComponent, useEffect } from "react";
+import { FunctionComponent, useEffect, useState } from "react";
 import { useFormik } from "formik";
-import { useNavigate } from "react-router-dom";
 import * as yup from "yup";
 import { successMessage } from "../services/FeedbackService";
 import People from "../interfaces/People";
 import { addPeopleToEvent } from "../services/eventServices";
+import { getAllGroup } from "../services/GruopServices";
+import Group from "../interfaces/Group";
+import { useParams } from "react-router-dom";
 
 interface AddPeopleProps {
     setpeopleChanged: Function;
@@ -13,14 +15,21 @@ interface AddPeopleProps {
 }
 
 const AddPeople: FunctionComponent<AddPeopleProps> = ({ setpeopleChanged, peopleChange, id }) => {
+    let [allGroup, setAllGruop] = useState<Group[]>([]);
+    let { eventId } = useParams();
+    let counter: number = 0;
+    useEffect(() => {
+        getAllGroup(eventId as string).then((res) => setAllGruop(res.data)).catch((e) => console.log(e));
+    }, []);
     let formik = useFormik({
-        initialValues: { phoneNumber: "", firstName: "", lastName: "", NumberOfGuests: 0, NumberOfGuestsAccept: 0 },
+        initialValues: { phoneNumber: "", firstName: "", lastName: "", NumberOfGuests: 0, NumberOfGuestsAccept: 0, eventGroupName: "" },
         validationSchema: yup.object({
             phoneNumber: yup.string().required().min(2),
             firstName: yup.string().required().min(2),
             lastName: yup.string().required().min(2),
             NumberOfGuests: yup.number().required().positive(),
             NumberOfGuestsAccept: yup.number().required().positive(),
+            eventGroupName: yup.string().required(),
 
         }),
         onSubmit: (values: People, { resetForm }) => {
@@ -51,7 +60,7 @@ const AddPeople: FunctionComponent<AddPeopleProps> = ({ setpeopleChanged, people
                         onChange={formik.handleChange}
                         onBlur={formik.handleBlur}
                     />
-                    <label htmlFor="bookname">Phone Number</label>
+                    <label htmlFor="phoneNumber">Phone Number</label>
                     {formik.touched.phoneNumber && formik.errors.phoneNumber && (
                         <small className="text-danger">{formik.errors.phoneNumber}</small>
                     )}
@@ -89,6 +98,26 @@ const AddPeople: FunctionComponent<AddPeopleProps> = ({ setpeopleChanged, people
                     )}
                 </div>
                 <div className="form-floating mb-3">
+                    <select defaultValue={'DEFAULT'}
+
+                        className="form-control"
+                        id="eventGroupName"
+                        placeholder="textme"
+                        name="eventGroupName"
+                        value={formik.values.eventGroupName}
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}>
+
+                        <option value="DEFAULT" hidden >Choose a Gruop...</option>
+                        {allGroup.map((groupname: Group) => <option key={counter++} value={groupname.eventGroupName}> {groupname.eventGroupName}</option>)}
+
+                    </select>
+                    <label htmlFor="eventGroupName">Gruop</label>
+                    {formik.touched.eventGroupName && formik.errors.eventGroupName && (
+                        <small className="text-danger">{formik.errors.eventGroupName}</small>
+                    )}
+                </div>
+                <div className="form-floating mb-3">
                     <input
                         type="number"
                         className="form-control"
@@ -120,34 +149,14 @@ const AddPeople: FunctionComponent<AddPeopleProps> = ({ setpeopleChanged, people
                         <small className="text-danger">{formik.errors.NumberOfGuestsAccept}</small>
                     )}
                 </div>
-                {/* <div className="form-floating mb-3">
 
-                    <select className="form-select"
-                        id="genre"
-                        placeholder="name@example.com"
-                        name="genre"
-                        value={formik.values.genre}
-                        onChange={formik.handleChange}
-                        onBlur={formik.handleBlur}
-                        aria-label="Default select example">
-                        //  הסתרה וגם בחירה 
-                        <option hidden selected>Select Book Genre</option>
-                        <option value="Novel">Novel</option>
-                        <option value="Biography">Biography</option>
-                        <option value="Kids">Kids</option>
-                    </select>
-                    <label htmlFor="genre">Book Genre</label>
-                    {formik.touched.genre && formik.errors.genre && (
-                        <small className="text-danger">{formik.errors.genre}</small>
-                    )}
-                </div> */}
 
 
 
                 <button type="submit" className="btn btn-warning w-100 my-3"
                     disabled={!formik.isValid || !formik.dirty}><i className="fa-solid fa-plus"></i>  ADD</button>
             </form>
-        </div>
+        </div >
 
     </>);
 }

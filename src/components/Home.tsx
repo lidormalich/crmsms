@@ -1,14 +1,17 @@
-import { FunctionComponent } from "react";
+import { FunctionComponent, useContext } from "react";
 import AllCampaign from "./AllCampaign";
 import InvitationManager from "./InvitationManager";
 import Login from "./Login";
+import { isLoginGlobal } from "../App";
+
 
 interface HomeProps {
     setIsLogIn: Function;
-    isLogin: boolean;
 }
 
-const Home: FunctionComponent<HomeProps> = ({ setIsLogIn, isLogin }) => {
+const Home: FunctionComponent<HomeProps> = ({ setIsLogIn }) => {
+    let isLogin = useContext<boolean>(isLoginGlobal);
+
     return (<>
         {isLogin ? <AllCampaign /> : <Login setIsLogIn={setIsLogIn} />}
 

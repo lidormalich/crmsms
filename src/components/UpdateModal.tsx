@@ -1,7 +1,7 @@
 import { FunctionComponent } from "react";
 import { Button, Modal } from "react-bootstrap";
 import People from "../interfaces/People";
-import UpdateBook from "./UpdateBook";
+import UpdatePeopleToInvitation from "./UpdatePeopleToInvitation";
 
 interface UpdateModalProps {
     show: boolean;
@@ -27,7 +27,7 @@ const UpdateModal: FunctionComponent<UpdateModalProps> = ({ show, onHide, phoneN
                 </Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                <UpdateBook phoneNum={phoneNum} eventId={eventId} refresh={refresh} onHide={onHide} />
+                <UpdatePeopleToInvitation phoneNum={phoneNum} eventId={eventId} refresh={refresh} onHide={onHide} />
             </Modal.Body>
 
         </Modal>
