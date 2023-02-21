@@ -26,7 +26,7 @@ For support or questions, please contact us at [lidormalich@gmail.com](mailto:li
 -   TypeScript
 -   React
 -   REST API
-###server side
+### server side
 -   NodeJS
 -   Express
 - MongoDB
