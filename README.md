@@ -1,46 +1,32 @@
-# Getting Started with Create React App
+# Wedding Event CRM Website = CRM SMS invitation
+### "Create and Manage Your Perfect Wedding Event with Ease: The Ideal Choice for Advanced Features and User-Friendly Interface."
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This website provides a comprehensive solution for managing and creating a wedding event. It comes with advanced options, including sending messages to invitees, editing their personal arrival, displaying invitations according to the data of the bride and groom, managing all invitees, and much more.
 
-## Available Scripts
+The website is designed to be completely online, making it easy to access and manage from anywhere, at any time. It offers a user-friendly interface that allows you to create and customize your wedding event easily.
 
-In the project directory, you can run:
+## Key Features:
 
-### `npm start`
+-   Personalized invitations and messaging: Create and send personalized invitations to your guests and communicate with them easily.
+-   RSVP Management: Easily manage your guest list and track responses.
+-   Wedding Details: Manage all your wedding event details including the date, time, location, and more.
+-   Guest Seating: Create and manage seating arrangements for your guests.
+-   Personalized Schedule: Create a personalized schedule for your guests, including ceremony and reception details.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+This website is perfect for anyone looking for a complete solution for managing and creating their wedding event. It offers advanced features and functionalities to make your wedding planning experience effortless and enjoyable.
 
-### `npm test`
+## Support
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+For support or questions, please contact us at [lidormalich@gmail.com](mailto:lidormalich@gmail.com). We are dedicated to providing the best experience for our users and are always happy to help with any issues or concerns.
 
-### `npm run build`
+## Technologies Used
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+### client side
+-   TypeScript
+-   React
+-   REST API
+###server side
+-   NodeJS
+-   Express
+- MongoDB
