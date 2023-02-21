@@ -47,7 +47,7 @@ const AddGroup: FunctionComponent<AddGroupProps> = ({ setIsLogIn }) => {
                 </div>
             </div> */}
             <div className="row">
-                <div className="col-md-4">
+                <div className="col-md-5">
                     <AllGruop />
                 </div>
                 <div className="col-md-8">

@@ -22,6 +22,7 @@ import AddGroup from './components/MangeGroup/AddGroup';
 import InvitationComponent from './components/InvitationComponent';
 import ClientUpdateGuost from './components/ClientUpadteGuostPage/ClientUpdateGuost';
 import ClientPage from './components/ClientUpadteGuostPage/ClientPage';
+import ParseExcel from './components/Extra/ParseExcel';
 
 export let siteTheme = React.createContext(false);
 export let isLoginGlobal = React.createContext<boolean>(false);
@@ -51,7 +52,7 @@ function App() {
             <Route path='/campaign/:eventId' element={<InvitationComponent setIsLogIn={setIsLogIn} setpeopleChanged={setpeopleChanged} peopleChange={peopleChange} />} />
             <Route path='/addgruop/:eventId' element={<AddGroup setIsLogIn={setIsLogIn} />} />
             <Route path='/event/:eventId/:phoneNum' element={<ClientPage />} />
-            {/* <Route path='/9090' element={<AddGroup />} /> */}
+            <Route path='/9090' element={<ParseExcel />} />
             <Route path='/invitation/:eventId' element={<Invitation />} />
             <Route path='/nothaveaccess' element={<NotHaveAccess />} />
             <Route path='/dashboard' element={<Dashboard letA='lidor' letC='500' letb='400' />} />

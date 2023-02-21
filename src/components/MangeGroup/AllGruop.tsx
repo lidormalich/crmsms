@@ -1,5 +1,5 @@
 import { FunctionComponent, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import Group from "../../interfaces/Group";
 import { getAllGroup } from "../../services/GruopServices";
 
@@ -20,11 +20,12 @@ const AllGruop: FunctionComponent<AllGruopProps> = () => {
     return (<>
 
         <div className="container">
-            <h5 className="display-5">All Gruop at that event</h5>
-            <ol>
-                {allGroup.map((item) => <li key={counter++}><a href="#">{item.eventGroupName}</a></li>)}
-            </ol>
-
+            <div className="mx-4">
+                <h5 className="display-5">All Gruop at that event</h5>
+                <ol>
+                    {allGroup.map((item) => <li key={counter++}><Link to={`/editGruop/${eventId}`} className={"eventGroupName"}>{item.eventGroupName}</Link></li>)}
+                </ol>
+            </div>
         </div>
 
     </>);
