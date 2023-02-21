@@ -1,11 +1,10 @@
 import { FunctionComponent, useContext } from "react";
-import { Container, Nav, Navbar, NavDropdown } from "react-bootstrap";
-import { NavLink, useNavigate } from "react-router-dom";
+import { Container, Nav, Navbar } from "react-bootstrap";
+import { Link, useNavigate } from "react-router-dom";
 import { isLoginGlobal } from "../App";
 
 interface NavBarProps {
     setIsLogIn: Function;
-
 }
 
 const NavBar: FunctionComponent<NavBarProps> = ({ setIsLogIn }) => {
@@ -14,40 +13,48 @@ const NavBar: FunctionComponent<NavBarProps> = ({ setIsLogIn }) => {
 
 
     return (<div className="bg-dark text-light">
-        <NavLink to="/newcampaign">New Campaign</NavLink>
 
         <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
             <Container>
-                <Navbar.Brand href="/"><h5 className="display-5">CRM SMS invitation </h5></Navbar.Brand>
+                <Link className="navbar-brand" to="/"><h5 className="display-5">CRM SMS invitation </h5></Link>
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                 <Navbar.Collapse id="responsive-navbar-nav">
                     <Nav className="me-auto">
-                        <NavLink to="/newcampaign">New Campaign</NavLink>
-                        <NavLink to="/invitation">Invitation</NavLink>
-                        <NavLink to="/allcampaign">All Campaign</NavLink>
+                        <ul className="navbar-nav">
+                            <li className="nav-item">
+                                <Link className="nav-link " to={"/newcampaign"}>New Campaign</Link>
+                            </li>
+                            <li className="nav-item">
+                                <Link className="nav-link" to="/invitation">Invitation</Link>
+                            </li>
+                            <li className="nav-item">
+                                <Link className="nav-link" to="/allcampaign">All Campaign</Link>
+                            </li>
+                        </ul>
                     </Nav>
 
 
 
                     {isLogin && <>
-                        <Nav className="me-5">
-                            <NavDropdown title={`Hi ${sessionStorage.getItem("userName")}`} id="collasible-nav-dropdown">
-                                <NavDropdown.Item href="/profile">
-                                    Profile Info
-                                </NavDropdown.Item>
-                                <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
-                                <NavDropdown.Item href="/" onClick={() => {
+                        <li className="nav-item dropdown" style={{ listStyleType: "none" }}>
+                            <Link className="nav-link dropdown-toggle" to="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                {`Hi ${sessionStorage.getItem("userName")}`}
+                            </Link>
+                            <ul className="dropdown-menu">
+                                <li><Link className="dropdown-item" to="/profile">Profile Info</Link></li>
+                                <li><Link className="dropdown-item" to="/action/3.3">Something</Link></li>
+                                <li><Link className="dropdown-item" to="/" onClick={() => {
                                     sessionStorage.setItem("IsLoggedIn", "false");
                                     setIsLogIn(false);
                                     navigate("/");
-                                }}>log-out
-                                </NavDropdown.Item>
-                            </NavDropdown>
-                        </Nav></>}
+                                }}>log-out</Link></li>
+                            </ul>
+                        </li>
+                    </>}
                 </Navbar.Collapse>
             </Container>
         </Navbar>
-    </div>);
+    </div >);
 }
 
 export default NavBar;

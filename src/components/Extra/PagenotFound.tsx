@@ -1,4 +1,5 @@
 import { FunctionComponent } from "react";
+import { Link } from "react-router-dom";
 import './404.css';
 
 
@@ -25,7 +26,7 @@ const PagenotFound: FunctionComponent<PagenotFoundProps> = () => {
 
                             <p>הבחור רעב, הוא אכל בטעות את הכבל- והשרת לא נמצא</p>
                             <p>אולי נסה לחזור למקום שכן עובד באתר?</p>
-                            <a href="/" className="link_404">לחזרה למסך הראשי</a>
+                            <Link to="/" className="link_404">לחזרה למסך הראשי</Link>
                         </div>
                     </div>
                 </div>
