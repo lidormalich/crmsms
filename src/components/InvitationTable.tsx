@@ -9,9 +9,18 @@ interface InvitationTableProps {
     peopleChanged: boolean;
     setPeopleChanged: Function;
 
+
+    setPcountercome: Function;
+    countercome: number;
 }
 
-const InvitationTable: FunctionComponent<InvitationTableProps> = ({ peopleChanged, setPeopleChanged }) => {
+const InvitationTable: FunctionComponent<InvitationTableProps> = ({ peopleChanged, setPeopleChanged,
+
+
+    setPcountercome, countercome
+
+
+}) => {
     let [peopleArr, setPeopleArr] = useState<People[]>([]);
 
     // Open Modal
@@ -69,7 +78,17 @@ const InvitationTable: FunctionComponent<InvitationTableProps> = ({ peopleChange
                     <td>{people.eventGroupName}</td>
                     <td>{people.phoneNumber}</td>
                     <td>{people.NumberOfGuests}</td>
-                    <td><span style={{ color: "green" }}>{people.NumberOfGuestsAccept}<i className="fa-solid fa-person"  ></i></span></td>
+                    <td><span style={{ color: "green" }}>{people.NumberOfGuestsAccept}
+
+
+
+                        {/* {setPcountercome(countercome+people.NumberOfGuestsAccept)} */}
+
+
+
+
+
+                        <i className="fa-solid fa-person"  ></i></span></td>
                     <td onClick={() => {
                         setItemPepole(people.phoneNumber)
                         setOpenUpdateModal(true);

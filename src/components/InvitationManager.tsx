@@ -11,9 +11,16 @@ interface InvitationManagerProps {
     peopleChange: boolean;
     setIsLogIn: Function;
     setpeopleChanged: Function;
+
+    setPcountercome: Function;
+    countercome: number;
 }
 
-const InvitationManager: FunctionComponent<InvitationManagerProps> = ({ setIsLogIn, peopleChange, setpeopleChanged }) => {
+const InvitationManager: FunctionComponent<InvitationManagerProps> = ({ setIsLogIn, peopleChange, setpeopleChanged,
+
+    setPcountercome, countercome
+
+}) => {
     // משתני עזר לרענון הקומפוננטה בלי רענון הדף
     let { eventId } = useParams();
     let isLogin = useContext<boolean>(isLoginGlobal);
@@ -31,7 +38,13 @@ const InvitationManager: FunctionComponent<InvitationManagerProps> = ({ setIsLog
                         <AddPeople setpeopleChanged={setpeopleChanged} peopleChange={peopleChange} id={eventId as string} />
                     </div>
                     <div className="col-md-8">
-                        <InvitationTable peopleChanged={peopleChange} setPeopleChanged={setpeopleChanged} />
+                        <InvitationTable peopleChanged={peopleChange} setPeopleChanged={setpeopleChanged}
+
+                            setPcountercome={setPcountercome}
+                            countercome={countercome}
+
+
+                        />
                     </div>
                 </div>
             </>) : (<><Login setIsLogIn={setIsLogIn} /></>

@@ -15,7 +15,7 @@ interface InvitationComponentProps {
 const InvitationComponent: FunctionComponent<InvitationComponentProps> = ({ setIsLogIn, peopleChange, setpeopleChanged }) => {
     let isLogin = useContext<boolean>(isLoginGlobal);
     let [peopleArr, setPeopleArr] = useState<People[]>([]);
-    // let [peopleArr, setPeopleArr] = useState<People[]>([]);
+    // let [peopleArrCounter, setPeopleArrCounter] = useState<number[]>([]);
     let [countercome, setPcountercome] = useState<number>(0);
     let { eventId } = useParams();
 
@@ -37,7 +37,13 @@ const InvitationComponent: FunctionComponent<InvitationComponentProps> = ({ setI
         {/* {peopleArr.map((item) => setPcountercome(item.NumberOfGuests + countercome)) + ""} */}
         {isLogin && <Dashboard letA={countercome + ""} letC={""} letb={""} />}
 
-        <InvitationManager setIsLogIn={setIsLogIn} setpeopleChanged={setpeopleChanged} peopleChange={peopleChange} />
+        <InvitationManager setIsLogIn={setIsLogIn} setpeopleChanged={setpeopleChanged} peopleChange={peopleChange}
+
+            setPcountercome={setPcountercome}
+            countercome={countercome}
+
+
+        />
 
     </>);
 }

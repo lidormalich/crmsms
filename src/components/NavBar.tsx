@@ -1,6 +1,6 @@
 import { FunctionComponent, useContext } from "react";
 import { Container, Nav, Navbar, NavDropdown } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { isLoginGlobal } from "../App";
 
 interface NavBarProps {
@@ -14,6 +14,7 @@ const NavBar: FunctionComponent<NavBarProps> = ({ setIsLogIn }) => {
 
 
     return (<div className="bg-dark text-light">
+        <NavLink to="/newcampaign">New Campaign</NavLink>
 
         <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
             <Container>
@@ -21,9 +22,9 @@ const NavBar: FunctionComponent<NavBarProps> = ({ setIsLogIn }) => {
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                 <Navbar.Collapse id="responsive-navbar-nav">
                     <Nav className="me-auto">
-                        <Nav.Link href="/newcampaign">New Campaign</Nav.Link>
-                        <Nav.Link href="/invitation">Invitation</Nav.Link>
-                        <Nav.Link href="/allcampaign">All Campaign</Nav.Link>
+                        <NavLink to="/newcampaign">New Campaign</NavLink>
+                        <NavLink to="/invitation">Invitation</NavLink>
+                        <NavLink to="/allcampaign">All Campaign</NavLink>
                     </Nav>
 
 
