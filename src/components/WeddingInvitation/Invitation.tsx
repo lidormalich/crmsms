@@ -24,7 +24,6 @@ const Invitation: FunctionComponent<InvitationProps> = () => {
     }, []);
 
     return (<>
-        {console.log(flage)}
         {flage ? <WeddingInvitation eventInfo={info} /> : <Loading stringToShow={"No Data To Show"} />}
     </>);
 }

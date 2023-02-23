@@ -9,7 +9,7 @@ interface DashboardProps {
 
 const Dashboard: FunctionComponent<DashboardProps> = ({ letA, letb, letC }) => {
     return (<>
-        <div className="d-flex justify-content-center ">
+        <div className="d-flex justify-content-center align-items-center ">
             <div className="dashCards">
                 <div className="dashCard">
                     <div className="title">Guest</div>
