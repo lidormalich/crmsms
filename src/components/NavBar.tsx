@@ -1,7 +1,9 @@
 import { FunctionComponent, useContext } from "react";
 import { Container, Nav, Navbar } from "react-bootstrap";
+import { isBrowser } from "react-device-detect";
 import { Link, useNavigate } from "react-router-dom";
 import { isLoginGlobal } from "../App";
+
 
 interface NavBarProps {
     setIsLogIn: Function;
@@ -17,8 +19,9 @@ const NavBar: FunctionComponent<NavBarProps> = ({ setIsLogIn }) => {
         <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
             <Container>
                 <Link className="navbar-brand" to="/">
-                    {/* <h5 className="display-5">CRM SMS invitation </h5> */}
-                    <img alt="CRM SMS invitation" src="https://github.com/lidormalich/crmsms/blob/master/src/images/CRMSMSIinvitation.png?raw=true" height={50} />
+                    {/*  <h5 className="display-5">CRM SMS invitation </h5>*/}
+                    {isBrowser ? (<img alt="CRM SMS invitation" src="https://github.com/lidormalich/crmsms/blob/master/src/images/CRMSMSIinvitation.png?raw=true" height={50} />) : (<h5 className="display-5">CRM SMS invitation </h5>)}
+
 
                 </Link>
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
