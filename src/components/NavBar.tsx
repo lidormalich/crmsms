@@ -18,7 +18,7 @@ const NavBar: FunctionComponent<NavBarProps> = ({ setIsLogIn }) => {
             <Container>
                 <Link className="navbar-brand" to="/">
                     {/* <h5 className="display-5">CRM SMS invitation </h5> */}
-                    <img alt="CRM SMS invitation" src=".././images/CRMSMSIinvitation.png" />
+                    <img alt="CRM SMS invitation" src="https://github.com/lidormalich/crmsms/blob/master/src/images/CRMSMSIinvitation.png?raw=true" height={50} />
 
                 </Link>
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
