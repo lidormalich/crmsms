@@ -16,7 +16,11 @@ const NavBar: FunctionComponent<NavBarProps> = ({ setIsLogIn }) => {
 
         <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
             <Container>
-                <Link className="navbar-brand" to="/"><h5 className="display-5">CRM SMS invitation </h5></Link>
+                <Link className="navbar-brand" to="/">
+                    {/* <h5 className="display-5">CRM SMS invitation </h5> */}
+                    <img alt="CRM SMS invitation" src=".././images/CRMSMSIinvitation.png" />
+
+                </Link>
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                 <Navbar.Collapse id="responsive-navbar-nav">
                     <Nav className="me-auto">
