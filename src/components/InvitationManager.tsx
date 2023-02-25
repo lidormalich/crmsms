@@ -35,7 +35,7 @@ const InvitationManager: FunctionComponent<InvitationManagerProps> = ({ setIsLog
                 </div>
                 <div className="row">
                     <div className="col-md-4">
-                        <AddPeople setpeopleChanged={setpeopleChanged} peopleChange={peopleChange} id={eventId as string} />
+                        <AddPeople setpeopleChanged={setpeopleChanged} peopleChange={peopleChange} />
                     </div>
                     <div className="col-md-8">
                         <InvitationTable peopleChanged={peopleChange} setPeopleChanged={setpeopleChanged}

@@ -4,17 +4,16 @@ import * as yup from "yup";
 import { successMessage } from "../services/FeedbackService";
 import People from "../interfaces/People";
 import { addPeopleToEvent } from "../services/eventServices";
-import { getAllGroup } from "../services/GruopServices";
+import { getAllGroup } from "../services/GroupServices";
 import Group from "../interfaces/Group";
 import { useParams } from "react-router-dom";
 
 interface AddPeopleProps {
     setpeopleChanged: Function;
     peopleChange: boolean;
-    id: string;
 }
 
-const AddPeople: FunctionComponent<AddPeopleProps> = ({ setpeopleChanged, peopleChange, id }) => {
+const AddPeople: FunctionComponent<AddPeopleProps> = ({ setpeopleChanged, peopleChange }) => {
     let [allGroup, setAllGruop] = useState<Group[]>([]);
     let { eventId } = useParams();
     let counter: number = 0;
@@ -33,7 +32,7 @@ const AddPeople: FunctionComponent<AddPeopleProps> = ({ setpeopleChanged, people
 
         }),
         onSubmit: (values: People, { resetForm }) => {
-            addPeopleToEvent(id, values).then((res) => {
+            addPeopleToEvent(eventId as string, values).then((res) => {
                 successMessage("Event Added");
                 resetForm();
 

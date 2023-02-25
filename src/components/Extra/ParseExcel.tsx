@@ -20,19 +20,22 @@ const ParseExcel: FunctionComponent<ParseExcelProps> = () => {
 
 
         const worksheet = workbook.Sheets[workbook.SheetNames[0]];
-        const jsonData = XLSX.utils.sheet_to_json(worksheet, {
-            header: 1,
-            defval: ""
-        });
+        const jsonData = XLSX.utils.sheet_to_json(worksheet);
 
         // console.log(jsonData);
         setCulums(jsonData);
+        console.log(culums);
+
     }
     return (<>
         <h1>Parse Excel</h1>
-        {/* {fileName && (<p>{fileName} <p />)} */}
-        {console.log(culums[4][1])}
-        <input type={"file"} onChange={(e) => handelFile(e)}></input>
+        {fileName && (<p>{fileName}</p>)}
+        {/* {console.log(culums[4][1])} */}
+        <input type={"file"}
+            onChange={(e) => handelFile(e)}
+        ></input>
+
+        {culums.length && console.log(culums)}
     </>);
 }
 

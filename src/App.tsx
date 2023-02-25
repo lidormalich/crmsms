@@ -15,10 +15,11 @@ import AllCampaign from './components/AllCampaign';
 import Home from './components/Home';
 import Dashboard from './components/Extra/Dashboard';
 import Profile from './components/Extra/Profile/Profile';
-import AddGroup from './components/MangeGroup/AddGroup';
 import InvitationComponent from './components/InvitationComponent';
 import ClientPage from './components/ClientUpadteGuostPage/ClientPage';
 import ParseExcel from './components/Extra/ParseExcel';
+import ManageAllGroup from './components/MangeGroup/ManageAllGroup';
+import About from './components/Extra/About';
 
 export let siteTheme = React.createContext(false);
 export let isLoginGlobal = React.createContext<boolean>(false);
@@ -26,6 +27,7 @@ export let isLoginGlobal = React.createContext<boolean>(false);
 function App() {
   let [isLogin, setIsLogIn] = useState<boolean>(sessionStorage.getItem("IsLoggedIn") == "true" ? true : false);
   let [peopleChange, setpeopleChanged] = useState<boolean>(false);
+  let [groupChange, setgroupChanged] = useState<boolean>(false);
 
   return (
 
@@ -46,9 +48,10 @@ function App() {
             <Route path='/profile' element={<Profile />} />
             <Route path='/allcampaign' element={<AllCampaign />} />
             <Route path='/campaign/:eventId' element={<InvitationComponent setIsLogIn={setIsLogIn} setpeopleChanged={setpeopleChanged} peopleChange={peopleChange} />} />
-            <Route path='/addgruop/:eventId' element={<AddGroup setIsLogIn={setIsLogIn} />} />
+            <Route path='/gruop/:eventId' element={<ManageAllGroup setIsLogIn={setIsLogIn} setGroupChanged={setgroupChanged} groupChanged={groupChange} />} />
             <Route path='/event/:eventId/:phoneNum' element={<ClientPage />} />
             <Route path='/9090' element={<ParseExcel />} />
+            <Route path='/about' element={<About />} />
             <Route path='/invitation/:eventId' element={<Invitation />} />
             <Route path='/nothaveaccess' element={<NotHaveAccess />} />
             <Route path='/dashboard' element={<Dashboard letA='lidor' letC='500' letb='400' />} />

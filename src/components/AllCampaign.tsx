@@ -42,7 +42,7 @@ const AllCampaign: FunctionComponent<AllCampaignProps> = () => {
                             <td>{counter++}</td>
                             {isBrowser && (<td>{eventItem._id}</td>)}
                             <td>{eventItem.campaignName}</td>
-                            <td><Link to={`/addgruop/${eventItem._id}`}>Manage</Link></td>
+                            <td><Link to={`/gruop/${eventItem._id}`}>Manage</Link></td>
                             <td><Link to={`/campaign/${eventItem._id}`}>Manage Event</Link></td>
 
                         </tr>)}

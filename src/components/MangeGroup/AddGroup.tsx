@@ -1,61 +1,68 @@
-import { FunctionComponent, useEffect, useState, useContext } from "react";
-import { Link, useParams } from "react-router-dom";
+import { useFormik } from "formik";
+import { FunctionComponent } from "react";
+import { useParams } from "react-router-dom";
+import * as yup from "yup";
 import Group from "../../interfaces/Group";
-import { getAllGroup } from "../../services/GruopServices";
-import { isLoginGlobal } from "../../App";
-import AllGruop from "./AllGruop";
-import Login from "../Login";
+import { successMessage } from "../../services/FeedbackService";
+import { addNewGroup } from "../../services/GroupServices";
 
-import './AddGruop.css';
 
 interface AddGroupProps {
-    setIsLogIn: Function;
+    setGroupChanged: Function;
+    groupChanged: boolean;
 }
 
-const AddGroup: FunctionComponent<AddGroupProps> = ({ setIsLogIn }) => {
-    let [allGroupItem, setAllGruopItem] = useState<Group[]>([]);
+const AddGroup: FunctionComponent<AddGroupProps> = ({ setGroupChanged, groupChanged }) => {
     let { eventId } = useParams();
-    let isLogin = useContext<boolean>(isLoginGlobal);
 
-    let counter: number = 0;
-    // useEffect(() => {
-    //     getAllGroup(eventId as string).then((res) => setAllGruopItem(res.data)).catch((e) => console.log(e));
-    // }, []);
+    let formik = useFormik({
+        initialValues: { eventGroupName: "" },
+        validationSchema: yup.object({
+            eventGroupName: yup.string().required().min(2),
+        }),
+        onSubmit: (values: any, { resetForm }) => {
+            addNewGroup(eventId as string, values).then((res) => {
+                successMessage("Event Added");
+                resetForm();
+
+                // רענון
+                setGroupChanged(!groupChanged);
+            })
+                .catch((e) => console.log(e))
+
+        }
+    })
     return (<>
-        {isLogin ? (<>
+        <div>
+            <h5 className="">Add Guest- pepole interface</h5>
+            <form onSubmit={formik.handleSubmit}>
 
-            <div className="d-flex justify-content-center align-items-center">
-                <h5 className="display-5">All Gruop for event <Link to={`/campaign/${eventId}`}>{eventId}</Link></h5>
-            </div>
-            {/* <div className="container">
-                <div className="row">
-                    <div className="col-md-4" >
-                        <h1><span className="counter">2,523</span></h1>
-                        <h3>Customers</h3>
-                        <i className=" iItem fa fa-users"></i>
-                    </div>
-                    <div className="col-md-4">
-                        <h1><span className="counter">63,075</span></h1>
-                        <h3>Total Web Pages</h3>
-                        <i className="iItem fa fa-desktop"></i>
-                    </div>
-                    <div className="col-md-4">
-                        <h1><span className="counter">12,218</span></h1>
-                        <h3>Cups Of Coffee</h3>
-                        <i className="iItem fa fa-coffee"></i>
-                    </div>
+                <div className="form-floating mb-3">
+                    <input
+                        type="text"
+                        className="form-control"
+                        id="eventGroupName"
+                        placeholder="textme"
+                        name="eventGroupName"
+                        value={formik.values.eventGroupName}
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                    />
+                    <label htmlFor="eventGroupName">Group Name</label>
+                    {/* {formik.touched.eventGroupName && formik.errors.eventGroupName && (
+                        <small className="text-danger">{formik.errors.eventGroupName}</small>
+                    )} */}
                 </div>
-            </div> */}
-            <div className="row">
-                <div className="col-md-5">
-                    <AllGruop />
-                </div>
-                <div className="col-md-8">
-                    {/* <AllGruop /><p>55555</p> */}
-                </div>
-            </div>
-        </>) : (<><Login setIsLogIn={setIsLogIn} /></>
-        )}
+
+
+
+
+
+                <button type="submit" className="btn btn-warning w-100 my-3"
+                    disabled={!formik.isValid || !formik.dirty}><i className="fa-solid fa-plus"></i>  ADD</button>
+            </form>
+        </div >
+
 
     </>);
 }

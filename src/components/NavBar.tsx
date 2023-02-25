@@ -31,11 +31,12 @@ const NavBar: FunctionComponent<NavBarProps> = ({ setIsLogIn }) => {
                             <li className="nav-item">
                                 <Link className="nav-link " to={"/newcampaign"}>New Campaign</Link>
                             </li>
-                            <li className="nav-item">
-                                <Link className="nav-link" to="/invitation">Invitation</Link>
-                            </li>
+
                             <li className="nav-item">
                                 <Link className="nav-link" to="/allcampaign">All Campaign</Link>
+                            </li>
+                            <li className="nav-item">
+                                <Link className="nav-link" to="/about">About</Link>
                             </li>
                         </ul>
                     </Nav>

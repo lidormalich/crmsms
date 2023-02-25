@@ -2,7 +2,6 @@ import { useFormik } from "formik";
 import { FunctionComponent } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import * as yup from "yup";
-import { date } from "yup/lib/locale";
 import User from "../interfaces/User";
 import { errorMessage, successMessage } from "../services/FeedbackService";
 import { checkUser } from "../services/userServices";
@@ -14,7 +13,8 @@ interface LoginProps {
 const Login: FunctionComponent<LoginProps> = ({ setIsLogIn }) => {
     let navigate = useNavigate();
     let formik = useFormik({
-        initialValues: { email: "", password: "" },
+        initialValues: { email: "admin@gmail.com", password: "adminadmin" },
+        enableReinitialize: true,
         validationSchema: yup.object({
             email: yup.string().required().email().min(5),
             password: yup.string().required().min(8)
@@ -73,7 +73,9 @@ const Login: FunctionComponent<LoginProps> = ({ setIsLogIn }) => {
                     )}
                 </div>
                 <button type="submit" className="btn btn-success w-100 my-3"
-                    disabled={!formik.isValid || !formik.dirty}>Login</button>
+                    disabled={!formik.isValid
+                        // || !formik.dirty
+                    }>Login</button>
             </form>
             <Link to={"/register"}>It took a moment for her to register the truth. <i className="fa-solid fa-face-smile-wink"></i></Link>
 

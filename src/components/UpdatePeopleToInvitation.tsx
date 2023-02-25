@@ -1,12 +1,12 @@
 import { FunctionComponent, useEffect, useState } from "react";
 import * as yup from "yup";
-import { Button } from "react-bootstrap";
 import { successMessage } from "../services/FeedbackService";
 import People from "../interfaces/People";
 import { getPeopleInfoByPhone, updatePeopleInEvent } from "../services/eventServices";
 import { useFormik } from "formik";
 import Group from "../interfaces/Group";
-import { getAllGroup } from "../services/GruopServices";
+import { getAllGroup } from "../services/GroupServices";
+import { sendsmstoclient } from "../services/SMSservices";
 
 
 interface UpdatePeopleToInvitationProps {
@@ -20,9 +20,8 @@ const UpdatePeopleToInvitation: FunctionComponent<UpdatePeopleToInvitationProps>
     let [people, setpoepole] = useState<People>({ phoneNumber: "", firstName: "", lastName: "", NumberOfGuests: 0, NumberOfGuestsAccept: 0, eventGroupName: "" });
     let [allGroup, setAllGruop] = useState<Group[]>([]);
     useEffect(() => {
-        // console.log(eventId, phoneNum);
         getPeopleInfoByPhone(eventId, phoneNum)
-            .then((res) => setpoepole(res.data))
+            .then((res) => { setpoepole(res.data); console.log(res.data) })
             .catch((e) => console.log(e));
         getAllGroup(eventId).then((res) => setAllGruop(res.data)).catch((e) => console.log(e));
     }, []);
@@ -43,9 +42,6 @@ const UpdatePeopleToInvitation: FunctionComponent<UpdatePeopleToInvitationProps>
             eventGroupName: yup.string().required()
         }),
         onSubmit: (values: People) => {
-            console.log(values);
-
-
             updatePeopleInEvent(eventId, values).then((res) => {
                 onHide();
                 successMessage("People data change and save");
@@ -161,9 +157,18 @@ const UpdatePeopleToInvitation: FunctionComponent<UpdatePeopleToInvitationProps>
 
                 <hr />
 
-                {/* <button type="submit" className="btn btn-success w-100 my-3" onClick={() => { console.log("Clicked"); }
+                <button type="submit" className="btn btn-primary w-100 my-3" onClick={() => {
+                    sendsmstoclient({
+                        message: `
+                היי 
+                ${formik.values.firstName} אתה מוזמנ/ת לחתונה שלנו
+                נשמח שתבואו ותאשרו הגעה בלינק הבא
+                https://crmsms.netlify.app/event/63ebe5414278d6a3e293af1a/+1%20(716)%20193-6362
+                `, phone: `+972${formik.values.phoneNumber}`
+                    }).then(res => console.log(res.data)).catch(e => console.log(e))
                 }
-                >TRY</button> */}
+                }
+                >SENS SMS</button>
                 <button type="submit" className="btn btn-success w-100 my-3"
                 // disabled={!formik.isValid || !formik.dirty}
                 ><i className="fa-solid fa-floppy-disk"></i>  Save Change</button>

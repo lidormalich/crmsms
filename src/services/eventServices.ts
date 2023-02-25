@@ -19,8 +19,8 @@ export function getEventInfoByID(id: string) {
     return axios.get(`${api}/eventinfo/${id}`);
 }
 // get one People Info by Event id  and Phone OKKKKKKKKKKKKKKKKKKKK
-export function getPeopleInfoByPhone(id: string, phone: string) {
-    return axios.get(`${api}/getoneepepole/${id}`, { data: { phoneNumber: phone } });
+export function getPeopleInfoByPhone(eventid: string, phone: string) {
+    return axios.get(`${api}/getoneepepole/${eventid}/${phone}`);
 }
 
 // add new Event

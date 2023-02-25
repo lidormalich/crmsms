@@ -11,5 +11,9 @@ export function getAllGroup(id: string) {
 export function deleteGroup(id: string, groupToDelete: string) {
     return axios.patch(`${api}/deletegroup/${id}`, groupToDelete);
 }
+// Delete One Group -OKKKKKKKKKKK
+export function addNewGroup(id: string, groupToAdd: string) {
+    return axios.patch(`${api}/group/${id}`, groupToAdd);
+}
 
 
