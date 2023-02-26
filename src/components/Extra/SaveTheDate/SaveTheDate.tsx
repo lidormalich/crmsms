@@ -20,8 +20,8 @@ const SaveTheDate: FunctionComponent<SaveTheDateProps> = () => {
             {/* <div className="info">
                 <h3>hi</h3>
             </div>  */}
-            <img src="frm.png" alt="" className="frame responsiveImg" />
-            <img src="cuple.jpg" alt="" className="cuple responsiveImg" />
+            <img src="https://github.com/lidormalich/crmsms/blob/master/src/components/Extra/frm.png?raw=true" alt="" className="frame responsiveImg" />
+            <img src="https://github.com/lidormalich/crmsms/blob/master/src/components/Extra/cuple.jpg?raw=true" alt="" className="cuple responsiveImg" />
         </div>
     </>);
 }
