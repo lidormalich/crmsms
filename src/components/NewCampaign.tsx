@@ -18,7 +18,7 @@ const NewCampaign: FunctionComponent<NewCampaignProps> = () => {
     let campaignId: number = 5;
     let formik = useFormik({
         initialValues: {
-            campaignName: "", ownerName: "", phone: "", uuid: uuidLidor, bride: "", groom: ""
+            campaignName: "", ownerName: "", phone: "", uuid: uuidLidor, bride: "", groom: "", groomParents: "", brideParents: "",
         }, validationSchema: yup.object({
             campaignName: yup.string().required("Campaign name is a required field").min(2),
             bride: yup.string().required("brige name is a required field").min(2),
@@ -133,6 +133,38 @@ const NewCampaign: FunctionComponent<NewCampaignProps> = () => {
                     <label htmlFor="phone">Owner Phone</label>
                     {formik.touched.phone && formik.errors.phone && (
                         <small className="text-danger">{formik.errors.phone}</small>
+                    )}
+                </div>
+                <div className="form-floating mb-3">
+                    <input
+                        type="text"
+                        className="form-control"
+                        id="groomParents"
+                        placeholder="0525552555"
+                        name="groomParents"
+                        value={formik.values.groomParents}
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                    />
+                    <label htmlFor="groomParents">הורי החתן groomParents</label>
+                    {formik.touched.groomParents && formik.errors.groomParents && (
+                        <small className="text-danger">{formik.errors.phone}</small>
+                    )}
+                </div>
+                <div className="form-floating mb-3">
+                    <input
+                        type="text"
+                        className="form-control"
+                        id="brideParents"
+                        placeholder="0525552555"
+                        name="brideParents"
+                        value={formik.values.brideParents}
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                    />
+                    <label htmlFor="brideParents">הורי הכלה bride Parents</label>
+                    {formik.touched.brideParents && formik.errors.brideParents && (
+                        <small className="text-danger">{formik.errors.brideParents}</small>
                     )}
                 </div>
 

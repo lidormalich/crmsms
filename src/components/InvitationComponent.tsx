@@ -23,8 +23,6 @@ const InvitationComponent: FunctionComponent<InvitationComponentProps> = ({ setI
         getPeopleInEventByID(eventId as string).then((res) => {
             setPeopleArr(res.data);
             // console.log(res.data);
-
-
         }).catch((e) => console.log(e))
     }, []);
     // useEffect(() => {

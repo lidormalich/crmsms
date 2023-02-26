@@ -18,12 +18,12 @@ interface UpdatePeopleToInvitationProps {
 
 const UpdatePeopleToInvitation: FunctionComponent<UpdatePeopleToInvitationProps> = ({ eventId, refresh, onHide, phoneNum }) => {
     let [people, setpoepole] = useState<People>({ phoneNumber: "", firstName: "", lastName: "", NumberOfGuests: 0, NumberOfGuestsAccept: 0, eventGroupName: "" });
-    let [allGroup, setAllGruop] = useState<Group[]>([]);
+    let [allGroup, setAllGroup] = useState<Group[]>([]);
     useEffect(() => {
         getPeopleInfoByPhone(eventId, phoneNum)
             .then((res) => { setpoepole(res.data); console.log(res.data) })
             .catch((e) => console.log(e));
-        getAllGroup(eventId).then((res) => setAllGruop(res.data)).catch((e) => console.log(e));
+        getAllGroup(eventId).then((res) => setAllGroup(res.data)).catch((e) => console.log(e));
     }, []);
 
 
@@ -113,11 +113,11 @@ const UpdatePeopleToInvitation: FunctionComponent<UpdatePeopleToInvitationProps>
                         onChange={formik.handleChange}
                         onBlur={formik.handleBlur}>
 
-                        <option value="DEFAULT" hidden >Choose a Gruop...</option>
+                        <option value="DEFAULT" hidden >Choose a Group...</option>
                         {allGroup.map((groupname: Group) => <option key={counter++} value={groupname.eventGroupName}> {groupname.eventGroupName}</option>)}
 
                     </select>
-                    <label htmlFor="eventGroupName">Gruop</label>
+                    <label htmlFor="eventGroupName">Group</label>
                     {formik.touched.eventGroupName && formik.errors.eventGroupName && (
                         <small className="text-danger">{formik.errors.eventGroupName}</small>
                     )}

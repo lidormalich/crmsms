@@ -1,3 +1,4 @@
+import { info } from "console";
 import { FunctionComponent } from "react";
 import EventInterface from "../../interfaces/EventInterface";
 import "./WeddingInvitation.css";
@@ -66,8 +67,9 @@ const WeddingInvitation: FunctionComponent<WeddingInvitationProps> = ({ eventInf
                         </div>
 
                         <div className="parents">
-                            <div className="parentsdetails">הורי הכלה<br />שלמה ומזל<br />אנג'ל</div>
-                            <div className="parentsdetails">הורי החתן<br />אהרון ואורה<br />מליח</div>
+                            <div className="parentsdetails">הורי הכלה<br />{eventInfo.brideParents}</div>
+                            <div className="parentsdetails">הורי החתן<br />{eventInfo.groomParents}</div>
+
                         </div>
                     </div>
                 </div>

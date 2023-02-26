@@ -45,5 +45,7 @@ export function deleteEvent(id: string) {
 }
 // delete pepole by phone from event-OKKKKKKKKKKKK
 export function deletePepoleFromEvent(phoneNum: string, id: string) {
-    return axios.patch(`${api}/deletepepole/${id}`, phoneNum);
+    console.log(phoneNum);
+
+    return axios.patch(`${api}/deletepepole/${id}`, { phoneNum });
 }

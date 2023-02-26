@@ -1,5 +1,6 @@
 import { FunctionComponent, useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { isLoginGlobal } from "../../../App";
 import NotHaveAccess from "../NotHaveAccess";
 // import { isLoginGlobal } from "../../App";
 // import UserInterface from "../../interface/UserInterface";
@@ -13,16 +14,9 @@ interface ProfileProps {
 }
 
 const Profile: FunctionComponent<ProfileProps> = () => {
-    // let navigate = useNavigate();
-    // let [length, setLength] = useState<number>(0);
-    // let isLogin = useContext<boolean>(isLoginGlobal);
-    // let [user, setUser] = useState<UserInterface>({
-    //     id: 0,
-    //     name: "string",
-    //     email: "string",
-    //     password: "string",
-    //     location: "string",
-    // });
+    let navigate = useNavigate();
+    let isLogin = useContext<boolean>(isLoginGlobal);
+
     useEffect(() => {
 
 
@@ -45,35 +39,32 @@ const Profile: FunctionComponent<ProfileProps> = () => {
     }, []);
 
     return (<>
-        <p>hi</p>
-        {/* {isLogin ? <>
+        {isLogin ? <>
             <div className="container my-3">
                 <div className="card-container mx-auto">
-                    <span className="pro">{user.isBusiness ? "Business" : "Regular"}</span>
-                    {user.image != null ? <img src={user.image} alt={user.name} className="round mx-auto d-block my-3" style={{ width: "15rem" }} /> : <img src="https://images.nightcafe.studio//assets/profile.png?tr=w-1600,c-at_max" alt="ANONYMOUS USER" className="round mx-auto d-block my-3" style={{ width: "17em" }} />}
-                    <h3>{user.name}</h3>
-                    <h6>{user.location}</h6>
-                    <p>User interface designer and <br /> front-end developer</p>
+                    <span className="pro"> Free Account</span>
+                    <img src="https://images.nightcafe.studio//assets/profile.png?tr=w-1600,c-at_max" alt="ANONYMOUS USER" className="round mx-auto d-block my-3" style={{ width: "17em" }} />
+                    <h3>{sessionStorage.getItem("userName")}</h3>
+                    <h6></h6>
+                    <p>Can make and edit all Event <br /> Can Send free sms from web</p>
                     <div className="buttons mx-2 my-3">
 
-                        <div className=" button primary ghost my-3">
-                            You have {length} cards
-                        </div>
+                        {/* <div className=" button primary ghost my-3">
+                            You have E Events
+                        </div> */}
                         <button className="primary" onClick={() => {
-                            navigate("/Profile/Edit");
-                        }
-                        }>
-                            Edit Profile
+                            navigate("/allcampaign")
+                        }}>
+                            Make More Events
                         </button>
                     </div>
                     <div className="by">
-                        // <p>creat by lidor</p> 
-        <p className="">{user.isBusiness ? "Business" : "Regular"}</p>
-    </div>
+                        <p className="">Free Account</p>
+                    </div>
                 </div >
 
             </div >
-        </> : (<NotHaveAccess />)} */}
+        </> : (<NotHaveAccess />)}
     </>);
 }
 

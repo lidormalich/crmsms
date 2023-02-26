@@ -1,19 +1,16 @@
 import { FunctionComponent } from "react";
 import { Button, Modal } from "react-bootstrap";
-import People from "../interfaces/People";
-import { deletePepoleFromEvent } from "../services/eventServices";
+import { deleteEvent } from "../services/eventServices";
 import { errorMessage, successMessage } from "../services/FeedbackService";
 
-interface DeleteModalProps {
+interface DeleteCMPProps {
     show: boolean;
-    phoneNum: string;
     eventId: string;
     onHide: Function;
     refresh: Function;
-
 }
 
-const DeleteModal: FunctionComponent<DeleteModalProps> = ({ show, onHide, phoneNum, refresh, eventId }) => {
+const DeleteCMP: FunctionComponent<DeleteCMPProps> = ({ show, onHide, refresh, eventId }) => {
     return (<>
         <Modal
             show={show}
@@ -33,10 +30,8 @@ const DeleteModal: FunctionComponent<DeleteModalProps> = ({ show, onHide, phoneN
             <Modal.Footer>
                 <Button onClick={() => onHide()}>Cancle</Button>
                 <Button variant="danger" onClick={() => {
-                    deletePepoleFromEvent(phoneNum, eventId).then((res) => {
-                        console.log("deleted phoneNum");
-                        console.log(phoneNum);
-                        successMessage("Men Deleted");
+                    deleteEvent(eventId).then((res) => {
+                        successMessage("Event Deleted");
                         refresh();
                     }).catch((e) => {
                         errorMessage("Sorry! Something went wrong...");
@@ -44,10 +39,10 @@ const DeleteModal: FunctionComponent<DeleteModalProps> = ({ show, onHide, phoneN
                     });
                     onHide()
                 }}
-                >Yes, Delete It</Button>
+                >Yes, Delete that Event</Button>
             </Modal.Footer>
         </Modal>
     </>);
 }
 
-export default DeleteModal;
+export default DeleteCMP;

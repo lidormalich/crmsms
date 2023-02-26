@@ -48,7 +48,7 @@ function App() {
             <Route path='/profile' element={<Profile />} />
             <Route path='/allcampaign' element={<AllCampaign />} />
             <Route path='/campaign/:eventId' element={<InvitationComponent setIsLogIn={setIsLogIn} setpeopleChanged={setpeopleChanged} peopleChange={peopleChange} />} />
-            <Route path='/gruop/:eventId' element={<ManageAllGroup setIsLogIn={setIsLogIn} setGroupChanged={setgroupChanged} groupChanged={groupChange} />} />
+            <Route path='/group/:eventId' element={<ManageAllGroup setIsLogIn={setIsLogIn} setGroupChanged={setgroupChanged} groupChanged={groupChange} />} />
             <Route path='/event/:eventId/:phoneNum' element={<ClientPage />} />
             <Route path='/9090' element={<ParseExcel />} />
             <Route path='/about' element={<About />} />

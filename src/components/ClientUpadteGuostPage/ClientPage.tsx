@@ -2,6 +2,7 @@ import { FunctionComponent, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import People from "../../interfaces/People";
 import { getEventInfoByID, getPeopleInfoByPhone } from "../../services/eventServices";
+import Footer from "../Extra/Footer";
 import ClientUpdateGuost from "./ClientUpdateGuost";
 
 interface ClientPageProps {
@@ -15,7 +16,9 @@ const ClientPage: FunctionComponent<ClientPageProps> = () => {
 
     useEffect(() => {
         getPeopleInfoByPhone(eventId as string, phoneNum as string)
-            .then((res) => setpoepole(res.data))
+            .then((res) => {
+                setpoepole(res.data); console.log(res.data);
+            })
             .catch((e) => console.log(e));
         getEventInfoByID(eventId as string).then((res) => setWeddingInfo(res.data)).catch((e) => console.log(e))
     }, []);
@@ -29,6 +32,7 @@ const ClientPage: FunctionComponent<ClientPageProps> = () => {
                 <p className="h6">{`Then you will receive a message confirming your arrival at the event, thank you very much`}</p>
                 <ClientUpdateGuost people={people} />
             </div>
+            <Footer />
         </div>
     </>);
 }

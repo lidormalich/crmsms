@@ -8,6 +8,21 @@
     src: url("../../Font/yiddishkeit.otf") format("opentype");
 }
 
+@font-face {
+    font-family: Marker;
+    src: url("../../Font/Marker.otf");
+}
+
+@font-face {
+    font-family: shofardemi;
+    src: url("../../Font/shofardemi.ttf");
+}
+
+@font-face {
+    font-family: Keter;
+    src: url("../../Font/Keter.ttf");
+}
+
 * {
     box-sizing: border-box;
     margin: 0;
@@ -74,7 +89,8 @@
     display: flex;
     align-items: center;
     gap: 8px;
-    font-family: rubik;
+    font-family: Marker;
+    font-size: 18px;
 }
 
 .time-hour {
@@ -132,12 +148,14 @@
 }
 
 .parents {
-    color: #18ed66;
+    color: #9381FF;
+    font-family: Keter;
     font-weight: 400;
     display: flex;
     justify-content: space-between;
     width: 90%;
     margin-top: 20px;
+    font-size: 25px;
 }
 
 .parentsdetails {

@@ -1,4 +1,5 @@
 import { FunctionComponent } from "react";
+import Footer from "./Footer";
 
 interface AboutProps {
 
@@ -38,20 +39,7 @@ const About: FunctionComponent<AboutProps> = () => {
             <h2 className="display-4">Contact Us</h2>
             <p>If you have any questions or feedback about Wedding Event CRM Website, please don't hesitate to contact us. You can reach us by email at <a href="mailto:lidormalich@gmail.com">lidormalich@gmail.com</a> or by phone at <a href="tel:972526761204"> (052) 676-1204</a> . We are always happy to hear from our clients and are committed to providing the best possible experience.</p>
             <p>Thank you for choosing Wedding Event CRM Website for your event planning needs. We hope our system helps make your event planning experience a success!</p>
-            <div className="center text-black">
-                <div>
-                    <span>Created with <i className="fa fa-heart" ></i> by Lidor Malich: © 2023 Copyright
-                        <a href="https://lidormalich.netlify.app">        lidormalich.netlify.app</a></span>
-                    <section>
-                        <a className="btn btn-outline-light btn-floating m-1" href="https://wa.me/972526761204"
-                            role="button"><i className="fa-brands fa-whatsapp text-black"></i></a>
-                        <a className="btn btn-outline-light btn-floating m-1" href="https://www.linkedin.com/in/lidormalich/"
-                            role="button"><i className="fa-brands fa-linkedin text-black"></i></a>
-                        <a className="btn btn-outline-light btn-floating m-1" href="https://github.com/lidormalich"
-                            role="button"><i className="fa-brands fa-github text-black"></i></a>
-                    </section>
-                </div>
-            </div>
+            <Footer />
         </div>
     </>);
 }

@@ -36,7 +36,7 @@ const ClientUpdateGuost: FunctionComponent<ClientUpdateGuostProps> = ({ people }
     return (<>
 
         <div>
-            <label>How many people are going to come?</label>
+            <label>Are you going to come with {people.NumberOfGuests} people? </label>
             <form onSubmit={formik.handleSubmit}>
 
                 <div className="form-floating mb-3 qty mt-5 divPlusMin">

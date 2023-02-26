@@ -18,9 +18,8 @@ const NavBar: FunctionComponent<NavBarProps> = ({ setIsLogIn }) => {
 
         <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
             <Container>
-                <Link className="navbar-brand" to="/">
-                    {/*  <h5 className="display-5">CRM SMS invitation </h5>*/}
-                    {isBrowser ? (<img alt="CRM SMS invitation" src="https://github.com/lidormalich/crmsms/blob/master/src/images/CRMSMSIinvitation.png?raw=true" height={50} />) : (<h5 className="display-5">CRM SMS invitation </h5>)}
+                <Link className="navbar-brand " to="/" >
+                    {isBrowser ? (<img alt="CRM SMS invitation" src="https://github.com/lidormalich/crmsms/blob/master/src/images/CRMSMSIinvitation.png?raw=true" height={50} />) : (<h5 className="display-5 " style={{ textAlign: "center" }}>CRM SMS Invitation </h5>)}
 
 
                 </Link>
@@ -50,7 +49,7 @@ const NavBar: FunctionComponent<NavBarProps> = ({ setIsLogIn }) => {
                             </Link>
                             <ul className="dropdown-menu">
                                 <li><Link className="dropdown-item" to="/profile">Profile Info</Link></li>
-                                <li><Link className="dropdown-item" to="/action/3.3">Something</Link></li>
+                                {/* <li><Link className="dropdown-item" to="/action/3.3">Something</Link></li> */}
                                 <li><Link className="dropdown-item" to="/" onClick={() => {
                                     sessionStorage.setItem("IsLoggedIn", "false");
                                     setIsLogIn(false);

@@ -6,5 +6,5 @@ const api: string = `${process.env.REACT_APP_API}` || "";
 
 // send sms
 export function sendsmstoclient(sms: smsInterface) {
-    return axios.post(`https://crmsmsserver.cyclic.app/api/sendsms`, sms);
+    return axios.post(`${api}/sendsms`, sms);
 }

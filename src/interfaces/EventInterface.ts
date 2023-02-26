@@ -8,6 +8,8 @@ export default interface EventInterface {
     phone: string, //טלפון המזמין
     bride: string, //כלה
     groom: string, //חתן
+    brideParents: string, //כלה
+    groomParents: string, //חתן
     pepoleCome?: People[],
     group?: People[],
 }
