@@ -157,18 +157,7 @@ const UpdatePeopleToInvitation: FunctionComponent<UpdatePeopleToInvitationProps>
 
                 <hr />
 
-                <button type="submit" className="btn btn-primary w-100 my-3" onClick={() => {
-                    sendsmstoclient({
-                        message: `
-                היי 
-                ${formik.values.firstName} אתה מוזמנ/ת לחתונה שלנו
-                נשמח שתבואו ותאשרו הגעה בלינק הבא
-                https://crmsms.netlify.app/event/63ebe5414278d6a3e293af1a/+1%20(716)%20193-6362
-                `, phone: `+972${formik.values.phoneNumber}`
-                    }).then(res => console.log(res.data)).catch(e => console.log(e))
-                }
-                }
-                >SENS SMS</button>
+
                 <button type="submit" className="btn btn-success w-100 my-3"
                 // disabled={!formik.isValid || !formik.dirty}
                 ><i className="fa-solid fa-floppy-disk"></i>  Save Change</button>

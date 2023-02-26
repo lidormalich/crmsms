@@ -2,6 +2,7 @@ import { FunctionComponent, useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import People from "../interfaces/People";
 import { getPeopleInEventByID } from "../services/eventServices";
+import { sendsmstoclient } from "../services/SMSservices";
 import DeleteModal from "./DeleteModal";
 import UpdateModal from "./UpdateModal";
 
@@ -49,6 +50,20 @@ const InvitationTable: FunctionComponent<InvitationTableProps> = ({ peopleChange
     }, [peopleChanged]);
 
 
+    let editphone = (phone: string) => {
+        var p = phone;
+        // value.match(/\d/g).length === 10
+        if (phone.startsWith("+972")) {
+            p = phone.slice(4);
+
+        }
+        if (phone.startsWith("05")) {
+            p = phone.slice(1);
+
+        }
+
+        return p;
+    }
 
 
 
@@ -67,7 +82,7 @@ const InvitationTable: FunctionComponent<InvitationTableProps> = ({ peopleChange
                     <th><i className="fa-regular fa-circle-check" style={{ color: "green" }}></i> ACCEPT Guests</th>
                     <th>Edit</th>
                     <th>Delete</th>
-                    <th>Client</th>
+                    <th>SMS TO Guest</th>
                 </tr>
             </thead>
             <tbody>
@@ -97,9 +112,29 @@ const InvitationTable: FunctionComponent<InvitationTableProps> = ({ peopleChange
                         setItemPepole(people.phoneNumber);
                         setOpendeleteModal(true);
                     }}><i className="fa-solid fa-trash-can text-danger"></i></td>
+
                     <td onClick={() => {
-                        navigate(`/event/${eventId}/${people.phoneNumber}`)
-                    }}><i className="fa-solid fa-phone"></i></td>
+                        //         <button type="submit" className="btn btn-primary w-100 my-3" onClick={() => {
+                        //             sendsmstoclient({
+                        //                 message: `
+                        // היי 
+                        // ${formik.values.firstName} אתה מוזמנ/ת לחתונה שלנו
+                        // נשמח שתבואו ותאשרו הגעה בלינק הבא
+                        // https://crmsms.netlify.app/event/63ebe5414278d6a3e293af1a/+1%20(716)%20193-6362
+                        // `, phone: `+972${formik.values.phoneNumber}`
+                        //             }).then(res => console.log(res.data)).catch(e => console.log(e))
+                        //         }
+                        //         }
+                        //         >SENS SMS</button>
+                        // sendsmstoclient(`/event/${eventId}/${people.phoneNumber}`)
+
+                        sendsmstoclient({
+                            message: `שלום ${people.firstName}, הוזמנתם לחתונה של  
+                        לפרטים ואישור הגעה  https://crmsms.netlify.app/event/${eventId}/${people.phoneNumber}
+                        נשמח לראותכם`, phone: `+972${editphone(people.phoneNumber)}`
+                        })
+
+                    }}><i className="fa-solid fa-comment-sms"></i></td>
                 </tr>)}
             </tbody>
         </table>) : (<h3> No peoples</h3>)}
