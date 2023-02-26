@@ -20,6 +20,7 @@ import ClientPage from './components/ClientUpadteGuostPage/ClientPage';
 import ParseExcel from './components/Extra/ParseExcel';
 import ManageAllGroup from './components/MangeGroup/ManageAllGroup';
 import About from './components/Extra/About';
+import SaveTheDate from './components/Extra/SaveTheDate/SaveTheDate';
 
 export let siteTheme = React.createContext(false);
 export let isLoginGlobal = React.createContext<boolean>(false);
@@ -56,6 +57,7 @@ function App() {
             <Route path='/nothaveaccess' element={<NotHaveAccess />} />
             <Route path='/dashboard' element={<Dashboard letA='lidor' letC='500' letb='400' />} />
             {/* <Route path='/invitation' element={<WeddingInvitation />} /> */}
+            <Route path='/savethedate' element={<SaveTheDate />} />
 
             <Route path='/loading' element={<Loading stringToShow={"BLOCKED ID"} />} />
             <Route path='*' element={<PagenotFound />} />
