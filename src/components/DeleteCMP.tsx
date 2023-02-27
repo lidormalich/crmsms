@@ -37,7 +37,7 @@ const DeleteCMP: FunctionComponent<DeleteCMPProps> = ({ show, onHide, refresh, e
                         errorMessage("Sorry! Something went wrong...");
                         console.log(e)
                     });
-                    onHide()
+                    onHide();
                 }}
                 >Yes, Delete that Event</Button>
             </Modal.Footer>

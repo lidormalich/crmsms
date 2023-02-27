@@ -27,7 +27,7 @@ const UpdateModal: FunctionComponent<UpdateModalProps> = ({ show, onHide, phoneN
                 </Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                <UpdatePeopleToInvitation phoneNum={phoneNum} eventId={eventId} refresh={refresh} onHide={onHide} />
+                <UpdatePeopleToInvitation phoneNum={phoneNum} eventId={eventId} refresh={() => refresh()} onHide={onHide} />
             </Modal.Body>
 
         </Modal>

@@ -10,6 +10,7 @@ export default interface EventInterface {
     groom: string, //חתן
     brideParents: string, //כלה
     groomParents: string, //חתן
+    coupleImage?: string, //Image
     pepoleCome?: People[],
     group?: People[],
 }

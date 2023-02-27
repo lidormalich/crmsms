@@ -107,7 +107,8 @@ const AddPeople: FunctionComponent<AddPeopleProps> = ({ setpeopleChanged, people
                         onChange={formik.handleChange}
                         onBlur={formik.handleBlur}>
 
-                        <option value="DEFAULT" hidden >Choose a Group...</option>
+                        <option hidden >Choose a Group...</option>
+                        {allGroup.length === 0 && <option value="DEFAULT" disabled >Need Add a Group...</option>}
                         {allGroup.map((groupname: Group) => <option key={counter++} value={groupname.eventGroupName}> {groupname.eventGroupName}</option>)}
 
                     </select>

@@ -7,6 +7,7 @@ import DeleteModal from "./DeleteModal";
 import UpdateModal from "./UpdateModal";
 import "./invTable.css";
 import { successMessage } from "../services/FeedbackService";
+import { BrowserView, isBrowser, isMobile } from "react-device-detect";
 
 interface InvitationTableProps {
     peopleChanged: boolean;
@@ -66,30 +67,26 @@ const InvitationTable: FunctionComponent<InvitationTableProps> = ({ peopleChange
         {peopleArr.length ? (<table className="table lightFont">
             <thead>
                 <tr>
-                    <th>#</th>
-                    <th>Fisrt Name</th>
-                    <th>Last Name</th>
+                    <BrowserView><th>#</th></BrowserView>
+                    <th>Name</th>
                     <th>Group</th>
-                    <th>Phone Number</th>
-                    <th><i className="fa-regular fa-circle-check" style={{ color: "blue" }}></i> Invited Guests</th>
-                    <th><i className="fa-regular fa-circle-check" style={{ color: "green" }}></i> ACCEPT Guests</th>
-                    <th>SMS TO Guest</th>
-                    <th>Edit</th>
-                    <th>Delete</th>
+                    <th>Phone</th>
+                    <th> Guests</th>
+                    <th>SMS</th>
+                    <th>Edit / Delete</th>
 
                 </tr>
             </thead>
             <tbody>
                 {peopleArr.map((people: People) => <tr key={counter}>
-                    <td>{++counter}</td>
-                    <td>{people.firstName}</td>
-                    <td>{people.lastName}</td>
+                    {isBrowser && <td>{++counter}</td>}
+                    <td>{`${people.firstName} ${people.lastName}`}</td>
                     <td>{people.eventGroupName}</td>
-                    <td>{people.phoneNumber}</td>
-                    <td>{people.NumberOfGuests}</td>
-                    <td><span style={{ color: "green" }}>{people.NumberOfGuestsAccept}
-                        {/* {setPcountercome(countercome+people.NumberOfGuestsAccept)} */}
-                        <i className="fa-solid fa-person"  ></i></span></td>
+                    <td>{isMobile ? `${(people.phoneNumber).slice(0, 5)} ${(people.phoneNumber).slice(5)}` : people.phoneNumber}</td>
+                    <td>{people.NumberOfGuestsAccept > 0 ? <span style={{ color: "green" }}>{people.NumberOfGuestsAccept}
+                        /{people.NumberOfGuests}</span> : <span style={{ color: "black" }}>{people.NumberOfGuestsAccept}
+                        /{people.NumberOfGuests}</span>}
+                    </td>
                     <td onClick={() => {
                         sendsmstoclient({
                             message: `שלום ${people.firstName}, הוזמנתם לחתונה של  
@@ -98,21 +95,23 @@ const InvitationTable: FunctionComponent<InvitationTableProps> = ({ peopleChange
                         }).then(() => successMessage("SMS sent")).catch((e) => console.log(e))
 
                     }}><i className="fa-solid fa-comment-sms"></i></td>
-                    <td onClick={() => {
-                        setItemPepole(people.phoneNumber)
-                        setOpenUpdateModal(true);
-                    }}><i className="fa-solid fa-pen text-success"></i></td>
-                    <td onClick={() => {
-                        setItemPepole(people.phoneNumber);
-                        setOpendeleteModal(true);
-                    }}><i className="fa-solid fa-trash-can text-danger"></i></td>
+                    <td>
+                        <i className="fa-solid fa-pen text-success mx-2" onClick={() => {
+                            setItemPepole(people.phoneNumber)
+                            setOpenUpdateModal(true);
+                        }}></i>
+                        <i className="fa-solid fa-trash-can text-danger" onClick={() => {
+                            setItemPepole(people.phoneNumber);
+                            setOpendeleteModal(true);
+                        }}></i>
+                    </td>
 
 
                 </tr>)}
             </tbody>
         </table>) : (<h3> No peoples</h3>)}
-        <DeleteModal show={opendeleteModal} onHide={() => setOpendeleteModal(false)} phoneNum={peopleItemPhoneNum} eventId={eventId as string} refresh={refresh} />
-        <UpdateModal show={openUpdateModal} onHide={() => setOpenUpdateModal(false)} eventId={eventId as string} phoneNum={peopleItemPhoneNum} refresh={refresh} />
+        <DeleteModal show={opendeleteModal} onHide={() => setOpendeleteModal(false)} phoneNum={peopleItemPhoneNum} eventId={eventId as string} refresh={() => refresh()} />
+        <UpdateModal show={openUpdateModal} onHide={() => setOpenUpdateModal(false)} eventId={eventId as string} phoneNum={peopleItemPhoneNum} refresh={() => refresh()} />
     </>);
 }
 

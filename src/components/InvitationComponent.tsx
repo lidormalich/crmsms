@@ -1,5 +1,6 @@
 import { FunctionComponent, useContext, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { isMobile } from "react-device-detect";
+import { Link, useParams } from "react-router-dom";
 import { isLoginGlobal } from "../App";
 import People from "../interfaces/People";
 import { getPeopleInEventByID } from "../services/eventServices";
@@ -33,16 +34,20 @@ const InvitationComponent: FunctionComponent<InvitationComponentProps> = ({ setI
     // }, []);
     return (<>
         {/* {peopleArr.map((item) => setPcountercome(item.NumberOfGuests + countercome)) + ""} */}
-        {isLogin && <Dashboard letA={countercome + ""} letC={""} letb={""} />}
+        {isLogin && <><Dashboard letA={countercome + ""} letC={""} letb={""} />
+
+            {isMobile && <>
+                <Link className="btn btn-primary mx-2 col" to={`/savethedate/${eventId}`}>Save The Date</Link>
+                <Link className="btn btn-primary mx-0 col" to={`/invitation/${eventId}`}>Online Invitation</Link>
+            </>}
+
+
+
+        </>}
 
         <InvitationManager setIsLogIn={setIsLogIn} setpeopleChanged={setpeopleChanged} peopleChange={peopleChange}
-
             setPcountercome={setPcountercome}
-            countercome={countercome}
-
-
-        />
-
+            countercome={countercome} />
     </>);
 }
 

@@ -1,7 +1,22 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;700;900&display=swap");
+.imageSmall {
+  min-width: 13em;
+  max-width: 13em;
+  max-height: 9em;
+  min-height: 9em;
+  align-self: center;
+}
+
+.imageSmallWithBTN {
+  min-width: 7em;
+  max-width: 7em;
+  align-self: center;
+}
+
 .dashCards {
   font-size: 16px;
-  font-family: "Roboto", Arial, sans-serif;
+  font-weight: bold;
+  font-family: rubik;
   display: flex;
   flex-direction: row;
   flex-flow: row wrap;
@@ -16,7 +31,7 @@
   display: flex;
   flex-direction: column;
 }
-.dashCards .dashCard .title {
+.dashCards .dashCard .cardtitle {
   color: #333;
   padding: 0 0 0.5em 0;
   margin: 0 0 1em 0;

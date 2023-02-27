@@ -39,13 +39,19 @@ export function addPeopleToEvent(id: string, peopoleToUpdate: People) {
 export function updatePeopleInEvent(id: string, peopoleToUpdate: People) {
     return axios.patch(`${api}/updatepepole/${id}`, peopoleToUpdate);
 }
+// GET Image in Event
+export function getCoupleImageInEvent(id: string) {
+    return axios.get(`${api}/img/${id}`);
+}
+// update Image in Event
+export function updateCoupleImageInEvent(id: string, img: string) {
+    return axios.patch(`${api}/img/${id}`, { data: { coupleImage: img } });
+}
 // delete Event
 export function deleteEvent(id: string) {
     return axios.delete(`${api}/deleteEvent/${id}`);
 }
 // delete pepole by phone from event-OKKKKKKKKKKKK
 export function deletePepoleFromEvent(phoneNum: string, id: string) {
-    console.log(phoneNum);
-
     return axios.patch(`${api}/deletepepole/${id}`, { phoneNum });
 }

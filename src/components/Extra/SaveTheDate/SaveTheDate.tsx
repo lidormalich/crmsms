@@ -1,4 +1,6 @@
-import { FunctionComponent } from "react";
+import { FunctionComponent, useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import { getEventInfoByID } from "../../../services/eventServices";
 import "./savedate.css";
 
 interface SaveTheDateProps {
@@ -6,11 +8,17 @@ interface SaveTheDateProps {
 }
 
 const SaveTheDate: FunctionComponent<SaveTheDateProps> = () => {
+    let [coupleName, setCoupleName] = useState<string>("");
+    let { eventId } = useParams();
+    useEffect(() => {
+
+        getEventInfoByID(eventId as string).then((res) => { setCoupleName(`${res.data.groom} & ${res.data.bride}`) });
+    }, []);
     return (<>
         <div className="div">
             <div className="divsave">
                 <p className="title">Save The Date</p>
-                <p className="COUPLE">לידור וטליה</p>
+                <p className="COUPLE">{coupleName}</p>
 
                 <div className="date"> -20
                     <i className="point">&#x2764;</i>2<i className="point">&#x2764;</i>2023-

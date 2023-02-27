@@ -11,13 +11,16 @@ interface DeleteModalProps {
     onHide: Function;
     refresh: Function;
 
+
 }
 
-const DeleteModal: FunctionComponent<DeleteModalProps> = ({ show, onHide, phoneNum, refresh, eventId }) => {
+const DeleteModal: FunctionComponent<DeleteModalProps> = ({ show, onHide, phoneNum, refresh, eventId, }) => {
+
     return (<>
         <Modal
             show={show}
             onHide={() => onHide()}
+            refresh={() => refresh()}
             size="sm"
             aria-labelledby="contained-modal-title-vcenter"
             centered
@@ -33,9 +36,7 @@ const DeleteModal: FunctionComponent<DeleteModalProps> = ({ show, onHide, phoneN
             <Modal.Footer>
                 <Button onClick={() => onHide()}>Cancle</Button>
                 <Button variant="danger" onClick={() => {
-                    deletePepoleFromEvent(phoneNum, eventId).then((res) => {
-                        console.log("deleted phoneNum");
-                        console.log(phoneNum);
+                    deletePepoleFromEvent(phoneNum, eventId).then(() => {
                         successMessage("Men Deleted");
                         refresh();
                     }).catch((e) => {

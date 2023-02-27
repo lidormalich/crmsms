@@ -24,7 +24,7 @@ const Register: FunctionComponent<RegisterProps> = ({ setIsLogIn }) => {
             addUser(values)
                 .then(() => {
                     navigate("/");
-                    sessionStorage.setItem("IsLoggedIn", "false");
+                    localStorage.setItem("IsLoggedIn", "false");
                     successMsg("You registered successfully!");
                 })
                 .catch((err) => console.log(err));

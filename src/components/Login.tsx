@@ -24,8 +24,8 @@ const Login: FunctionComponent<LoginProps> = ({ setIsLogIn }) => {
                 .then((res) => {
                     if (res.data.error == false) {
                         setIsLogIn(true);
-                        sessionStorage.setItem("IsLoggedIn", "true");
-                        sessionStorage.setItem("userName", `${res.data.first_name}`);
+                        localStorage.setItem("IsLoggedIn", "true");
+                        localStorage.setItem("userName", `${res.data.first_name}`);
                         successMessage("You Loged-In :)");
                         navigate('/');
                     }

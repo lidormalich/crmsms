@@ -13,7 +13,7 @@ const Invitation: FunctionComponent<InvitationProps> = () => {
     let { eventId } = useParams();
 
     let [info, setInfo] = useState<EventInterface>({
-        _id: "", uuid: "", campaignName: "", ownerName: "", phone: "", bride: "", groom: "", groomParents: "", brideParents: ""
+        _id: "", uuid: "", campaignName: "", ownerName: "", phone: "", bride: "", groom: "", groomParents: "", brideParents: "", coupleImage: ""
     });
     let [flage, setFlage] = useState<boolean>(false);
     useEffect(() => {

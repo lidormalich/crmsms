@@ -21,6 +21,7 @@ import ParseExcel from './components/Extra/ParseExcel';
 import ManageAllGroup from './components/MangeGroup/ManageAllGroup';
 import About from './components/Extra/About';
 import SaveTheDate from './components/Extra/SaveTheDate/SaveTheDate';
+import UploadImage from './components/Extra/UploadImage';
 
 export let siteTheme = React.createContext(false);
 export let isLoginGlobal = React.createContext<boolean>(false);
@@ -57,7 +58,8 @@ function App() {
             <Route path='/nothaveaccess' element={<NotHaveAccess />} />
             <Route path='/dashboard' element={<Dashboard letA='lidor' letC='500' letb='400' />} />
             {/* <Route path='/invitation' element={<WeddingInvitation />} /> */}
-            <Route path='/savethedate' element={<SaveTheDate />} />
+            <Route path='/savethedate/:eventId' element={<SaveTheDate />} />
+            <Route path='/uploadimage/:eventId' element={<UploadImage />} />
 
             <Route path='/loading' element={<Loading stringToShow={"BLOCKED ID"} />} />
             <Route path='*' element={<PagenotFound />} />

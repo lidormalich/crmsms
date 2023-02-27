@@ -18,7 +18,7 @@ const AddGroup: FunctionComponent<AddGroupProps> = ({ setGroupChanged, groupChan
     let formik = useFormik({
         initialValues: { eventGroupName: "" },
         validationSchema: yup.object({
-            eventGroupName: yup.string().required().min(2),
+            eventGroupName: yup.string().required().min(2).max(13),
         }),
         onSubmit: (values: any, { resetForm }) => {
             addNewGroup(eventId as string, values).then((res) => {
@@ -49,9 +49,7 @@ const AddGroup: FunctionComponent<AddGroupProps> = ({ setGroupChanged, groupChan
                         onBlur={formik.handleBlur}
                     />
                     <label htmlFor="eventGroupName">Group Name</label>
-                    {/* {formik.touched.eventGroupName && formik.errors.eventGroupName && (
-                        <small className="text-danger">{formik.errors.eventGroupName}</small>
-                    )} */}
+
                 </div>
 
 

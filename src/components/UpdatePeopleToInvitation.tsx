@@ -21,7 +21,7 @@ const UpdatePeopleToInvitation: FunctionComponent<UpdatePeopleToInvitationProps>
     let [allGroup, setAllGroup] = useState<Group[]>([]);
     useEffect(() => {
         getPeopleInfoByPhone(eventId, phoneNum)
-            .then((res) => { setpoepole(res.data); console.log(res.data) })
+            .then((res) => setpoepole(res.data))
             .catch((e) => console.log(e));
         getAllGroup(eventId).then((res) => setAllGroup(res.data)).catch((e) => console.log(e));
     }, []);
@@ -38,7 +38,7 @@ const UpdatePeopleToInvitation: FunctionComponent<UpdatePeopleToInvitationProps>
             firstName: yup.string().required().min(2),
             lastName: yup.string().required().min(2),
             NumberOfGuests: yup.number().required().positive(),
-            NumberOfGuestsAccept: yup.number().required().positive(),
+            NumberOfGuestsAccept: yup.number().required().moreThan(-1),
             eventGroupName: yup.string().required()
         }),
         onSubmit: (values: People) => {

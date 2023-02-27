@@ -34,7 +34,7 @@ const AllCampaign: FunctionComponent<AllCampaignProps> = () => {
 
             <div className="container">
                 {/* <h3 className="display-3">Details</h3> */}
-                {allEvent.length ? (<table className="table">
+                {allEvent.length ? (<table className="table table-hover">
                     <thead>
                         <tr>
                             <th>#</th>

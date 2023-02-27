@@ -1,4 +1,4 @@
-import { FunctionComponent, useEffect, useId } from "react";
+import { FunctionComponent, useEffect, useId, useState } from "react";
 import { useFormik } from "formik";
 import { useNavigate } from "react-router-dom";
 import * as yup from "yup";
@@ -6,30 +6,32 @@ import { successMessage } from "../services/FeedbackService";
 import Event from "../interfaces/EventInterface";
 import { addEvent } from "../services/eventServices";
 import { v4 as uuidv4 } from 'uuid';
+import axios from "axios";
 
 interface NewCampaignProps {
 
 }
 
 const NewCampaign: FunctionComponent<NewCampaignProps> = () => {
-
+    const [imageSelected, setImageSelected] = useState<any>("");
+    const [imageUrl, setImageUrl] = useState<string>("");
     let navigate = useNavigate();
     let uuidLidor = uuidv4();
-    let campaignId: number = 5;
     let formik = useFormik({
         initialValues: {
-            campaignName: "", ownerName: "", phone: "", uuid: uuidLidor, bride: "", groom: "", groomParents: "", brideParents: "",
+            campaignName: "", ownerName: "", phone: "", uuid: uuidLidor, bride: "", groom: "", groomParents: "", brideParents: "", coupleImage: ""
         }, validationSchema: yup.object({
             campaignName: yup.string().required("Campaign name is a required field").min(2),
-            bride: yup.string().required("brige name is a required field").min(2),
-            groom: yup.string().required("groom name is a required field").min(2),
+            bride: yup.string().required("brige name is a required field").min(2).max(7),
+            groom: yup.string().required("groom name is a required field").min(2).max(7),
+            groomParents: yup.string().required("groom Parents name is a required field").min(2).max(15),
+            brideParents: yup.string().required("bride Parents name is a required field").min(2).max(15),
             phone: yup.number().required("Phone number is a required field").min(10).positive(),
             ownerName: yup.string().required("Owner Campaign is a required field").min(2)
         }),
         onSubmit: (values: Event, { resetForm }) => {
             addEvent(values).then((res) => {
-                // console.log(res.data);
-                // console.log(res.data._id);
+
 
                 successMessage("Event Added");
                 resetForm();
@@ -41,9 +43,25 @@ const NewCampaign: FunctionComponent<NewCampaignProps> = () => {
                 navigate(`/campaign/${res.data._id}`)
             })
                 .catch((e) => console.log(e))
-            console.log(values);
         }
     })
+
+
+
+
+    // const uploadImage = () => {
+    //     const formData = new FormData();
+    //     formData.append('file', imageSelected[0]);
+    //     formData.append('upload_preset', "nnmxcowx");
+
+    //     axios.post("https://api.cloudinary.com/v1_1/ddk6cfhl0/image/upload", formData)
+    //         .then((res) => setImageUrl(res.data.secure_url))
+    //     console.log("secccsed upload image");
+    // }
+    // const submit = () => {
+    //     uploadImage();
+    // }
+
 
     // שינוי תצוגה מ0 אל כלום
     useEffect(() => {
@@ -167,6 +185,7 @@ const NewCampaign: FunctionComponent<NewCampaignProps> = () => {
                         <small className="text-danger">{formik.errors.brideParents}</small>
                     )}
                 </div>
+
 
 
                 <button type="submit" className="btn btn-success w-100 my-3"
