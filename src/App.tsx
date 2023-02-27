@@ -49,13 +49,13 @@ function App() {
             <Route path='/campaign/:eventId' element={<InvitationComponent setIsLogIn={setIsLogIn} setpeopleChanged={setpeopleChanged} peopleChange={peopleChange} />} />
             <Route path='/group/:eventId' element={<ManageAllGroup setIsLogIn={setIsLogIn} setGroupChanged={setgroupChanged} groupChanged={groupChange} />} />
             <Route path='/event/:eventId/:phoneNum' element={<ClientPage />} />
-            <Route path='/9090' element={<ParseExcel />} />
             <Route path='/about' element={<About />} />
             <Route path='/invitation/:eventId' element={<Invitation />} />
-            <Route path='/nothaveaccess' element={<NotHaveAccess />} />
-            <Route path='/dashboard' element={<Dashboard letA='lidor' letC='500' letb='400' />} />
-            <Route path='/savethedate/:eventId' element={<SaveTheDate />} />
+            <Route path='/savethedate/:eventId' element={<SaveTheDate coupleImage='' />} />
             <Route path='/uploadimage/:eventId' element={<UploadImage />} />
+
+
+            <Route path='/9090' element={<ParseExcel />} />
 
             {/* <Route path='/loading' element={<Loading stringToShow={"BLOCKED ID"} />} /> */}
             <Route path='*' element={<PagenotFound />} />

@@ -1,5 +1,6 @@
 import { FunctionComponent, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import EventInterface from "../../interfaces/EventInterface";
 import People from "../../interfaces/People";
 import { getEventInfoByID, getPeopleInfoByPhone } from "../../services/eventServices";
 import Footer from "../Extra/Footer";
@@ -13,24 +14,22 @@ interface ClientPageProps {
 const ClientPage: FunctionComponent<ClientPageProps> = () => {
     let { eventId, phoneNum } = useParams();
     let [people, setpoepole] = useState<People>({ phoneNumber: "", firstName: "", lastName: "", NumberOfGuests: 0, NumberOfGuestsAccept: 0, eventGroupName: "" });
-    let [weddingInfo, setWeddingInfo] = useState<any>({ uuid: "", campaignName: "", ownerName: "", phone: "", bride: "", groom: "" });
+    let [weddingInfo, setWeddingInfo] = useState<any>({ uuid: "", campaignName: "", ownerName: "", phone: "", bride: "", groom: "", coupleImage: "" });
 
     useEffect(() => {
         getPeopleInfoByPhone(eventId as string, phoneNum as string)
-            .then((res) => {
-                setpoepole(res.data); console.log(res.data);
-            })
+            .then((res) => setpoepole(res.data))
             .catch((e) => console.log(e));
         getEventInfoByID(eventId as string).then((res) => setWeddingInfo(res.data)).catch((e) => console.log(e))
     }, []);
     return (<>
-        {/* {console.log(people.NumberOfGuestsAccept + "APPCETEDDDDD")} */}
         <div className="container">
-            <SaveTheDate />
-            <h6 className="display-6">{`Hi ${people.firstName}, `}</h6>
-            {/* <h6 className="display-6">{`You are invited to the wedding event of ${weddingInfo.bride} and ${weddingInfo.groom}. Please confirm here the number of people you will come to the event.Thank you`}</h6> */}
-            <div className=" mt-3 ">
-                <p className="h6">{`Then you will receive a message confirming your arrival at the event, thank you very much`}</p>
+            <SaveTheDate coupleImage={weddingInfo.coupleImage} />
+            <div className="" style={{
+                paddingTop: "50%", position: "absolute",
+            }}>
+                <h6 className="display-6">{`Hi ${people.firstName}, `}</h6>
+                <p className="h6">{`Please confirm how many people are coming to the event, thank you very much`}</p>
                 <ClientUpdateGuost people={people} />
             </div>
             <Footer />

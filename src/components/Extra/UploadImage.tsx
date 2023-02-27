@@ -5,6 +5,7 @@ import { Button } from "react-bootstrap";
 import { useNavigate, useParams } from "react-router-dom";
 import { updateCoupleImageInEvent } from "../../services/eventServices";
 import { successMessage } from "../../services/FeedbackService";
+import Loading from "./Loading";
 
 interface UploadImageProps {
 
@@ -52,10 +53,7 @@ const UploadImage: FunctionComponent<UploadImageProps> = () => {
                 <Button onClick={() => submit()}>Upload Image</Button>
             </div>
             {load && <>
-                <h3 className="display-3">Uploading file...</h3>
-                <div className="spinner-border text-secondary" role="status">
-                    <span className="visually-hidden">Loading...</span>
-                </div>
+                <Loading stringToShow={"Uploading file..."} />
             </>}
         </div>
 

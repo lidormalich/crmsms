@@ -4,10 +4,10 @@ import { getEventInfoByID } from "../../../services/eventServices";
 import "./savedate.css";
 
 interface SaveTheDateProps {
-
+    coupleImage: string;
 }
 
-const SaveTheDate: FunctionComponent<SaveTheDateProps> = () => {
+const SaveTheDate: FunctionComponent<SaveTheDateProps> = ({ coupleImage }) => {
     let [coupleName, setCoupleName] = useState<string>("");
     let { eventId } = useParams();
     useEffect(() => {
@@ -29,7 +29,14 @@ const SaveTheDate: FunctionComponent<SaveTheDateProps> = () => {
                 <h3>hi</h3>
             </div>  */}
             <img src="https://github.com/lidormalich/crmsms/blob/master/src/components/Extra/frm.png?raw=true" alt="" className="frame responsiveImg" />
-            <img src="https://github.com/lidormalich/crmsms/blob/master/src/components/Extra/cuple.jpg?raw=true" alt="" className="cuple responsiveImg" />
+
+            {coupleImage != "" ? (<img src={coupleImage} alt="" className="cuple responsiveImg" />) : (<>
+                <img src={"https://res.cloudinary.com/ddk6cfhl0/image/upload/v1677517835/yjbm2infbdot6bixlvbg.jpg"} alt="" className="cuple responsiveImg" />
+
+            </>)}
+
+
+            <img src={""} alt="" className="cuple responsiveImg" />
         </div>
     </>);
 }

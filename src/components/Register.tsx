@@ -2,7 +2,6 @@ import { useFormik } from "formik";
 import { FunctionComponent } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import * as yup from "yup";
-import { date } from "yup/lib/locale";
 import User from "../interfaces/User";
 import { errorMessage, successMessage as successMsg } from "../services/FeedbackService";
 import { addUser } from "../services/userServices";
@@ -24,7 +23,7 @@ const Register: FunctionComponent<RegisterProps> = ({ setIsLogIn }) => {
             addUser(values)
                 .then(() => {
                     navigate("/");
-                    localStorage.setItem("IsLoggedIn", "false");
+                    sessionStorage.setItem("IsLoggedIn", "false");
                     successMsg("You registered successfully!");
                 })
                 .catch((err) => console.log(err));
