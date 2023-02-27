@@ -27,7 +27,7 @@ const ManageAllGroup: FunctionComponent<ManageAllGroupProps> = ({ setIsLogIn, gr
             {isLogin ? (<>
 
                 <div className="d-flex justify-content-center align-items-center">
-                    <h5 className="display-5">All Group for event <Link to={`/campaign/${eventId}`}>{eventId}</Link></h5>
+                    <h5 className="display-5">All Group for event <Link to={`/campaign/${eventId}`}>To Event <i className="fa-solid fa-angles-right"></i></Link></h5>
 
                 </div>
                 <div className="row">
