@@ -30,7 +30,6 @@ const InvitationManager: FunctionComponent<InvitationManagerProps> = ({ setIsLog
             {isLogin ? (<>
 
                 <div className="d-flex justify-content-center align-items-center">
-                    <Link to={`/invitation/${eventId}`}>Online -Invitation</Link>
                     <h5 className="display-5">Guest for event</h5>
                 </div>
                 <div className="row">

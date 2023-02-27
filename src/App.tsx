@@ -34,8 +34,6 @@ function App() {
   return (
 
     <div className="App">
-
-
       <ToastContainer />
       <isLoginGlobal.Provider value={isLogin}>
 
@@ -45,7 +43,6 @@ function App() {
             <Route path='/' element={<Home setIsLogIn={setIsLogIn} />} />
             <Route path='/register' element={<Register setIsLogIn={setIsLogIn} />} />
             <Route path='/login' element={<Login setIsLogIn={setIsLogIn} />} />
-            {/* <Route path='/InvitationTable' element={<InvitationTable  setIsLogIn={setIsLogIn} setpeopleChanged={setpeopleChanged} peopleChange={peopleChange} />} /> */}
             <Route path='/NewCampaign' element={<CreatNewCamp />} />
             <Route path='/profile' element={<Profile />} />
             <Route path='/allcampaign' element={<AllCampaign />} />
@@ -57,11 +54,10 @@ function App() {
             <Route path='/invitation/:eventId' element={<Invitation />} />
             <Route path='/nothaveaccess' element={<NotHaveAccess />} />
             <Route path='/dashboard' element={<Dashboard letA='lidor' letC='500' letb='400' />} />
-            {/* <Route path='/invitation' element={<WeddingInvitation />} /> */}
             <Route path='/savethedate/:eventId' element={<SaveTheDate />} />
             <Route path='/uploadimage/:eventId' element={<UploadImage />} />
 
-            <Route path='/loading' element={<Loading stringToShow={"BLOCKED ID"} />} />
+            {/* <Route path='/loading' element={<Loading stringToShow={"BLOCKED ID"} />} /> */}
             <Route path='*' element={<PagenotFound />} />
           </Routes>
         </Router>
