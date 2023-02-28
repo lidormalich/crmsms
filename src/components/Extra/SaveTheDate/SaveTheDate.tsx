@@ -9,12 +9,17 @@ interface SaveTheDateProps {
 
 const SaveTheDate: FunctionComponent<SaveTheDateProps> = ({ coupleImage }) => {
     let [coupleName, setCoupleName] = useState<string>("");
+    let [weddingInfo, setWeddingInfo] = useState<any>("");
+
     let { eventId } = useParams();
     useEffect(() => {
+        getEventInfoByID(eventId as string).then((res) => setWeddingInfo(res.data.coupleImage)).catch((e) => console.log(e))
 
         getEventInfoByID(eventId as string).then((res) => { setCoupleName(`${res.data.groom} & ${res.data.bride}`) });
     }, []);
+
     return (<>
+        {console.log(weddingInfo)}
         <div className="div">
             <div className="divsave">
                 <p className="title">Save The Date</p>
@@ -30,7 +35,7 @@ const SaveTheDate: FunctionComponent<SaveTheDateProps> = ({ coupleImage }) => {
             </div>  */}
             <img src="https://github.com/lidormalich/crmsms/blob/master/src/components/Extra/frm.png?raw=true" alt="" className="frame responsiveImg" />
 
-            {coupleImage != "" ? (<img src={coupleImage} alt="" className="cuple responsiveImg" />) : (<>
+            {weddingInfo != "" ? (<img src={weddingInfo} alt="" className="cuple responsiveImg" />) : (<>
                 <img src={"https://res.cloudinary.com/ddk6cfhl0/image/upload/v1677517835/yjbm2infbdot6bixlvbg.jpg"} alt="" className="cuple responsiveImg" />
 
             </>)}
