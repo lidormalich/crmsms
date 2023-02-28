@@ -13,6 +13,7 @@ export function errorMessage(message: string) {
         autoClose: 3000,
     })
 }
+
 export function earningMessage(message: string) {
     toast.warn(message, {
         position: toast.POSITION.TOP_CENTER,

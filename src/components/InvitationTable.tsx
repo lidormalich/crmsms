@@ -1,13 +1,14 @@
 import { FunctionComponent, useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import People from "../interfaces/People";
-import { getPeopleInEventByID } from "../services/eventServices";
+import { getEventInfoByID, getPeopleInEventByID } from "../services/eventServices";
 import { sendsmstoclient } from "../services/SMSservices";
 import DeleteModal from "./DeleteModal";
 import UpdateModal from "./UpdateModal";
 import "./invTable.css";
-import { successMessage } from "../services/FeedbackService";
+import { earningMessage, successMessage } from "../services/FeedbackService";
 import { BrowserView, isBrowser, isMobile } from "react-device-detect";
+import { toast } from "react-toastify";
 
 interface InvitationTableProps {
     peopleChanged: boolean;
@@ -26,6 +27,8 @@ const InvitationTable: FunctionComponent<InvitationTableProps> = ({ peopleChange
 
 }) => {
     let [peopleArr, setPeopleArr] = useState<People[]>([]);
+    let [weddingInfo, setWeddingInfo] = useState<any>({ uuid: "", campaignName: "", ownerName: "", phone: "", bride: "", groom: "", coupleImage: "" });
+
 
     // Open Modal
     let [opendeleteModal, setOpendeleteModal] = useState<boolean>(false);
@@ -40,11 +43,18 @@ const InvitationTable: FunctionComponent<InvitationTableProps> = ({ peopleChange
     let counter: number = 0;
     let navigate = useNavigate();
 
+
+    useEffect(() => {
+        getEventInfoByID(eventId as string).then((res) => setWeddingInfo(res.data)).catch((e) => console.log(e))
+
+    }, []);
+
+
     // רענון --הוספת הדיפנדנסיס בלבד
     useEffect(() => {
         getPeopleInEventByID(eventId as string).then((res) => {
             setPeopleArr(res.data);
-        }).catch((e) => console.log(e))
+        }).catch((e) => console.log(e));
     }, [peopleChanged]);
 
 
@@ -59,7 +69,24 @@ const InvitationTable: FunctionComponent<InvitationTableProps> = ({ peopleChange
         return p;
     }
 
+    const getData = (people: People) => {
+        const id = toast.loading("Please wait...", { position: toast.POSITION.TOP_CENTER });
+        sendsmstoclient({
+            message: `שלום ${people.firstName}, הוזמנתם לחתונה של  ${weddingInfo.groom} & ${weddingInfo.bride}
+                        לפרטים ואישור הגעה  https://crmsms.netlify.app/event/${eventId}/${people.phoneNumber}
+                        נשמח לראותכם ${weddingInfo.groom} & ${weddingInfo.bride}`, phone: `+972${editphone(people.phoneNumber)}`
+        })
+            .then(() => {
+                toast.update(id, {
+                    render: "SMS sent", type: "success", isLoading: false,
+                    autoClose: 5000,
+                });
 
+            }).catch(err => {
+                toast.update(id, { render: "Something went wrong", type: "error", isLoading: false, autoClose: 5000, });
+                console.log(err);
+            });
+    }
 
     return (<>
         <h5 className="">{peopleArr.length}  Guest list for the event</h5>
@@ -87,14 +114,7 @@ const InvitationTable: FunctionComponent<InvitationTableProps> = ({ peopleChange
                         /{people.NumberOfGuests}</span> : <span style={{ color: "black" }}>{people.NumberOfGuestsAccept}
                         /{people.NumberOfGuests}</span>}
                     </td>
-                    <td onClick={() => {
-                        sendsmstoclient({
-                            message: `שלום ${people.firstName}, הוזמנתם לחתונה של  
-                        לפרטים ואישור הגעה  https://crmsms.netlify.app/event/${eventId}/${people.phoneNumber}
-                        נשמח לראותכם`, phone: `+972${editphone(people.phoneNumber)}`
-                        }).then(() => successMessage("SMS sent")).catch((e) => console.log(e))
-
-                    }}><i className="fa-solid fa-comment-sms"></i></td>
+                    <td onClick={() => { getData(people) }}><i className="fa-solid fa-comment-sms"></i></td>
                     <td>
                         <i className="fa-solid fa-pen text-success mx-2" onClick={() => {
                             setItemPepole(people.phoneNumber)
