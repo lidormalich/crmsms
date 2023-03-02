@@ -2,7 +2,7 @@ import { FunctionComponent, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import EventInterface from "../../interfaces/EventInterface";
 import People from "../../interfaces/People";
-import { getEventInfoByID, getPeopleInfoByPhone } from "../../services/eventServices";
+import { getEventInfoByID, getPeopleInfoByPhone } from "../../Services/eventServices";
 import Footer from "../Extra/Footer";
 import SaveTheDate from "../Extra/SaveTheDate/SaveTheDate";
 import ClientUpdateGuost from "./ClientUpdateGuost";

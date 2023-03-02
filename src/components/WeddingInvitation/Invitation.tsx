@@ -1,7 +1,7 @@
 import { FunctionComponent, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import EventInterface from "../../interfaces/EventInterface";
-import { getEventInfoByID } from "../../services/eventServices";
+import { getEventInfoByID } from "../../Services/eventServices";
 import Loading from "../Extra/Loading";
 import WeddingInvitation from "./WeddingInvitation";
 

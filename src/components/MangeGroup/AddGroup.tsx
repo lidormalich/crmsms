@@ -3,8 +3,8 @@ import { FunctionComponent } from "react";
 import { useParams } from "react-router-dom";
 import * as yup from "yup";
 import Group from "../../interfaces/Group";
-import { successMessage } from "../../services/FeedbackService";
-import { addNewGroup } from "../../services/GroupServices";
+import { successMessage } from "../../Services/FeedbackService";
+import { addNewGroup } from "../../Services/GroupServices";
 
 
 interface AddGroupProps {

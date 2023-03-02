@@ -1,14 +1,15 @@
 import { FunctionComponent, useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import People from "../interfaces/People";
-import { getEventInfoByID, getPeopleInEventByID } from "../services/eventServices";
-import { sendsmstoclient } from "../services/SMSservices";
+import { getEventInfoByID, getPeopleInEventByID } from "../Services/eventServices";
+import { sendsmstoclient } from "../Services/SMSservices";
 import DeleteModal from "./DeleteModal";
 import UpdateModal from "./UpdateModal";
 import "./invTable.css";
-import { earningMessage, successMessage } from "../services/FeedbackService";
+import { earningMessage, successMessage } from "../Services/FeedbackService";
 import { BrowserView, isBrowser, isMobile } from "react-device-detect";
 import { toast } from "react-toastify";
+import People from "../interfaces/People";
+
 
 interface InvitationTableProps {
     peopleChanged: boolean;

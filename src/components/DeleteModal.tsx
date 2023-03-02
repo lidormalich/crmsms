@@ -1,8 +1,8 @@
 import { FunctionComponent } from "react";
 import { Button, Modal } from "react-bootstrap";
 import People from "../interfaces/People";
-import { deletePepoleFromEvent } from "../services/eventServices";
-import { errorMessage, successMessage } from "../services/FeedbackService";
+import { deletePepoleFromEvent } from "../Services/eventServices";
+import { errorMessage, successMessage } from "../Services/FeedbackService";
 
 interface DeleteModalProps {
     show: boolean;

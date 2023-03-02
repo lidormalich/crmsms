@@ -1,7 +1,7 @@
 import { FunctionComponent, useEffect, useState } from "react";
 import { Button } from "react-bootstrap";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { getCoupleImageInEvent } from "../../services/eventServices";
+import { getCoupleImageInEvent } from "../../Services/eventServices";
 import "./Dashboard.css";
 
 interface DashboardProps {

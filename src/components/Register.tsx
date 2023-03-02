@@ -3,8 +3,8 @@ import { FunctionComponent } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import * as yup from "yup";
 import User from "../interfaces/User";
-import { errorMessage, successMessage as successMsg } from "../services/FeedbackService";
-import { addUser } from "../services/userServices";
+import { errorMessage, successMessage as successMsg } from "../Services/FeedbackService";
+import { addUser } from "../Services/userServices";
 interface RegisterProps {
     setIsLogIn: Function;
 }

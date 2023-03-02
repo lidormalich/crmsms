@@ -1,10 +1,10 @@
 import { FunctionComponent, useEffect, useState } from "react";
 import { useFormik } from "formik";
 import * as yup from "yup";
-import { successMessage } from "../services/FeedbackService";
+import { successMessage } from "../Services/FeedbackService";
 import People from "../interfaces/People";
-import { addPeopleToEvent } from "../services/eventServices";
-import { getAllGroup } from "../services/GroupServices";
+import { addPeopleToEvent } from "../Services/eventServices";
+import { getAllGroup } from "../Services/GroupServices";
 import Group from "../interfaces/Group";
 import { useParams } from "react-router-dom";
 

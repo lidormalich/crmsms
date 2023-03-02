@@ -3,8 +3,8 @@ import * as yup from "yup";
 import { useFormik } from "formik";
 import { Button } from "react-bootstrap";
 import People from "../../interfaces/People";
-import { successMessage } from "../../services/FeedbackService";
-import { updatePeopleInEvent } from "../../services/eventServices";
+import { successMessage } from "../../Services/FeedbackService";
+import { updatePeopleInEvent } from "../../Services/eventServices";
 import { useParams } from "react-router-dom";
 
 import './ClientPage.css';

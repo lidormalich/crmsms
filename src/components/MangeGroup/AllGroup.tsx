@@ -1,7 +1,7 @@
 import { FunctionComponent, useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import Group from "../../interfaces/Group";
-import { getAllGroup } from "../../services/GroupServices";
+import { getAllGroup } from "../../Services/GroupServices";
 import Loading from "../Extra/Loading";
 
 interface AllGroupProps {
