@@ -19,29 +19,30 @@ const SaveTheDate: FunctionComponent<SaveTheDateProps> = ({ coupleImage }) => {
     }, []);
 
     return (<>
-        {console.log(weddingInfo)}
-        <div className="div">
-            <div className="divsave">
-                <p className="title">Save The Date</p>
-                <p className="COUPLE">{coupleName}</p>
+        <div className="div2main">
+            <div className="div">
+                <div className="divsave">
+                    <p className="title">Save The Date</p>
+                    <p className="COUPLE">{coupleName}</p>
 
-                <div className="date"> -20
-                    <i className="point">&#x2764;</i>2<i className="point">&#x2764;</i>2023-
+                    <div className="date"> -20
+                        <i className="point">&#x2764;</i>2<i className="point">&#x2764;</i>2023-
+                    </div>
+
                 </div>
-
-            </div>
-            {/* <div className="info">
+                {/* <div className="info">
                 <h3>hi</h3>
             </div>  */}
-            <img src="https://github.com/lidormalich/crmsms/blob/master/src/components/Extra/frm.png?raw=true" alt="" className="frame responsiveImg" />
+                <img src="https://github.com/lidormalich/crmsms/blob/master/src/components/Extra/frm.png?raw=true" alt="" className="frame responsiveImg" />
 
-            {weddingInfo != "" ? (<img src={weddingInfo} alt="" className="cuple responsiveImg" />) : (<>
-                <img src={"https://res.cloudinary.com/ddk6cfhl0/image/upload/v1677517835/yjbm2infbdot6bixlvbg.jpg"} alt="" className="cuple responsiveImg" />
+                {weddingInfo != "" ? (<img src={weddingInfo} alt="" className="cuple responsiveImg" />) : (<>
+                    <img src={"https://res.cloudinary.com/ddk6cfhl0/image/upload/v1677517835/yjbm2infbdot6bixlvbg.jpg"} alt="" className="cuple responsiveImg" />
 
-            </>)}
+                </>)}
 
 
-            <img src={""} alt="" className="cuple responsiveImg" />
+                <img src={""} alt="" className="cuple responsiveImg" />
+            </div>
         </div>
     </>);
 }

@@ -22,6 +22,7 @@
 .responsiveImg {
     width: 100%;
     max-width: 400px;
+    min-width: 400px;
     height: auto;
 }
 
@@ -33,12 +34,20 @@
     position: absolute;
 }
 
+.div2main {
+    text-align: left;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+}
+
 .divsave {
     position: absolute;
     transform: rotate(-30deg);
     z-index: 1;
-    top: 20px;
-    left: 5px;
+    top: 10%;
+    left: 30px;
     display: flex;
 }
 
@@ -88,4 +97,6 @@
 .point {
     color: red;
     font-size: 10px;
+    margin-top: 32px;
+
 }
