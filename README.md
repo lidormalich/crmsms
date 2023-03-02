@@ -22,11 +22,13 @@ For support or questions, please contact us at [lidormalich@gmail.com](mailto:li
 
 ## Technologies Used
 
-### client side
+### CLIENT SIDE
 -   TypeScript
 -   React
 -   REST API
-### server side
--   NodeJS
+-Bootstrap
+### SERVER SIDE
+-   NodeJS 
+- Twillo API
 -   Express
 - MongoDB
