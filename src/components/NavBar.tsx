@@ -27,7 +27,7 @@ const NavBar: FunctionComponent<NavBarProps> = ({ setIsLogIn }) => {
         <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
             <Container>
                 <Link className="navbar-brand " to="/" >
-                    {isBrowser ? (<img alt="CRM SMS invitation" src="https://github.com/lidormalich/crmsms/blob/master/src/images/CRMSMSIinvitation.png?raw=true" height={50} />) : (<h5 className="display-5 " style={{ textAlign: "center" }}>CRM SMS Invitation </h5>)}
+                    {isBrowser ? (<img alt="CRM SMS invitation" src="https://github.com/lidormalich/crmsms/blob/master/src/Images/CRMSMSIinvitation.png?raw=true" height={50} />) : (<h5 className="display-5 " style={{ textAlign: "center" }}>CRM SMS Invitation </h5>)}
                 </Link>
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                 <Navbar.Collapse id="responsive-navbar-nav">
