@@ -29,7 +29,7 @@ const UploadImage: FunctionComponent<UploadImageProps> = () => {
             .then((response) => {
                 // setImageUrl(response.data.secure_url);
                 updateCoupleImageInEvent(eventId as string, response.data.secure_url);
-                successMessage("Iamge Save");
+                successMessage("Image Save");
                 navigate(-1);
 
             }).catch((e) => console.log(e));
