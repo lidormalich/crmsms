@@ -22,15 +22,14 @@ const Login: FunctionComponent<LoginProps> = ({ setIsLogIn }) => {
         onSubmit: (values: User) => {
             checkUser(values)
                 .then((res) => {
-                    if (res.data.error == false) {
-                        setIsLogIn(true);
-                        sessionStorage.setItem("IsLoggedIn", "true");
-                        sessionStorage.setItem("userName", `${res.data.first_name}`);
-                        successMessage("You Loged-In :)");
-                        navigate('/');
-                    }
-                    else { navigate('/'); errorMessage("Wrong info"); }
-                }).catch((e) => { errorMessage("Wrong info"); console.log(e); }
+                    // if (res.data.error == false) {
+                    setIsLogIn(true);
+                    sessionStorage.setItem("IsLoggedIn", "true");
+                    sessionStorage.setItem("userName", `${res.data.first_name}`);
+                    sessionStorage.setItem("Authorization", `${res.data.Authorization}`);
+                    successMessage("You Loged-In :)");
+                    navigate('/');
+                }).catch((e) => { navigate('/'); errorMessage("Wrong info"); console.log(e); }
                 );
         }
     })

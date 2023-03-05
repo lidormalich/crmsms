@@ -30,7 +30,8 @@ const NewCampaign: FunctionComponent<NewCampaignProps> = () => {
             ownerName: yup.string().required("Owner Campaign is a required field").min(2)
         }),
         onSubmit: (values: Event, { resetForm }) => {
-            addEvent(values).then((res) => {
+            const Authorization = sessionStorage.getItem("Authorization");
+            addEvent(values, Authorization as string).then((res) => {
 
 
                 successMessage("Event Added");

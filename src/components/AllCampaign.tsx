@@ -22,7 +22,7 @@ const AllCampaign: FunctionComponent<AllCampaignProps> = () => {
     let counter: number = 0;
     let isLogin = useContext<boolean>(isLoginGlobal);
     useEffect(() => {
-        getAllEvent().then((res) => { setAllEvent(res.data); }).catch((e) => console.log(e));
+        getAllEvent(sessionStorage.getItem("Authorization") as string).then((res) => { setAllEvent(res.data); }).catch((e) => console.log(e));
 
     }, [userRefresh]);
 
@@ -38,21 +38,10 @@ const AllCampaign: FunctionComponent<AllCampaignProps> = () => {
                     <thead>
                         <tr>
                             <th>#</th>
-                            {/* {isBrowser && (<th>
-                                 <i className="fa-solid fa-id-card"></i> 
-                                Campaign ID </th>)} */}
-                            <th>
-                                {/* <i className="fa-solid fa-info"></i> */}
-                                Info | Campaign Name </th>
-                            <th>
-                                {/* <i className="fa-solid fa-users-between-lines"></i> */}
-                                Group Manage </th>
-                            <th>
-                                {/* <i className=" fa-solid fa-gear"></i> */}
-                                Manage  </th>
-                            <th>
-                                Delete Event  </th>
-
+                            <th>Info | Campaign Name</th>
+                            <th>Group Manage</th>
+                            <th>Manage</th>
+                            <th>Delete Event</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -65,7 +54,9 @@ const AllCampaign: FunctionComponent<AllCampaignProps> = () => {
                             <td onClick={() => {
                                 setEventID(eventItem._id as string)
                                 setOpendeleteModal(true);
-                            }}><i className="fa-solid fa-trash-can" style={{ height: "30px" }}></i> </td>
+                            }}>
+                                <img src="https://img.icons8.com/ios/256/del-key.png" height={30} alt="" />
+                            </td>
 
                         </tr>)}
                     </tbody>

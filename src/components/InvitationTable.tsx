@@ -76,7 +76,7 @@ const InvitationTable: FunctionComponent<InvitationTableProps> = ({ peopleChange
             message: `שלום ${people.firstName}, הוזמנתם לחתונה של  ${weddingInfo.groom} & ${weddingInfo.bride}
                         לפרטים ואישור הגעה  https://crmsms.netlify.app/event/${eventId}/${people.phoneNumber}
                         נשמח לראותכם ${weddingInfo.groom} & ${weddingInfo.bride}`, phone: `+972${editphone(people.phoneNumber)}`
-        })
+        }, sessionStorage.getItem("Authorization") as string)
             .then(() => {
                 toast.update(id, {
                     render: "SMS sent", type: "success", isLoading: false,
