@@ -69,6 +69,7 @@ const NavBar: FunctionComponent<NavBarProps> = ({ setIsLogIn }) => {
                                 {/* <li><Link className="dropdown-item" to="/action/3.3">Something</Link></li> */}
                                 <li><Link className="dropdown-item" to="/" onClick={() => {
                                     sessionStorage.setItem("IsLoggedIn", "false");
+                                    sessionStorage.removeItem("Authorization")
                                     setIsLogIn(false);
                                     navigate("/");
                                 }}>log-out</Link></li>
