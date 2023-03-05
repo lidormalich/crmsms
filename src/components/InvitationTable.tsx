@@ -1,11 +1,11 @@
 import { FunctionComponent, useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { getEventInfoByID, getPeopleInEventByID } from "../Services/eventServices";
-import { sendsmstoclient } from "../Services/SMSservices";
+import { getEventInfoByID, getPeopleInEventByID } from "../ServicesOEM/eventServices";
+import { sendsmstoclient } from "../ServicesOEM/SMSservices";
 import DeleteModal from "./DeleteModal";
 import UpdateModal from "./UpdateModal";
 import "./invTable.css";
-import { earningMessage, successMessage } from "../Services/FeedbackService";
+import { earningMessage, successMessage } from "../ServicesOEM/FeedbackService";
 import { BrowserView, isBrowser, isMobile } from "react-device-detect";
 import { toast } from "react-toastify";
 import People from "../interfaces/People";

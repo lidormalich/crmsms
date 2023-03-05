@@ -3,8 +3,8 @@ import axios from "axios";
 import { FunctionComponent, useState } from "react";
 import { Button } from "react-bootstrap";
 import { useNavigate, useParams } from "react-router-dom";
-import { updateCoupleImageInEvent } from "../../Services/eventServices";
-import { successMessage } from "../../Services/FeedbackService";
+import { updateCoupleImageInEvent } from "../../ServicesOEM/eventServices";
+import { successMessage } from "../../ServicesOEM/FeedbackService";
 import Loading from "./Loading";
 
 interface UploadImageProps {

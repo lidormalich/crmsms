@@ -1,7 +1,7 @@
 import { FunctionComponent } from "react";
 import { Button, Modal } from "react-bootstrap";
-import { deleteEvent } from "../Services/eventServices";
-import { errorMessage, successMessage } from "../Services/FeedbackService";
+import { deleteEvent } from "../ServicesOEM/eventServices";
+import { errorMessage, successMessage } from "../ServicesOEM/FeedbackService";
 
 interface DeleteCMPProps {
     show: boolean;

@@ -3,7 +3,7 @@ import { isMobile } from "react-device-detect";
 import { Link, useParams } from "react-router-dom";
 import { isLoginGlobal } from "../App";
 import People from "../interfaces/People";
-import { getPeopleInEventByID } from "../Services/eventServices";
+import { getPeopleInEventByID } from "../ServicesOEM/eventServices";
 import Dashboard from "./Extra/Dashboard";
 import InvitationManager from "./InvitationManager";
 

@@ -1,6 +1,6 @@
 import { FunctionComponent, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { getEventInfoByID } from "../../../Services/eventServices";
+import { getEventInfoByID } from "../../../ServicesOEM/eventServices";
 import "./savedate.css";
 
 interface SaveTheDateProps {
