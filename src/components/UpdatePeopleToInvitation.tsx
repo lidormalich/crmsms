@@ -1,12 +1,12 @@
 import { FunctionComponent, useEffect, useState } from "react";
 import * as yup from "yup";
-import { successMessage } from "../ServicesOEM/FeedbackService";
+import { successMessage } from "../Services/FeedbackService";
 import People from "../interfaces/People";
-import { getPeopleInfoByPhone, updatePeopleInEvent } from "../ServicesOEM/eventServices";
+import { getPeopleInfoByPhone, updatePeopleInEvent } from "../Services/eventServices";
 import { useFormik } from "formik";
 import Group from "../interfaces/Group";
-import { getAllGroup } from "../ServicesOEM/GroupServices";
-import { sendsmstoclient } from "../ServicesOEM/SMSservices";
+import { getAllGroup } from "../Services/GroupServices";
+import { sendsmstoclient } from "../Services/SMSservices";
 
 
 interface UpdatePeopleToInvitationProps {

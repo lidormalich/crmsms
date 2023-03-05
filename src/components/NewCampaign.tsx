@@ -2,9 +2,9 @@ import { FunctionComponent, useEffect, useId, useState } from "react";
 import { useFormik } from "formik";
 import { useNavigate } from "react-router-dom";
 import * as yup from "yup";
-import { successMessage } from "../ServicesOEM/FeedbackService";
+import { successMessage } from "../Services/FeedbackService";
 import Event from "../interfaces/EventInterface";
-import { addEvent } from "../ServicesOEM/eventServices";
+import { addEvent } from "../Services/eventServices";
 import { v4 as uuidv4 } from 'uuid';
 import axios from "axios";
 
