@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .main {
+            position: relative;
+            width: 100%;
+            max-width: 400px;
+            height: 600px;
+        }
+
+        .imageRes {
+            position: absolute;
+            width: 100%;
+
+        }
+
+        .textName {
+            position: absolute;
+            font-size: 20;
+            z-index: 5;
+            font-size: 35px;
+
+        }
+
+        #save {
+            left: -40px;
+            transform: rotate(-50deg);
+            top: 60px;
+            /* right: 0; */
+            color: rgb(138, 75, 227);
+
+        }
+
+        #cuople {
+            transform: rotate(60deg);
+            top: 60px;
+            right: -20px;
+            color: rgb(138, 75, 227);
+        }
+
+        #date {
+            left: 25%;
+            top: 85%;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="main">
+
+        <p class="textName" id="cuople">יוחאי & ירדן</p>
+        <p class="textName" id="save">SAVE THE DATE</p>
+        <span class="textName" id="date">
+            <div style="position: relative;"><span>27</span><span style="position: absolute;bottom:-15px">*</span><span
+                    style="position: absolute; transform: translateX(20px);">08</span><span
+                    style="position: absolute;bottom:-15px; transform: translateX(60px);">*</span><span
+                    style="position: absolute; transform: translateX(80px);">2022</span>
+            </div>
+        </span>
+
+        <img src="frm.png" alt="" class="imageRes" style="z-index: 1;">
+        <img src="https://res.cloudinary.com/ddk6cfhl0/image/upload/v1677517835/yjbm2infbdot6bixlvbg.jpg" alt=""
+            class="imageRes">
+    </div>
+</body>
+
+</html>

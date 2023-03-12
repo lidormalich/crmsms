@@ -7,6 +7,7 @@ import Event from "../interfaces/EventInterface";
 import { addEvent } from "../Services/eventServices";
 import { v4 as uuidv4 } from 'uuid';
 import axios from "axios";
+import { getAllSentences } from "../Services/sentencesServices";
 
 interface NewCampaignProps {
 
@@ -15,18 +16,20 @@ interface NewCampaignProps {
 const NewCampaign: FunctionComponent<NewCampaignProps> = () => {
     const [imageSelected, setImageSelected] = useState<any>("");
     const [imageUrl, setImageUrl] = useState<string>("");
+    const [allweddingSentence, setAllweddingSentence] = useState<any[]>([]);
     let navigate = useNavigate();
     let uuidLidor = uuidv4();
     let formik = useFormik({
         initialValues: {
-            campaignName: "", ownerName: "", phone: "", uuid: uuidLidor, bride: "", groom: "", groomParents: "", brideParents: "", coupleImage: ""
+            campaignName: "", ownerName: "", phone: "", uuid: uuidLidor, bride: "", groom: "", groomParents: "", brideParents: "", coupleImage: "", weddingSentence: "",
         }, validationSchema: yup.object({
             campaignName: yup.string().required("Campaign name is a required field").min(2),
             bride: yup.string().required("brige name is a required field").min(2).max(7),
             groom: yup.string().required("groom name is a required field").min(2).max(7),
-            groomParents: yup.string().required("groom Parents name is a required field").min(2).max(15),
-            brideParents: yup.string().required("bride Parents name is a required field").min(2).max(15),
+            groomParents: yup.string().required("groom Parents name is a required field").min(2).max(18),
+            brideParents: yup.string().required("bride Parents name is a required field").min(2).max(18),
             phone: yup.number().required("Phone number is a required field").min(10).positive(),
+            weddingSentence: yup.string().required(),
             ownerName: yup.string().required("Owner Campaign is a required field").min(2)
         }),
         onSubmit: (values: Event, { resetForm }) => {
@@ -48,25 +51,10 @@ const NewCampaign: FunctionComponent<NewCampaignProps> = () => {
     })
 
 
-
-
-    // const uploadImage = () => {
-    //     const formData = new FormData();
-    //     formData.append('file', imageSelected[0]);
-    //     formData.append('upload_preset', "nnmxcowx");
-
-    //     axios.post("https://api.cloudinary.com/v1_1/ddk6cfhl0/image/upload", formData)
-    //         .then((res) => setImageUrl(res.data.secure_url))
-    //     console.log("secccsed upload image");
-    // }
-    // const submit = () => {
-    //     uploadImage();
-    // }
-
-
     // שינוי תצוגה מ0 אל כלום
     useEffect(() => {
-        formik.setFieldValue("phone", "")
+        getAllSentences().then(res => setAllweddingSentence(res.data));
+        formik.setFieldValue("phone", "");
 
     }, []);
     return (<>
@@ -167,7 +155,7 @@ const NewCampaign: FunctionComponent<NewCampaignProps> = () => {
                     />
                     <label htmlFor="groomParents">הורי החתן groomParents</label>
                     {formik.touched.groomParents && formik.errors.groomParents && (
-                        <small className="text-danger">{formik.errors.phone}</small>
+                        <small className="text-danger">{formik.errors.groomParents}</small>
                     )}
                 </div>
                 <div className="form-floating mb-3">
@@ -187,6 +175,27 @@ const NewCampaign: FunctionComponent<NewCampaignProps> = () => {
                     )}
                 </div>
 
+                <div className="form-floating mb-3">
+
+                    <select defaultValue={'DEFAULT'}
+
+                        className="form-control"
+                        id="weddingSentence"
+                        placeholder="textme"
+                        name="weddingSentence"
+                        value={formik.values.weddingSentence}
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}>
+
+                        <option hidden >Choose a Wedding Sentence...</option>
+                        {allweddingSentence.map((sentence: any) => <option key={sentence.weddingSentence} value={sentence.weddingSentence}> {sentence.weddingSentence}</option>)}
+
+                    </select>
+                    <label htmlFor="weddingSentence">Group</label>
+                    {formik.touched.weddingSentence && formik.errors.weddingSentence && (
+                        <small className="text-danger">{formik.errors.weddingSentence}</small>
+                    )}
+                </div>
 
 
                 <button type="submit" className="btn btn-success w-100 my-3"

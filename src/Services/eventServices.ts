@@ -50,7 +50,7 @@ export function updateCoupleImageInEvent(id: string, img: string) {
 }
 // delete Event
 export function deleteEvent(id: string) {
-    return axios.delete(`${api}/deleteEvent/${id}`);
+    return axios.delete(`${api}/event/deleteEvent/${id}`);
 }
 // delete pepole by phone from event-OKKKKKKKKKKKK
 export function deletePepoleFromEvent(phoneNum: string, id: string) {

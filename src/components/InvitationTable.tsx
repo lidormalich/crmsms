@@ -5,7 +5,7 @@ import { sendsmstoclient } from "../Services/SMSservices";
 import DeleteModal from "./DeleteModal";
 import UpdateModal from "./UpdateModal";
 import "./invTable.css";
-import { earningMessage, successMessage } from "../Services/FeedbackService";
+import { earningMessage, errorMessage, successMessage } from "../Services/FeedbackService";
 import { BrowserView, isBrowser, isMobile } from "react-device-detect";
 import { toast } from "react-toastify";
 import People from "../interfaces/People";
@@ -46,7 +46,7 @@ const InvitationTable: FunctionComponent<InvitationTableProps> = ({ peopleChange
 
 
     useEffect(() => {
-        getEventInfoByID(eventId as string).then((res) => setWeddingInfo(res.data)).catch((e) => console.log(e))
+        getEventInfoByID(eventId as string).then((res) => setWeddingInfo(res.data)).catch((e) => { console.log(e); errorMessage("Error , Can't get info...") })
 
     }, []);
 

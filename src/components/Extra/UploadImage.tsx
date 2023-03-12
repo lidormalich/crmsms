@@ -33,7 +33,6 @@ const UploadImage: FunctionComponent<UploadImageProps> = () => {
                 navigate(-1);
 
             }).catch((e) => console.log(e));
-        console.log("secccsed upload image");
     }
     const submit = () => {
         uploadImage();

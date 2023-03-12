@@ -21,8 +21,8 @@
 
 .responsiveImg {
     width: 100%;
-    max-width: 400px;
-    min-width: 400px;
+    max-width: 100%;
+    min-width: 100%;
     height: auto;
 }
 
@@ -40,6 +40,7 @@
     left: 50%;
     transform: translateX(-50%);
     width: 100%;
+    height: 600px;
 }
 
 .divsave {
@@ -76,22 +77,12 @@
 }
 
 .date {
-    font-family: Mellisia;
-    font-size: 35px;
-    transform: rotate(30deg);
-    top: 100px;
-    right: 30%;
-    position: absolute;
-    display: flex;
-    font-family: SBL;
-    color: rgb(138, 75, 227);
-    border-radius: 50%;
-
-}
-
-.date {
     font-family: Lordranga;
     position: relative;
+    top: 400px;
+    right: 100%;
+    font-size: 30px;
+    transform: rotate(30deg);
 }
 
 .point {
