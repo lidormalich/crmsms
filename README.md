@@ -1,5 +1,5 @@
-# [Wedding Event CRM Website = CRM SMS invitation](https://crmsms.netlify.app)
-### Create and Manage Your Perfect Wedding Event with Ease: The Ideal Choice for Advanced Features and User-Friendly Interface.
+# [Wedding Event CRM Website ](https://crmsms.netlify.app)  
+### [crmsms.netlify.app](https://crmsms.netlify.app)
 
 This website provides a comprehensive solution for managing and creating a wedding event. It comes with advanced options, including sending messages to invitees, editing their personal arrival, displaying invitations according to the data of the bride and groom, managing all invitees, and much more.
 
@@ -22,13 +22,20 @@ For support or questions, please contact us at [lidormalich@gmail.com](mailto:li
 
 ## Technologies Used
 
-### CLIENT SIDE
+ ### CLIENT SIDE
 -   TypeScript
 -   React
+- Bootstrap
+-  Cloudinary API
 -   REST API
--Bootstrap
+
+### [crmsms.netlify.app](https://crmsms.netlify.app/)
+
+
 ### SERVER SIDE
--   NodeJS 
-- Twillo API
+-   NodeJS
 -   Express
+-   Twillo API
 - MongoDB
+- JWT - jsonwebtoken
+### [crmsmsserver.cyclic.app](https://crmsmsserver.cyclic.app/api/lidor)
