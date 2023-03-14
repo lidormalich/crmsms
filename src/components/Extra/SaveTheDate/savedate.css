@@ -28,6 +28,9 @@
 
 .div {
     position: relative;
+    width: 100%;
+    max-width: 400px;
+    height: 600px;
 }
 
 .frame {
@@ -35,54 +38,74 @@
 }
 
 .div2main {
-    text-align: left;
-    position: absolute;
+    align-items: center;
     left: 50%;
-    transform: translateX(-50%);
-    width: 100%;
-    height: 600px;
+    right: 50%;
+    /* width: 100%;
+    height: 600px; */
 }
 
 .divsave {
     position: absolute;
-    transform: rotate(-30deg);
+    /* transform: rotate(-30deg); */
     z-index: 1;
-    top: 10%;
-    left: 30px;
+    /* top: 10%; */
+    /* left: 30px; */
     display: flex;
+
+    left: -40px;
+    /* transform: rotate(-50deg); */
+    top: 60px;
+    /* right: 0; */
+    color: rgb(138, 75, 227);
 }
 
-.cuple {
-    align-items: center;
-}
+
 
 .title {
+    /* font-family: Mellisia;
+    font-size: 35px;*/
+    color: #CC2936;
     font-family: Mellisia;
     font-size: 35px;
-    color: #CC2936;
+    right: -320px;
+    top: -20px;
+    position: absolute;
 }
 
 .COUPLE {
     font-family: Mellisia;
     font-size: 35px;
-    transform: rotate(60deg);
-    top: 60px;
-    right: 0;
     position: absolute;
     display: flex;
     font-family: SBL;
     color: rgb(138, 75, 227);
     border-radius: 50%;
+    transform: rotate(60deg);
+    top: 80px;
+    right: -420px;
+    color: rgb(138, 75, 227);
+
+}
+
+
+
+.textName {
+    position: absolute;
+    font-size: 20;
+    z-index: 5;
+    font-size: 35px;
 
 }
 
 .date {
     font-family: Lordranga;
-    position: relative;
-    top: 400px;
-    right: 100%;
+    transform: rotate(-30deg);
     font-size: 30px;
-    transform: rotate(30deg);
+    color: red;
+    position: absolute;
+    left: 45%;
+    top: 90%;
 }
 
 .point {

@@ -52,7 +52,7 @@ function App() {
             <Route path='/event/:eventId/:phoneNum' element={<ClientPage />} />
             <Route path='/about' element={<About />} />
             <Route path='/invitation/:eventId' element={<Invitation />} />
-            <Route path='/savethedate/:eventId' element={<SaveTheDate coupleImage='' />} />
+            <Route path='/savethedate/:eventId' element={<SaveTheDate coupleImage={''} />} />
             <Route path='/uploadimage/:eventId' element={<UploadImage />} />
             <Route path='/test' element={<Test />} />
 
