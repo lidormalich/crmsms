@@ -21,7 +21,7 @@ const NewCampaign: FunctionComponent<NewCampaignProps> = () => {
     let uuidLidor = uuidv4();
     let formik = useFormik({
         initialValues: {
-            campaignName: "", ownerName: "", phone: "", uuid: uuidLidor, bride: "", groom: "", groomParents: "", brideParents: "", coupleImage: "", weddingSentence: "",
+            campaignName: "", ownerName: "", phone: "", uuid: uuidLidor, bride: "", groom: "", groomParents: "", brideParents: "", coupleImage: "", weddingSentence: "", weddingDate: ""
         }, validationSchema: yup.object({
             campaignName: yup.string().required("Campaign name is a required field").min(2),
             bride: yup.string().required("brige name is a required field").min(2).max(7),
@@ -30,6 +30,7 @@ const NewCampaign: FunctionComponent<NewCampaignProps> = () => {
             brideParents: yup.string().required("bride Parents name is a required field").min(2).max(18),
             phone: yup.number().required("Phone number is a required field").min(10).positive(),
             weddingSentence: yup.string().required(),
+            weddingDate: yup.date().required(),
             ownerName: yup.string().required("Owner Campaign is a required field").min(2)
         }),
         onSubmit: (values: Event, { resetForm }) => {
@@ -175,6 +176,7 @@ const NewCampaign: FunctionComponent<NewCampaignProps> = () => {
                     )}
                 </div>
 
+
                 <div className="form-floating mb-3">
 
                     <select defaultValue={'DEFAULT'}
@@ -196,7 +198,22 @@ const NewCampaign: FunctionComponent<NewCampaignProps> = () => {
                         <small className="text-danger">{formik.errors.weddingSentence}</small>
                     )}
                 </div>
-
+                <div className="form-floating mb-3">
+                    <input
+                        type="date"
+                        className="form-control"
+                        id="weddingDate"
+                        placeholder="0525552555"
+                        name="weddingDate"
+                        value={formik.values.weddingDate}
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                    />
+                    <label htmlFor="weddingDate">wedding Date</label>
+                    {formik.touched.weddingDate && formik.errors.weddingDate && (
+                        <small className="text-danger">{formik.errors.weddingDate}</small>
+                    )}
+                </div>
 
                 <button type="submit" className="btn btn-success w-100 my-3"
                     disabled={!formik.isValid || !formik.dirty}>ADD New Campaign<i className="fa-solid fa-angles-right"></i></button>

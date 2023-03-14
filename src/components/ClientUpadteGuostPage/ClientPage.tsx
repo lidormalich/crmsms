@@ -25,14 +25,13 @@ const ClientPage: FunctionComponent<ClientPageProps> = () => {
     return (<>
         <div className="container">
             <SaveTheDate coupleImage={weddingInfo.coupleImage} />
-            <div className="" style={{
-                paddingTop: "50%", position: "absolute",
-            }}>
+            <div className="">
                 <h6 className="display-6">{`Hi ${people.firstName}, `}</h6>
                 <p className="h6">{`Please confirm how many people are coming to the event, thank you very much`}</p>
                 <ClientUpdateGuost people={people} />
             </div>
-            <Footer />
+            <div className="mt-6"><Footer /></div>
+
         </div>
     </>);
 }

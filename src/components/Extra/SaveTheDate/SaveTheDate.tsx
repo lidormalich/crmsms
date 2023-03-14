@@ -1,5 +1,6 @@
 import { FunctionComponent, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import EventInterface from "../../../interfaces/EventInterface";
 import { getEventInfoByID } from "../../../Services/eventServices";
 import "./savedate.css";
 
@@ -9,15 +10,15 @@ interface SaveTheDateProps {
 
 const SaveTheDate: FunctionComponent<SaveTheDateProps> = ({ coupleImage }) => {
     let [coupleName, setCoupleName] = useState<string>("");
-    let [weddingInfo, setWeddingInfo] = useState<any>("");
+    let [weddingInfo, setWeddingInfo] = useState<EventInterface>({ campaignName: "", ownerName: "", phone: "", uuid: "", bride: "", groom: "", groomParents: "", brideParents: "", coupleImage: "", weddingSentence: "", weddingDate: "" });
 
     let { eventId } = useParams();
     useEffect(() => {
         // בדיקת איבנט שגוי והחזרה למסך הראשי
 
-        getEventInfoByID(eventId as string).then((res) => setWeddingInfo(res.data.coupleImage)).catch((e) => console.log(e))
+        getEventInfoByID(eventId as string).then((res) => setWeddingInfo(res.data)).catch((e) => console.log(e))
 
-        getEventInfoByID(eventId as string).then((res) => { setCoupleName(`${res.data.groom} & ${res.data.bride}`) });
+        // getEventInfoByID(eventId as string).then((res) => { setCoupleName() });
     }, []);
 
     return (<>
@@ -25,7 +26,7 @@ const SaveTheDate: FunctionComponent<SaveTheDateProps> = ({ coupleImage }) => {
             <div className="div">
                 <div className="divsave">
                     <p className="title">Save The Date</p>
-                    <p className="COUPLE">{coupleName}</p>
+                    <p className="COUPLE">{`${weddingInfo.groom} & ${weddingInfo.bride}`}</p>
 
                     {/* <div className="date"> -20
                     <i className="point">&#x2764;</i>2<i className="point">&#x2764;</i>2023-
@@ -36,12 +37,12 @@ const SaveTheDate: FunctionComponent<SaveTheDateProps> = ({ coupleImage }) => {
 
                 <img src="https://github.com/lidormalich/crmsms/blob/master/src/components/Extra/frm.png?raw=true" alt="" className="frame responsiveImg" />
 
-                {weddingInfo != "" ? (<img src={weddingInfo} alt="" className="cuple responsiveImg" />) : (<>
+                {weddingInfo?.coupleImage != "" ? (<img src={weddingInfo?.coupleImage} alt="" className="cuple responsiveImg" />) : (<>
                     <img src={"https://res.cloudinary.com/ddk6cfhl0/image/upload/v1677517835/yjbm2infbdot6bixlvbg.jpg"} alt="" className="cuple responsiveImg" />
 
                 </>)}
                 <span className=" date">
-                    20-20-2022</span>
+                    -{weddingInfo.weddingDate}-</span>
 
             </div>
 
