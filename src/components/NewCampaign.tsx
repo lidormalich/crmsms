@@ -122,7 +122,7 @@ const NewCampaign: FunctionComponent<NewCampaignProps> = () => {
                         onChange={formik.handleChange}
                         onBlur={formik.handleBlur}
                     />
-                    <label htmlFor="bride">bride</label>
+                    <label htmlFor="bride">bride כלה</label>
                     {formik.touched.bride && formik.errors.bride && (
                         <small className="text-danger">{formik.errors.bride}</small>
                     )}
@@ -154,7 +154,7 @@ const NewCampaign: FunctionComponent<NewCampaignProps> = () => {
                         onChange={formik.handleChange}
                         onBlur={formik.handleBlur}
                     />
-                    <label htmlFor="groomParents">הורי החתן groomParents</label>
+                    <label htmlFor="groomParents">הורי החתן Groom Parents</label>
                     {formik.touched.groomParents && formik.errors.groomParents && (
                         <small className="text-danger">{formik.errors.groomParents}</small>
                     )}
@@ -170,7 +170,7 @@ const NewCampaign: FunctionComponent<NewCampaignProps> = () => {
                         onChange={formik.handleChange}
                         onBlur={formik.handleBlur}
                     />
-                    <label htmlFor="brideParents">הורי הכלה bride Parents</label>
+                    <label htmlFor="brideParents">הורי הכלה Bride Parents</label>
                     {formik.touched.brideParents && formik.errors.brideParents && (
                         <small className="text-danger">{formik.errors.brideParents}</small>
                     )}
