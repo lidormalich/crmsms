@@ -1,6 +1,7 @@
 import { useFormik } from "formik";
 import { FunctionComponent } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import * as yup from "yup";
 import User from "../interfaces/User";
 import { errorMessage, successMessage } from "../Services/FeedbackService";
@@ -20,17 +21,27 @@ const Login: FunctionComponent<LoginProps> = ({ setIsLogIn }) => {
             password: yup.string().required().min(8)
         }),
         onSubmit: (values: User) => {
+
+
+
+            const id = toast.loading("Please wait...", { position: toast.POSITION.TOP_CENTER });
             checkUser(values)
                 .then((res) => {
-                    // if (res.data.error == false) {
                     setIsLogIn(true);
                     sessionStorage.setItem("IsLoggedIn", "true");
                     sessionStorage.setItem("userName", `${res.data.first_name}`);
                     sessionStorage.setItem("Authorization", `${res.data.Authorization}`);
-                    successMessage("You Loged-In :)");
                     navigate('/');
-                }).catch((e) => { navigate('/'); errorMessage("Wrong info"); console.log(e); }
-                );
+                    toast.update(id, {
+                        render: "You Loged-In :)", type: "success", isLoading: false,
+                        autoClose: 3000,
+                    });
+
+                }).catch(e => {
+                    navigate('/'); console.log(e);
+                    toast.update(id, { render: "Wrong info", type: "error", isLoading: false, autoClose: 5000, });
+
+                });
         }
     })
 

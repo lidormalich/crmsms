@@ -1,6 +1,7 @@
 import { useFormik } from "formik";
 import { FunctionComponent } from "react";
 import { useNavigate, Link } from "react-router-dom";
+import { toast } from "react-toastify";
 import * as yup from "yup";
 import User from "../interfaces/User";
 import { errorMessage, successMessage as successMsg } from "../Services/FeedbackService";
@@ -20,13 +21,21 @@ const Register: FunctionComponent<RegisterProps> = ({ setIsLogIn }) => {
             password: yup.string().required().min(8),
         }),
         onSubmit: (values: User) => {
+            const id = toast.loading("Please wait...", { position: toast.POSITION.TOP_CENTER });
             addUser(values)
-                .then(() => {
+                .then((res) => {
                     navigate("/");
                     sessionStorage.setItem("IsLoggedIn", "false");
-                    successMsg("You registered successfully!");
-                })
-                .catch((err) => console.log(err));
+                    toast.update(id, {
+                        render: "You registered successfully!", type: "success", isLoading: false,
+                        autoClose: 3000,
+                    });
+
+                }).catch(err => {
+                    console.log(err); errorMessage(err.response.data)
+                    toast.update(id, { render: err.response.data, type: "error", isLoading: false, autoClose: 5000, });
+
+                });
         },
     });
     return (
