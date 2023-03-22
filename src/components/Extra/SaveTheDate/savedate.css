@@ -74,15 +74,17 @@
 }
 
 .COUPLE {
-    border-radius: 50%;
-    color: #8a4be3;
+    font-family: Mellisia;
+    font-size: 35px;
+    position: absolute;
     display: flex;
     font-family: SBL;
-    right: -340px;
-    top: 355px;
-    -webkit-transform: rotate(60deg);
-    transform: rotate(0deg);
-
+    color: rgb(138, 75, 227);
+    border-radius: 50%;
+    transform: rotate(60deg);
+    top: 80px;
+    right: -420px;
+    color: rgb(138, 75, 227);
 }
 
 
