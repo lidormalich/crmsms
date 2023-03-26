@@ -39,7 +39,7 @@ const AllCampaign: FunctionComponent<AllCampaignProps> = () => {
                         <tr>
                             <th>#</th>
                             <th>Info | Campaign Name</th>
-                            <th>Group Manage</th>
+                            {/* <th>Group Manage</th> */}
                             <th>Manage</th>
                             <th>Delete Event</th>
                         </tr>
@@ -49,7 +49,7 @@ const AllCampaign: FunctionComponent<AllCampaignProps> = () => {
                             <td>{counter++}</td>
                             {/* {isBrowser && (<td>{eventItem._id}</td>)} */}
                             <td>{eventItem.campaignName}</td>
-                            <td><Link to={`/group/${eventItem._id}`}><img src="https://cdn.iconscout.com/icon/premium/png-256-thumb/user-management-3497686-2927497.png" height={30} alt="" /></Link></td>
+                            {/* <td><Link to={`/group/${eventItem._id}`}><img src="https://cdn.iconscout.com/icon/premium/png-256-thumb/user-management-3497686-2927497.png" height={30} alt="" /></Link></td> */}
                             <td><Link to={`/campaign/${eventItem._id}`}><img src="https://cdn-icons-png.flaticon.com/512/32/32355.png" height={30} alt="" /></Link></td>
                             <td onClick={() => {
                                 setEventID(eventItem._id as string)

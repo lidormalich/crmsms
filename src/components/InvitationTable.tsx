@@ -9,6 +9,9 @@ import { earningMessage, errorMessage, successMessage } from "../Services/Feedba
 import { BrowserView, isBrowser, isMobile } from "react-device-detect";
 import { toast } from "react-toastify";
 import People from "../interfaces/People";
+import { Button } from "react-bootstrap";
+import AddPeople from "./AddPeople";
+import GloablModal from "./GloablModal";
 
 
 interface InvitationTableProps {
@@ -21,11 +24,7 @@ interface InvitationTableProps {
 }
 
 const InvitationTable: FunctionComponent<InvitationTableProps> = ({ peopleChanged, setPeopleChanged,
-
-
     setPcountercome, countercome
-
-
 }) => {
     let [peopleArr, setPeopleArr] = useState<People[]>([]);
     let [weddingInfo, setWeddingInfo] = useState<any>({ uuid: "", campaignName: "", ownerName: "", phone: "", bride: "", groom: "", coupleImage: "" });
@@ -34,6 +33,7 @@ const InvitationTable: FunctionComponent<InvitationTableProps> = ({ peopleChange
     // Open Modal
     let [opendeleteModal, setOpendeleteModal] = useState<boolean>(false);
     let [openUpdateModal, setOpenUpdateModal] = useState<boolean>(false);
+    let [openGlobalModal, setOpenGlobalModal] = useState<boolean>(false);
     let [idPeople, setIdPepole] = useState<string>("");
     let [peopleItemPhoneNum, setItemPepole] = useState<string>("");
 
@@ -42,7 +42,7 @@ const InvitationTable: FunctionComponent<InvitationTableProps> = ({ peopleChange
     }
     let { eventId } = useParams();
     let counter: number = 0;
-    let navigate = useNavigate();
+
 
 
     useEffect(() => {
@@ -93,7 +93,10 @@ const InvitationTable: FunctionComponent<InvitationTableProps> = ({ peopleChange
 
     return (<>
         <h5 className="">{peopleArr.length}  Guest list for the event</h5>
-
+        <span>
+            <Link className="btn btn-primary mx-2  w-5" to={`/savethedate/${eventId}`}>Save The Date</Link>
+            <Link className="btn btn-primary mx-0  w-5" to={`/invitation/${eventId}`}>Online Invitation</Link>
+        </span>
         {peopleArr.length ? (<table className="table lightFont">
             <thead>
                 <tr>
@@ -132,8 +135,13 @@ const InvitationTable: FunctionComponent<InvitationTableProps> = ({ peopleChange
 
                 </tr>)}
             </tbody>
-        </table>) : (<h3> No peoples</h3>)}
+        </table>
+        ) : (<h3> No peoples</h3>)}
+        <div className="">
+            <Button className="w-25 " onClick={() => setOpenGlobalModal(true)}>Add people</Button>
+        </div>
         <DeleteModal show={opendeleteModal} onHide={() => setOpendeleteModal(false)} phoneNum={peopleItemPhoneNum} eventId={eventId as string} refresh={() => refresh()} />
+        <GloablModal show={openGlobalModal} onHide={() => setOpenGlobalModal(false)} refresh={() => refresh()} setpeopleChanged={setPeopleChanged} peopleChange={peopleChanged} />
         <UpdateModal show={openUpdateModal} onHide={() => setOpenUpdateModal(false)} eventId={eventId as string} phoneNum={peopleItemPhoneNum} refresh={() => refresh()} />
     </>);
 }

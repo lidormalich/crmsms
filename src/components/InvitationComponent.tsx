@@ -35,14 +35,6 @@ const InvitationComponent: FunctionComponent<InvitationComponentProps> = ({ setI
     return (<>
         {/* {peopleArr.map((item) => setPcountercome(item.NumberOfGuests + countercome)) + ""} */}
         {isLogin && <><Dashboard letA={countercome + ""} letC={""} letb={""} />
-
-            {isMobile && <>
-                <Link className="btn btn-primary mx-2 col" to={`/savethedate/${eventId}`}>Save The Date</Link>
-                <Link className="btn btn-primary mx-0 col" to={`/invitation/${eventId}`}>Online Invitation</Link>
-            </>}
-
-
-
         </>}
 
         <InvitationManager setIsLogIn={setIsLogIn} setpeopleChanged={setpeopleChanged} peopleChange={peopleChange}

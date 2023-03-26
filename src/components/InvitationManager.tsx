@@ -33,19 +33,19 @@ const InvitationManager: FunctionComponent<InvitationManagerProps> = ({ setIsLog
                     <h5 className="display-5">Guest for event</h5>
                 </div>
                 <div className="row">
-                    <div className="col-md-4">
+                    {/* <div className="col-md-4">
                         <AddPeople setpeopleChanged={setpeopleChanged} peopleChange={peopleChange} />
                     </div>
-                    <div className="col-md-8">
-                        <InvitationTable peopleChanged={peopleChange} setPeopleChanged={setpeopleChanged}
+                    <div className="col-md-8"> */}
+                    <InvitationTable peopleChanged={peopleChange} setPeopleChanged={setpeopleChanged}
 
-                            setPcountercome={setPcountercome}
-                            countercome={countercome}
+                        setPcountercome={setPcountercome}
+                        countercome={countercome}
 
 
-                        />
-                    </div>
+                    />
                 </div>
+                {/* </div> */}
             </>) : (<><Login setIsLogIn={setIsLogIn} /></>
             )}
         </div>

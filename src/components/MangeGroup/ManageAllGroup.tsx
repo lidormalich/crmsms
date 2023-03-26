@@ -32,7 +32,7 @@ const ManageAllGroup: FunctionComponent<ManageAllGroupProps> = ({ setIsLogIn, gr
                 </div>
                 <div className="row">
                     <div className="col-md-4">
-                        <AddGroup setGroupChanged={setGroupChanged} groupChanged={groupChanged} />
+                        {/* <AddGroup setGroupChanged={setGroupChanged} groupChanged={groupChanged} /> */}
                     </div>
                     <div className="col-md-8">
                         <AllGroup groupChanged={groupChanged} />

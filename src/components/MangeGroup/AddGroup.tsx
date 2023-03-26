@@ -10,9 +10,10 @@ import { addNewGroup } from "../../Services/GroupServices";
 interface AddGroupProps {
     setGroupChanged: Function;
     groupChanged: boolean;
+    onHide: Function;
 }
 
-const AddGroup: FunctionComponent<AddGroupProps> = ({ setGroupChanged, groupChanged }) => {
+const AddGroup: FunctionComponent<AddGroupProps> = ({ setGroupChanged, groupChanged, onHide }) => {
     let { eventId } = useParams();
 
     let formik = useFormik({
@@ -24,9 +25,9 @@ const AddGroup: FunctionComponent<AddGroupProps> = ({ setGroupChanged, groupChan
             addNewGroup(eventId as string, values).then((res) => {
                 successMessage("Event Added");
                 resetForm();
-
                 // רענון
                 setGroupChanged(!groupChanged);
+                onHide();
             })
                 .catch((e) => console.log(e))
 
@@ -34,7 +35,7 @@ const AddGroup: FunctionComponent<AddGroupProps> = ({ setGroupChanged, groupChan
     })
     return (<>
         <div>
-            <h5 className="">Add Guest- pepole interface</h5>
+
             <form onSubmit={formik.handleSubmit}>
 
                 <div className="form-floating mb-3">

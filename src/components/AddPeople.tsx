@@ -7,6 +7,7 @@ import { addPeopleToEvent } from "../Services/eventServices";
 import { getAllGroup } from "../Services/GroupServices";
 import Group from "../interfaces/Group";
 import { useParams } from "react-router-dom";
+import GloabSeclModal from "./GloabSeclModal";
 
 interface AddPeopleProps {
     setpeopleChanged: Function;
@@ -15,6 +16,7 @@ interface AddPeopleProps {
 
 const AddPeople: FunctionComponent<AddPeopleProps> = ({ setpeopleChanged, peopleChange }) => {
     let [allGroup, setAllGroup] = useState<Group[]>([]);
+    let [openSecModal, setOpenSecModal] = useState<boolean>(false);
     let { eventId } = useParams();
     let counter: number = 0;
     useEffect(() => {
@@ -46,7 +48,6 @@ const AddPeople: FunctionComponent<AddPeopleProps> = ({ setpeopleChanged, people
 
     return (<>
         <div>
-            <h5 className="">Add Guest- pepole interface</h5>
             <form onSubmit={formik.handleSubmit}>
                 <div className="form-floating mb-3">
                     <input
@@ -97,25 +98,27 @@ const AddPeople: FunctionComponent<AddPeopleProps> = ({ setpeopleChanged, people
                     )}
                 </div>
                 <div className="form-floating mb-3">
-                    <select defaultValue={'DEFAULT'}
-
-                        className="form-control"
-                        id="eventGroupName"
-                        placeholder="textme"
-                        name="eventGroupName"
-                        value={formik.values.eventGroupName}
-                        onChange={formik.handleChange}
-                        onBlur={formik.handleBlur}>
-
-                        <option hidden >Choose a Group...</option>
-                        {allGroup.length === 0 && <option value="DEFAULT" disabled >Need Add a Group...</option>}
-                        {allGroup.map((groupname: Group) => <option key={counter++} value={groupname.eventGroupName}> {groupname.eventGroupName}</option>)}
-
-                    </select>
-                    <label htmlFor="eventGroupName">Group</label>
+                    <span >
+                        <button className="w-25 btn btn-outline-primary " onClick={() => { setOpenSecModal(true) }}>add Group</button>
+                        <select defaultValue={'DEFAULT'}
+                            className="form-control"
+                            id="eventGroupName"
+                            placeholder="textme"
+                            name="eventGroupName"
+                            value={formik.values.eventGroupName}
+                            onChange={formik.handleChange}
+                            onBlur={formik.handleBlur}>
+                            <option hidden >Choose a Group...</option>
+                            {/* {allGroup.length === 0 && <option value="DEFAULT" disabled >Need Add a Group...</option>} */}
+                            {allGroup.map((groupname: Group) => <option key={counter++} value={groupname.eventGroupName}> {groupname.eventGroupName}</option>)}
+                            {/* <option onClick={() => setOpenSecModal(true)} >add Group</option> */}
+                        </select>
+                    </span>
+                    {/* <label htmlFor="eventGroupName">Group</label> */}
                     {formik.touched.eventGroupName && formik.errors.eventGroupName && (
                         <small className="text-danger">{formik.errors.eventGroupName}</small>
                     )}
+
                 </div>
                 <div className="form-floating mb-3">
                     <input
@@ -133,31 +136,12 @@ const AddPeople: FunctionComponent<AddPeopleProps> = ({ setpeopleChanged, people
                         <small className="text-danger">{formik.errors.NumberOfGuests}</small>
                     )}
                 </div>
-                {/* <div className="form-floating mb-3">
-                    <input
-                        type="number"
-                        className="form-control"
-                        id="NumberOfGuestsAccept"
-                        placeholder="textme"
-                        name="NumberOfGuestsAccept"
-                        value={formik.values.NumberOfGuestsAccept}
-                        onChange={formik.handleChange}
-                        onBlur={formik.handleBlur}
-                    />
-                    <label htmlFor="NumberOfGuestsAccept">Number Of Guests Accept</label>
-                    {formik.touched.NumberOfGuestsAccept && formik.errors.NumberOfGuestsAccept && (
-                        <small className="text-danger">{formik.errors.NumberOfGuestsAccept}</small>
-                    )}
-                </div> */}
-
-
-
 
                 <button type="submit" className="btn btn-warning w-100 my-3"
                     disabled={!formik.isValid || !formik.dirty}><i className="fa-solid fa-plus"></i>  ADD</button>
             </form>
         </div >
-
+        <GloabSeclModal show={openSecModal} onHide={() => setOpenSecModal(false)} groupChange={peopleChange} setGroupChanged={setpeopleChanged} />
     </>);
 }
 
