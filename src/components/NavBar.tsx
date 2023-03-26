@@ -43,13 +43,13 @@ const NavBar: FunctionComponent<NavBarProps> = ({ setIsLogIn }) => {
                                     <li className="nav-item">
                                         <Link className="nav-link" to={`/group/${splice(location.pathname)}`}>Add Group</Link>
                                     </li></>)} */}
-                                {(location.pathname.startsWith("/campaign/") && isBrowser) && (<>
+                                {/* {(location.pathname.startsWith("/campaign/") && isBrowser) && (<>
                                     <li className="nav-item">
                                         <Link className="btn btn-primary mx-0 col" to={`/invitation/${splice(location.pathname)}`}>Online Invitation</Link>                                </li>
                                     <li className="nav-item">
                                         <Link className="btn btn-primary mx-2 col" to={`/savethedate/${splice(location.pathname)}`}>Save The Date</Link>
                                     </li>
-                                </>)}
+                                </>)} */}
                                 <li className="nav-item">
                                     <Link className="nav-link" to="/about">About</Link>
                                 </li>
