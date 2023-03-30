@@ -20,7 +20,7 @@ const NavBar: FunctionComponent<NavBarProps> = ({ setIsLogIn }) => {
 
 
     return (
-        <>{!location.pathname.startsWith("/savethedate/") && !location.pathname.startsWith("/invitation/") &&
+        <>{!location.pathname.startsWith("/savethedate/") && !location.pathname.startsWith("/invitation/") && !location.pathname.startsWith("/event/") &&
             <Navbar collapseOnSelect expand="lg" bg="primary" variant="dark">
                 <Container>
                     <Link className="navbar-brand " to="/" >
