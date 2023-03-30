@@ -21,7 +21,7 @@ const NewCampaign: FunctionComponent<NewCampaignProps> = () => {
     let uuidLidor = uuidv4();
     let formik = useFormik({
         initialValues: {
-            campaignName: "", ownerName: "", phone: "", uuid: uuidLidor, bride: "", groom: "", groomParents: "", brideParents: "", coupleImage: "", weddingSentence: "", weddingDate: ""
+            campaignName: "", ownerName: "", phone: "", uuid: uuidLidor, bride: "", groom: "", groomParents: "", brideParents: "", coupleImage: "", weddingSentence: "", weddingDate: "", eventsHall: ""
         }, validationSchema: yup.object({
             campaignName: yup.string().required("Campaign name is a required field").min(2),
             bride: yup.string().required("brige name is a required field").min(2).max(7),
@@ -29,6 +29,7 @@ const NewCampaign: FunctionComponent<NewCampaignProps> = () => {
             groomParents: yup.string().required("groom Parents name is a required field").min(2).max(18),
             brideParents: yup.string().required("bride Parents name is a required field").min(2).max(18),
             phone: yup.number().required("Phone number is a required field").min(10).positive(),
+            eventsHall: yup.string().required("Events Hall is a required field").min(3),
             weddingSentence: yup.string().required(),
             weddingDate: yup.date().required(),
             ownerName: yup.string().required("Owner Campaign is a required field").min(2)
@@ -173,6 +174,22 @@ const NewCampaign: FunctionComponent<NewCampaignProps> = () => {
                     <label htmlFor="brideParents">הורי הכלה Bride Parents</label>
                     {formik.touched.brideParents && formik.errors.brideParents && (
                         <small className="text-danger">{formik.errors.brideParents}</small>
+                    )}
+                </div>
+                <div className="form-floating mb-3">
+                    <input
+                        type="text"
+                        className="form-control"
+                        id="eventsHall"
+                        placeholder="events Hall"
+                        name="eventsHall"
+                        value={formik.values.eventsHall}
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                    />
+                    <label htmlFor="eventsHall">Events Hall</label>
+                    {formik.touched.eventsHall && formik.errors.eventsHall && (
+                        <small className="text-danger">{formik.errors.eventsHall}</small>
                     )}
                 </div>
 

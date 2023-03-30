@@ -13,6 +13,7 @@ export default interface EventInterface {
     coupleImage?: string, //Image
     weddingSentence: string, //Image
     weddingDate: string, //Date
+    eventsHall: string,
     pepoleCome?: People[],
     group?: People[],
 }

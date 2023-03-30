@@ -17,13 +17,10 @@ const NavBar: FunctionComponent<NavBarProps> = ({ setIsLogIn }) => {
 
     let isLogin = useContext<boolean>(isLoginGlobal);
 
-    let splice = (str: string) => {
-        let splitted = str.split("/", 3);
-        return (splitted[2]);
-    }
+
 
     return (
-        <>
+        <>{!location.pathname.startsWith("/savethedate/") &&
             <Navbar collapseOnSelect expand="lg" bg="primary" variant="dark">
                 <Container>
                     <Link className="navbar-brand " to="/" >
@@ -39,17 +36,6 @@ const NavBar: FunctionComponent<NavBarProps> = ({ setIsLogIn }) => {
                                 <li className="nav-item">
                                     <Link className="nav-link" to="/allcampaign">All Campaign</Link>
                                 </li>
-                                {/* {location.pathname.startsWith("/campaign/") && (<>
-                                    <li className="nav-item">
-                                        <Link className="nav-link" to={`/group/${splice(location.pathname)}`}>Add Group</Link>
-                                    </li></>)} */}
-                                {/* {(location.pathname.startsWith("/campaign/") && isBrowser) && (<>
-                                    <li className="nav-item">
-                                        <Link className="btn btn-primary mx-0 col" to={`/invitation/${splice(location.pathname)}`}>Online Invitation</Link>                                </li>
-                                    <li className="nav-item">
-                                        <Link className="btn btn-primary mx-2 col" to={`/savethedate/${splice(location.pathname)}`}>Save The Date</Link>
-                                    </li>
-                                </>)} */}
                                 <li className="nav-item">
                                     <Link className="nav-link" to="/about">About</Link>
                                 </li>
@@ -66,7 +52,6 @@ const NavBar: FunctionComponent<NavBarProps> = ({ setIsLogIn }) => {
                                 </Link>
                                 <ul className="dropdown-menu">
                                     <li><Link className="dropdown-item" to="/profile">Profile Info</Link></li>
-                                    {/* <li><Link className="dropdown-item" to="/action/3.3">Something</Link></li> */}
                                     <li><Link className="dropdown-item" to="/" onClick={() => {
                                         sessionStorage.setItem("IsLoggedIn", "false");
                                         sessionStorage.removeItem("Authorization")
@@ -78,7 +63,7 @@ const NavBar: FunctionComponent<NavBarProps> = ({ setIsLogIn }) => {
                         </>}
                     </Navbar.Collapse>
                 </Container>
-            </Navbar>
+            </Navbar>}
         </>);
 }
 
