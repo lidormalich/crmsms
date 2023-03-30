@@ -94,8 +94,9 @@ const InvitationTable: FunctionComponent<InvitationTableProps> = ({ peopleChange
     return (<>
         <h5 className="">{peopleArr.length}  Guest list for the event</h5>
         <span>
-            <Link className="btn btn-primary mx-2  w-5" to={`/savethedate/${eventId}`}>Save The Date</Link>
-            <Link className="btn btn-primary mx-0  w-5" to={`/invitation/${eventId}`}>Online Invitation</Link>
+            <Link className="btn btn-info mx-1 rounded-pill w-5" to={`/savethedate/${eventId}`}>Save The Date</Link>
+            <Link className="btn btn-info mx-1 rounded-pill w-5" to={`/invitation/${eventId}`}>Online Invitation</Link>
+            <Link className="btn btn-info mx-1 rounded-pill w-5" to={`/importExcel/${eventId}`}>Import from Excel</Link>
         </span>
         {peopleArr.length ? (<table className="table lightFont">
             <thead>
