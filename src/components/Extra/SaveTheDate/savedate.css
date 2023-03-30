@@ -15,6 +15,21 @@
     src: url(../../../Font/SBL.ttf);
 }
 
+@font-face {
+    font-family: Kidma-Book;
+    src: url(../../../Font/Kidma-Book.ttf);
+}
+
+@font-face {
+    font-family: Nachlaot;
+    src: url(../../../Font/Nachlaot.ttf);
+}
+
+@font-face {
+    font-family: Fredoka;
+    src: url(../../../Font/Fredoka/Fredoka-Light.ttf);
+}
+
 
 .box {
     display: flex;
@@ -93,15 +108,14 @@
 
 .event {
     position: absolute;
-    /* border-radius: 50%; */
     display: flex;
-    font-family: Arimo;
+    font-family: Fredoka;
     font-weight: 200;
-    right: -350px;
+    right: -370px;
     top: 500px;
     -webkit-transform: rotate(60deg);
     transform: rotate(0deg);
-    font-size: 2rem;
+    font-size: 3rem;
     color: #ca4ccd;
 
 }
