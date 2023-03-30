@@ -35,7 +35,7 @@ const AddPeople: FunctionComponent<AddPeopleProps> = ({ setpeopleChanged, people
         }),
         onSubmit: (values: People, { resetForm }) => {
             addPeopleToEvent(eventId as string, values).then((res) => {
-                successMessage("Event Added");
+                successMessage("People Added");
                 resetForm();
 
                 // רענון

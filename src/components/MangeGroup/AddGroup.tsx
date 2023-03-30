@@ -23,7 +23,7 @@ const AddGroup: FunctionComponent<AddGroupProps> = ({ setGroupChanged, groupChan
         }),
         onSubmit: (values: any, { resetForm }) => {
             addNewGroup(eventId as string, values).then((res) => {
-                successMessage("Event Added");
+                successMessage("Group Added");
                 resetForm();
                 // רענון
                 setGroupChanged(!groupChanged);
