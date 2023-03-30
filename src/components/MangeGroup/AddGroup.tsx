@@ -19,7 +19,7 @@ const AddGroup: FunctionComponent<AddGroupProps> = ({ setGroupChanged, groupChan
     let formik = useFormik({
         initialValues: { eventGroupName: "" },
         validationSchema: yup.object({
-            eventGroupName: yup.string().required().min(2).max(13),
+            eventGroupName: yup.string().required().min(2).max(25),
         }),
         onSubmit: (values: any, { resetForm }) => {
             addNewGroup(eventId as string, values).then((res) => {
