@@ -24,10 +24,10 @@ const NewCampaign: FunctionComponent<NewCampaignProps> = () => {
             campaignName: "", ownerName: "", phone: "", uuid: uuidLidor, bride: "", groom: "", groomParents: "", brideParents: "", coupleImage: "", weddingSentence: "", weddingDate: "", eventsHall: ""
         }, validationSchema: yup.object({
             campaignName: yup.string().required("Campaign name is a required field").min(2),
-            bride: yup.string().required("brige name is a required field").min(2).max(7),
-            groom: yup.string().required("groom name is a required field").min(2).max(7),
-            groomParents: yup.string().required("groom Parents name is a required field").min(2).max(18),
-            brideParents: yup.string().required("bride Parents name is a required field").min(2).max(18),
+            bride: yup.string().required("brige name is a required field").min(2).max(10),
+            groom: yup.string().required("groom name is a required field").min(2).max(10),
+            groomParents: yup.string().required("groom Parents name is a required field").min(2).max(30),
+            brideParents: yup.string().required("bride Parents name is a required field").min(2).max(30),
             phone: yup.number().required("Phone number is a required field").min(10).positive(),
             eventsHall: yup.string().required("Events Hall is a required field").min(3),
             weddingSentence: yup.string().required(),

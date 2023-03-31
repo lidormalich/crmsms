@@ -77,7 +77,6 @@ const ParseExcel: FunctionComponent<ParseExcelProps> = () => {
             </div>
 
 
-
             {culums.length && showTable && <table className="table table-secondary table-hover">
                 <thead>
                     <tr>

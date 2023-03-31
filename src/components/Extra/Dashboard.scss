@@ -18,14 +18,17 @@
     font-size: 16px;
     font-weight: bold;
     font-family: rubik;
-    // background: #f0f0f0;
-    // padding: 1em;
+
+
     display: flex;
+
+    align-items: center;
+    justify-content: center;
+
     flex-direction: row;
     flex-flow: row wrap;
 
     .dashCard {
-        // background: #FFF;
         min-width: 16em;
         max-width: 16em;
         border-radius: .5em;
@@ -34,6 +37,7 @@
         margin: 1em;
         display: flex;
         flex-direction: column;
+
 
 
         .cardtitle {

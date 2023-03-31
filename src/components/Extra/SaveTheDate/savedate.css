@@ -111,11 +111,10 @@
     display: flex;
     font-family: Fredoka;
     font-weight: 200;
-    right: -370px;
+    right: -330px;
     top: 500px;
-    -webkit-transform: rotate(60deg);
     transform: rotate(0deg);
-    font-size: 3rem;
+    font-size: 2rem;
     color: #ca4ccd;
 
 }
