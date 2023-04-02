@@ -6,8 +6,8 @@ import AddGroup from "./MangeGroup/AddGroup";
 interface GloabSeclModalProps {
     show: boolean;
     onHide: Function;
-    groupChange: boolean;
-    setGroupChanged: Function;
+    groupChange?: boolean;
+    setGroupChanged?: Function;
 }
 
 const GloabSeclModal: FunctionComponent<GloabSeclModalProps> = ({ show, onHide, setGroupChanged, groupChange, }) => {
@@ -27,7 +27,9 @@ const GloabSeclModal: FunctionComponent<GloabSeclModalProps> = ({ show, onHide, 
                 </Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                <AddGroup setGroupChanged={setGroupChanged} groupChanged={groupChange} onHide={onHide} />
+                <AddGroup
+                    // setGroupChanged={setGroupChanged} groupChanged={groupChange} 
+                    onHide={onHide} />
             </Modal.Body>
             <Modal.Footer>
                 <Button onClick={() => onHide()}>Close</Button>

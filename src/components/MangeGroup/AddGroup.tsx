@@ -8,12 +8,14 @@ import { addNewGroup } from "../../Services/GroupServices";
 
 
 interface AddGroupProps {
-    setGroupChanged: Function;
-    groupChanged: boolean;
+    // setGroupChanged: Function;
+    // groupChanged: boolean;
     onHide: Function;
 }
 
-const AddGroup: FunctionComponent<AddGroupProps> = ({ setGroupChanged, groupChanged, onHide }) => {
+const AddGroup: FunctionComponent<AddGroupProps> = ({
+    // setGroupChanged, groupChanged,
+    onHide }) => {
     let { eventId } = useParams();
 
     let formik = useFormik({
@@ -26,7 +28,7 @@ const AddGroup: FunctionComponent<AddGroupProps> = ({ setGroupChanged, groupChan
                 successMessage("Group Added");
                 resetForm();
                 // רענון
-                setGroupChanged(!groupChanged);
+                // setGroupChanged(!groupChanged);
                 onHide();
             })
                 .catch((e) => console.log(e))

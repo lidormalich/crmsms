@@ -1,28 +1,17 @@
-import { FunctionComponent, useContext, useState } from "react";
-import { Link, useParams } from "react-router-dom";
-import AddPeople from "./AddPeople";
+import { FunctionComponent, useContext } from "react";
 import InvitationTable from "./InvitationTable";
 import Login from "./Login";
 import { isLoginGlobal } from "../App";
-import Dashboard from "./Extra/Dashboard";
 
 
 interface InvitationManagerProps {
     peopleChange: boolean;
     setIsLogIn: Function;
     setpeopleChanged: Function;
-
-    setPcountercome: Function;
-    countercome: number;
+    refresh: Function;
 }
 
-const InvitationManager: FunctionComponent<InvitationManagerProps> = ({ setIsLogIn, peopleChange, setpeopleChanged,
-
-    setPcountercome, countercome
-
-}) => {
-    // משתני עזר לרענון הקומפוננטה בלי רענון הדף
-    let { eventId } = useParams();
+const InvitationManager: FunctionComponent<InvitationManagerProps> = ({ setIsLogIn, peopleChange, setpeopleChanged, refresh }) => {
     let isLogin = useContext<boolean>(isLoginGlobal);
 
     return (<>
@@ -33,17 +22,8 @@ const InvitationManager: FunctionComponent<InvitationManagerProps> = ({ setIsLog
                     <h5 className="display-5">Guest for event</h5>
                 </div>
                 <div className="row">
-                    {/* <div className="col-md-4">
-                        <AddPeople setpeopleChanged={setpeopleChanged} peopleChange={peopleChange} />
-                    </div>
-                    <div className="col-md-8"> */}
-                    <InvitationTable peopleChanged={peopleChange} setPeopleChanged={setpeopleChanged}
 
-                        setPcountercome={setPcountercome}
-                        countercome={countercome}
-
-
-                    />
+                    <InvitationTable peopleChanged={peopleChange} setPeopleChanged={setpeopleChanged} refreshDash={refresh} />
                 </div>
                 {/* </div> */}
             </>) : (<><Login setIsLogIn={setIsLogIn} /></>

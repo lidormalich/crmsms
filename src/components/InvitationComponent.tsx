@@ -1,6 +1,5 @@
 import { FunctionComponent, useContext, useEffect, useState } from "react";
-import { isMobile } from "react-device-detect";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { isLoginGlobal } from "../App";
 import People from "../interfaces/People";
 import { getPeopleInEventByID } from "../Services/eventServices";
@@ -16,30 +15,31 @@ interface InvitationComponentProps {
 const InvitationComponent: FunctionComponent<InvitationComponentProps> = ({ setIsLogIn, peopleChange, setpeopleChanged }) => {
     let isLogin = useContext<boolean>(isLoginGlobal);
     let [peopleArr, setPeopleArr] = useState<People[]>([]);
-    // let [peopleArrCounter, setPeopleArrCounter] = useState<number[]>([]);
-    let [countercome, setPcountercome] = useState<number>(0);
+    let [userRefresh, setuserRefresh] = useState<boolean>(false);
+
     let { eventId } = useParams();
+
+
 
     useEffect(() => {
         getPeopleInEventByID(eventId as string).then((res) => {
             setPeopleArr(res.data);
             // console.log(res.data);
         }).catch((e) => console.log(e))
-    }, []);
-    // useEffect(() => {
-    //     let counter: number = 0;
-    //     for (let a = 0; a <= peopleArr.length; a++) {
-    //         counter = counter + peopleArr[a].NumberOfGuests;
-    //     } setPcountercome(counter);
-    // }, []);
-    return (<>
-        {/* {peopleArr.map((item) => setPcountercome(item.NumberOfGuests + countercome)) + ""} */}
-        {isLogin && <><Dashboard letA={countercome + ""} letC={""} letb={""} />
-        </>}
+    }, [userRefresh]);
 
-        <InvitationManager setIsLogIn={setIsLogIn} setpeopleChanged={setpeopleChanged} peopleChange={peopleChange}
-            setPcountercome={setPcountercome}
-            countercome={countercome} />
+
+    let refresh = () => {
+        setuserRefresh(!userRefresh);
+    }
+    return (<>
+        {isLogin && <>
+            <Dashboard peopleArr={peopleArr} userRefresh={userRefresh} />
+
+
+
+            <InvitationManager setIsLogIn={setIsLogIn} setpeopleChanged={setpeopleChanged} peopleChange={peopleChange} refresh={refresh} />
+        </>}
     </>);
 }
 

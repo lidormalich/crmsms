@@ -109,12 +109,10 @@ const AddPeople: FunctionComponent<AddPeopleProps> = ({ setpeopleChanged, people
                             onChange={formik.handleChange}
                             onBlur={formik.handleBlur}>
                             <option hidden >Choose a Group...</option>
-                            {/* {allGroup.length === 0 && <option value="DEFAULT" disabled >Need Add a Group...</option>} */}
                             {allGroup.map((groupname: Group) => <option key={counter++} value={groupname.eventGroupName}> {groupname.eventGroupName}</option>)}
                             {/* <option onClick={() => setOpenSecModal(true)} >add Group</option> */}
                         </select>
                     </span>
-                    {/* <label htmlFor="eventGroupName">Group</label> */}
                     {formik.touched.eventGroupName && formik.errors.eventGroupName && (
                         <small className="text-danger">{formik.errors.eventGroupName}</small>
                     )}

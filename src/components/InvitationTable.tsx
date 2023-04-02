@@ -1,31 +1,25 @@
 import { FunctionComponent, useEffect, useState } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { getEventInfoByID, getPeopleInEventByID } from "../Services/eventServices";
 import { sendsmstoclient } from "../Services/SMSservices";
 import DeleteModal from "./DeleteModal";
 import UpdateModal from "./UpdateModal";
 import "./invTable.css";
-import { earningMessage, errorMessage, successMessage } from "../Services/FeedbackService";
+import { errorMessage } from "../Services/FeedbackService";
 import { BrowserView, isBrowser, isMobile } from "react-device-detect";
 import { toast } from "react-toastify";
 import People from "../interfaces/People";
 import { Button } from "react-bootstrap";
-import AddPeople from "./AddPeople";
 import GloablModal from "./GloablModal";
 
 
 interface InvitationTableProps {
     peopleChanged: boolean;
     setPeopleChanged: Function;
-
-
-    setPcountercome: Function;
-    countercome: number;
+    refreshDash: Function;
 }
 
-const InvitationTable: FunctionComponent<InvitationTableProps> = ({ peopleChanged, setPeopleChanged,
-    setPcountercome, countercome
-}) => {
+const InvitationTable: FunctionComponent<InvitationTableProps> = ({ peopleChanged, setPeopleChanged, refreshDash }) => {
     let [peopleArr, setPeopleArr] = useState<People[]>([]);
     let [weddingInfo, setWeddingInfo] = useState<any>({ uuid: "", campaignName: "", ownerName: "", phone: "", bride: "", groom: "", coupleImage: "" });
 
@@ -39,6 +33,7 @@ const InvitationTable: FunctionComponent<InvitationTableProps> = ({ peopleChange
 
     let refresh = () => {
         setPeopleChanged(!peopleChanged);
+        refreshDash();
     }
     let { eventId } = useParams();
     let counter: number = 0;
@@ -47,11 +42,9 @@ const InvitationTable: FunctionComponent<InvitationTableProps> = ({ peopleChange
 
     useEffect(() => {
         getEventInfoByID(eventId as string).then((res) => setWeddingInfo(res.data)).catch((e) => { console.log(e); errorMessage("Error , Can't get info...") })
-
     }, []);
 
 
-    // רענון --הוספת הדיפנדנסיס בלבד
     useEffect(() => {
         getPeopleInEventByID(eventId as string).then((res) => {
             setPeopleArr(res.data);
