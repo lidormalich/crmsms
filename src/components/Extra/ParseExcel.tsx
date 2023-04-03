@@ -68,16 +68,13 @@ const ParseExcel: FunctionComponent<ParseExcelProps> = () => {
 
     return (<>
         <div className="container">
-            <h1>Parse Excel</h1>
-            {/* {fileName && (<p>{fileName}</p>)} */}
+            <h1>Import contacts from Excel</h1>
             <div>
                 <input type={"file"} accept=".xls,.xlsx, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel"
                     onChange={(e) => { setFileEvent(e); handelFile(e) }}
                 ></input>
             </div>
-
-
-            {culums.length && showTable && <table className="table table-secondary table-hover">
+            {showTable && culums.length && <table className="table table-secondary table-hover">
                 <thead>
                     <tr>
                         <th scope="col">#</th>
