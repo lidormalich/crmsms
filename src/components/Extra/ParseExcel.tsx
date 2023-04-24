@@ -19,29 +19,40 @@ const ParseExcel: FunctionComponent<ParseExcelProps> = () => {
     let [load, setLoad] = useState<boolean>(false);
     let [showTable, setShowTable] = useState<boolean>(false);
     let [culums, setCulums] = useState<any[]>([]);
-    let [data, setData] = useState<any[]>([])
+    let [data, setData] = useState<any[]>([]);
+    let arrString = ['Phone Number', 'First Name', 'Last Name', 'Number Of Guests', 'Event Group'];
+
 
     let handelFile = async (e: any) => {
         // console.log("HI");
         readFile(e).then(async (res) => {
-            if (res[0] != false) {
-                // await sendExcel(res, id as string);
-                // navigate("/")
-            } else {
-                console.log(res[0]);
-                errorMessage("not in format")
-            }
+            // if (res[0] != false) {
+            console.log(res);
+
+            // await sendExcel(res, id as string);
+            // navigate("/")
+            // } else {
+            //     console.log(res[0]);
+            //     errorMessage("not in format")
+            // }
         });
     }
 
     let checkIfWOrk = (workbook: any) => {
-        let arrString = ['Phone Number', 'First Name', 'Last Name', 'Number Of Guests']; // 'Number Of Guests Accept'
         for (let index = 0; index < arrString.length; index++) {
             if (workbook[index] != arrString[index]) return false;
         }
         return true;
     }
-
+    let removeNull = (jsonData: any) => {
+        console.log("jsonData");
+        console.log(jsonData);
+        for (const pepole of jsonData) {
+            if (pepole['First Name'] == undefined) pepole['First Name'] = ""
+            if (pepole['Last Name'] == undefined) pepole['Last Name'] = ""
+        }
+        return jsonData;
+    }
     let readFile = async (e: any) => {
         const file = e.target.files[0];
         setFilename(file.name);
@@ -50,13 +61,13 @@ const ParseExcel: FunctionComponent<ParseExcelProps> = () => {
         const worksheet = workbook.Sheets[workbook.SheetNames[0]];
         const jsonData = XLSX.utils.sheet_to_json(worksheet);
         const sheetHeader = XLSX.utils.sheet_to_json(worksheet, { header: 1 });
-        if (!checkIfWOrk(sheetHeader[0])) {
-            return [false];
-        }
-        setCulums(jsonData);
+        // if (!checkIfWOrk(sheetHeader[0])) {
+        //     return [false];
+        // }
+
+        setCulums(removeNull(jsonData));
         setShowTable(true);
-        // console.log(jsonData);
-        // console.log(jsonData.length);
+
         return jsonData;
     }
     let submitAll = async () => {
@@ -81,6 +92,7 @@ const ParseExcel: FunctionComponent<ParseExcelProps> = () => {
                         <th scope="col">Full Name</th>
                         <th scope="col">Guests</th>
                         <th scope="col">Phone</th>
+                        <th scope="col">Group</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -93,6 +105,7 @@ const ParseExcel: FunctionComponent<ParseExcelProps> = () => {
                             <th scope="row">{`${item["First Name"]}  ${item["Last Name"]}`}</th>
                             <th scope="row">{item["Number Of Guests"]}</th>
                             <th scope="row">{item["Phone Number"]}</th>
+                            <th scope="row">{item["Event Group"]}</th>
                         </tr>
                     )}
                 </tbody>
