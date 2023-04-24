@@ -53,14 +53,14 @@ const InvitationTable: FunctionComponent<InvitationTableProps> = ({ peopleChange
 
 
     let editphone = (phone: string) => {
-        var p = phone;
+        var newPhoneStr = phone;
         if (phone.startsWith("+972")) {
-            p = phone.slice(4);
+            newPhoneStr = phone.slice(4);
         } else
             if (phone.startsWith("05")) {
-                p = phone.slice(1);
+                newPhoneStr = phone.slice(1);
             }
-        return p;
+        return newPhoneStr;
     }
 
     const getData = (people: People) => {
@@ -70,7 +70,7 @@ const InvitationTable: FunctionComponent<InvitationTableProps> = ({ peopleChange
             הזמנה דיגיטלית לחתונה: https://crmsms.netlify.app/invitation/${eventId} 
             לפרטים ואישור הגעה >>  https://crmsms.netlify.app/event/${eventId}/${people.phoneNumber}
 
-                        נשמח לראותכם בחתונתנו ${weddingInfo.groom} & ${weddingInfo.bride}`, phone: `+972${editphone(people.phoneNumber)}`
+                        נשמח לראותכם בחתונתנו ${weddingInfo.groom} & ${weddingInfo.bride}`, phone: `+972${editphone(people.phoneNumber)}`, eventId: eventId as string
         }, sessionStorage.getItem("Authorization") as string)
             .then(() => {
                 toast.update(id, {
@@ -106,6 +106,7 @@ const InvitationTable: FunctionComponent<InvitationTableProps> = ({ peopleChange
             </thead>
             <tbody>
                 {peopleArr.map((people: People) => <tr key={counter}>
+
                     {isBrowser && <td>{++counter}</td>}
                     <td>{`${people.firstName} ${people.lastName}`}</td>
                     <td>{people.eventGroupName}</td>
@@ -113,6 +114,7 @@ const InvitationTable: FunctionComponent<InvitationTableProps> = ({ peopleChange
                     <td>{people.NumberOfGuestsAccept > 0 ? <span style={{ color: "green" }}>{people.NumberOfGuestsAccept}
                         /{people.NumberOfGuests}</span> : <span style={{ color: "black" }}>{people.NumberOfGuestsAccept}
                         /{people.NumberOfGuests}</span>}
+                        { }
                     </td>
                     <td onClick={() => { getData(people) }}><i className="fa-solid fa-comment-sms"></i></td>
                     <td>

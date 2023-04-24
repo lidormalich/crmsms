@@ -45,7 +45,6 @@ const UploadImage: FunctionComponent<UploadImageProps> = () => {
                     onChange={(e) => setImageSelected(e.target.files)}
                     className="form-control"
                     id="coupleImage"
-                    placeholder="0525552555"
                     name="coupleImage"
                 />
                 <label htmlFor="coupleImage">couple Image</label>
