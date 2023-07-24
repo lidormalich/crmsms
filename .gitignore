@@ -25,3 +25,4 @@ yarn-debug.log*
 yarn-error.log*
 משימות.txt
 src/Images/CRMSMSIinvitation.png
+*.png

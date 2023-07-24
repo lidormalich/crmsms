@@ -43,7 +43,8 @@ const Dashboard: FunctionComponent<DashboardProps> = ({ peopleArr, userRefresh }
             if (minutes < 10) minutes = `0${minutes}`;
             if (seconds < 10) seconds = `0${seconds}`;
 
-            return <span>{days} <span style={{ color: "rgb(136,108,228)", fontSize: "0.5em" }}>ימים</span>:{hours}<span style={{ color: "rgb(136,108,228)", fontSize: "0.5em" }}>שעות</span>:{minutes}<span style={{ color: "rgb(136,108,228)", fontSize: "0.5em" }}>דק</span></span>;
+            // return <span>{days} <span style={{ color: "rgb(136,108,228)", fontSize: "0.5em" }}>ימים</span>:{hours}<span style={{ color: "rgb(136,108,228)", fontSize: "0.5em" }}>שעות</span>:{minutes}<span style={{ color: "rgb(136,108,228)", fontSize: "0.5em" }}>דק</span></span>;
+            return <span style={{ color: "rgb(136,108,228)" }}>{days}:{hours}:{minutes}</span>
         }
     };
     useEffect(() => {
