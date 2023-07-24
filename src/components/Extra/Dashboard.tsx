@@ -60,37 +60,39 @@ const Dashboard: FunctionComponent<DashboardProps> = ({ peopleArr, userRefresh }
     return (<>
         {console.log(eventdate.slice(eventdate.indexOf("-")))}
         <div className="d-flex justify-content-center align-items-center ">
-
-            <div className="dashCard">
-                {/* צבע ירוק לאישור */}
-                <div className="cardtitle" style={{ color: "rgb(136,108,228)", fontWeight: "bold" }}>Timer for Love</div>
-                <div className="cardbody">
-                    <div dir="rtl" className="value" style={{ fontWeight: "bold", fontSize: "3vw" }}>
-                        {eventdate != "" ? <Countdown date={eventdate}
-                            intervalDelay={1000}
-                            zeroPadTime={2}
-                            zeroPadDays={2}
-                            precision={3}
-                            renderer={renderer}
-                            onComplete={() => <div>Just Mirred</div>}
-                        /> : <></>}
-                        <div style={{ fontSize: ".5em" }}>💜 Days 💜</div></div>
-                </div>
-            </div>
-            <div className="dashCards"><div className="dashCard">
-                {coupleImage != "" ? (<img src={coupleImage} alt="" className="imageSmall" />) : (<>
-                    <img src={"https://cdn-icons-png.flaticon.com/512/3875/3875433.png"} alt="" className="imageSmallWithBTN" />
-                    <Button onClick={() => navigate(`/uploadimage/${eventId}`)}>Add Image</Button>
-
-                </>)}</div>
+            <div className="dashCards">
 
 
 
                 <div className="dashCard">
+                    {/* צבע ירוק לאישור */}
+                    <div className="cardtitle" style={{ color: "rgb(136,108,228)", fontWeight: "bold" }}>Timer for Love</div>
+                    <div className="cardbody">
+                        <div dir="rtl" className="value" style={{ fontWeight: "bold", fontSize: "3vw" }}>
+                            {eventdate != "" ? <Countdown date={eventdate}
+                                intervalDelay={1000}
+                                zeroPadTime={2}
+                                zeroPadDays={2}
+                                precision={3}
+                                renderer={renderer}
+                                onComplete={() => <div>Just Mirred</div>}
+                            /> : <></>}
+                            <div style={{ fontSize: ".5em" }}>💜 Days 💜</div>
+                        </div>
+                    </div>
+                </div>
+                <div className="dashCard">
+                    {coupleImage != "" ? (<img src={coupleImage} alt="" className="imageSmall" />) : (<>
+                        <img src={"https://cdn-icons-png.flaticon.com/512/3875/3875433.png"} alt="" className="imageSmallWithBTN" />
+                        <Button onClick={() => navigate(`/uploadimage/${eventId}`)}>Add Image</Button>
+
+                    </>)}</div>
+                <div className="dashCard">
                     <div className="cardtitle">Confirmed Arrival</div>
                     <div className="cardbody">
                         <div className="icon"><i className="fa-regular fa-circle-check" style={{ color: "green" }} ></i></div>
-                        <div className="value">{counter(peopleArr).appect}<span style={{ fontSize: ".5em" }}>/{counter(peopleArr).come}</span></div>
+                        <div className="value">{counter(peopleArr).appect}<span style={{ fontSize: ".5em" }}>/{counter(peopleArr).come}</span>
+                        </div>
                     </div>
                 </div>
             </div>
