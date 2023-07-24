@@ -14,6 +14,9 @@ export function getAllEvent(auth: string) {
 export function getPeopleInEventByID(id: string) {
     return axios.get(`${api}/event/getPeople/${id}`);
 }
+export function getEventDateByID(id: string) {
+    return axios.get(`${api}/event/date/${id}`);
+}
 // get Event by id OKKKKKKKKKKKKKKKKKKKK
 export function getEventInfoByID(id: string) {
     return axios.get(`${api}/eventinfo/${id}`);

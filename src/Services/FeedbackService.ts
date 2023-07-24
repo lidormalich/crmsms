@@ -24,6 +24,5 @@ export function earningMessage(message: string) {
         draggable: true,
         progress: undefined,
         theme: "dark",
-
     })
 }
