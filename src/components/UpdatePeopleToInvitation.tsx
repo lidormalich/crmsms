@@ -159,7 +159,6 @@ const UpdatePeopleToInvitation: FunctionComponent<UpdatePeopleToInvitationProps>
                         <small className="text-danger">{formik.errors.NumberOfGuestsAccept}</small>
                     )}
                 </div>
-
                 <hr />
 
 

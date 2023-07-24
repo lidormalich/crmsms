@@ -1,13 +1,12 @@
 import { FunctionComponent, useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { getEventInfoByID, getPeopleInEventByID } from "../Services/eventServices";
-import { sendsmstoclient } from "../Services/SMSservices";
+import { getDataNew } from "../Services/SMSservices";
 import DeleteModal from "./DeleteModal";
 import UpdateModal from "./UpdateModal";
 import "./invTable.css";
 import { errorMessage } from "../Services/FeedbackService";
-import { BrowserView, isBrowser, isMobile } from "react-device-detect";
-import { toast } from "react-toastify";
+import { BrowserView, isBrowser } from "react-device-detect";
 import People from "../interfaces/People";
 import { Button } from "react-bootstrap";
 import GloablModal from "./GloablModal";
@@ -63,26 +62,6 @@ const InvitationTable: FunctionComponent<InvitationTableProps> = ({ peopleChange
         return newPhoneStr;
     }
 
-    const getData = (people: People, groom: string, bride: string, eventId: string) => {
-        const id = toast.loading("Please wait...", { position: toast.POSITION.TOP_CENTER });
-        sendsmstoclient({
-            message: `שלום ${people.firstName}, הוזמנתם לחתונה של  ${groom} & ${bride}
-            הזמנה דיגיטלית לחתונה: https://crmsms.netlify.app/invitation/${eventId} 
-            לפרטים ואישור הגעה >>  https://crmsms.netlify.app/event/${eventId}/${people.phoneNumber}
-                        נשמח לראותכם בחתונתנו ${groom} & ${bride}`, phone: `+972${editphone(people.phoneNumber)}`, eventId: eventId as string
-        }, sessionStorage.getItem("Authorization") as string)
-            .then(() => {
-                toast.update(id, {
-                    render: "SMS sent", type: "success", isLoading: false,
-                    autoClose: 5000,
-                });
-
-            }).catch(err => {
-                toast.update(id, { render: "Something went wrong", type: "error", isLoading: false, autoClose: 5000, });
-                console.log(err);
-            });
-    }
-
     return (<>
         <h5 className="">{peopleArr.length}  Guest list for the event</h5>
         <span>
@@ -115,7 +94,7 @@ const InvitationTable: FunctionComponent<InvitationTableProps> = ({ peopleChange
                         /{people.NumberOfGuests}</span>}
                         { }
                     </td>
-                    {isBrowser && <td onClick={() => { getData(people, weddingInfo.groom, weddingInfo.bride, eventId as string) }}><i className="fa-solid fa-comment-sms"></i></td>}
+                    {isBrowser && <td onClick={() => { getDataNew(people, weddingInfo.groom, weddingInfo.bride, eventId as string) }}><i className="fa-solid fa-comment-sms"></i></td>}
                     <td>
                         <i className="fa-solid fa-pen text-success mx-2" onClick={() => {
                             setItemPepole(people.phoneNumber)
