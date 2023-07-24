@@ -2,11 +2,11 @@ import { FunctionComponent, useEffect, useState } from "react";
 import * as yup from "yup";
 import { successMessage } from "../Services/FeedbackService";
 import People from "../interfaces/People";
-import { getPeopleInfoByPhone, updatePeopleInEvent } from "../Services/eventServices";
+import { getEventInfoByID, getPeopleInfoByPhone, updatePeopleInEvent } from "../Services/eventServices";
 import { useFormik } from "formik";
 import Group from "../interfaces/Group";
 import { getAllGroup } from "../Services/GroupServices";
-import { sendsmstoclient } from "../Services/SMSservices";
+import { getDataNew, sendsmstoclient } from "../Services/SMSservices";
 import GloabSeclModal from "./GloabSeclModal";
 
 
@@ -19,9 +19,11 @@ interface UpdatePeopleToInvitationProps {
 
 const UpdatePeopleToInvitation: FunctionComponent<UpdatePeopleToInvitationProps> = ({ eventId, refresh, onHide, phoneNum }) => {
     let [people, setpoepole] = useState<People>({ phoneNumber: "", firstName: "", lastName: "", NumberOfGuests: 0, NumberOfGuestsAccept: 0, eventGroupName: "" });
+    let [weddingInfo, setWeddingInfo] = useState<any>({});
     let [allGroup, setAllGroup] = useState<Group[]>([]);
     let [openSecModal, setOpenSecModal] = useState<boolean>(false);
     useEffect(() => {
+        getEventInfoByID(eventId as string).then(res => setWeddingInfo(res.data))
         getPeopleInfoByPhone(eventId, phoneNum)
             .then((res) => setpoepole(res.data))
             .catch((e) => console.log(e));
@@ -164,6 +166,12 @@ const UpdatePeopleToInvitation: FunctionComponent<UpdatePeopleToInvitationProps>
                 <button type="submit" className="btn btn-success w-100 my-3"
                 // disabled={!formik.isValid || !formik.dirty}
                 ><i className="fa-solid fa-floppy-disk"></i>  Save Change</button>
+
+                <button type="button" className="btn btn-primary w-100 my-3"
+                    onClick={() => {
+                        getDataNew(people, weddingInfo.groom, weddingInfo.bride, eventId as string);
+                        onHide()
+                    }}><i className="fa-solid fa-comment-sms"></i>  Send SMS</button>
             </form>
         </div>
         <GloabSeclModal show={openSecModal} onHide={() => setOpenSecModal(false)} />
