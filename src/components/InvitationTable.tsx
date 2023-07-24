@@ -1,7 +1,7 @@
 import { FunctionComponent, useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { getEventInfoByID, getPeopleInEventByID } from "../Services/eventServices";
-import { getData, sendsmstoclient } from "../Services/SMSservices";
+import { sendsmstoclient } from "../Services/SMSservices";
 import DeleteModal from "./DeleteModal";
 import UpdateModal from "./UpdateModal";
 import "./invTable.css";
@@ -63,7 +63,25 @@ const InvitationTable: FunctionComponent<InvitationTableProps> = ({ peopleChange
         return newPhoneStr;
     }
 
+    const getData = (people: People, groom: string, bride: string, eventId: string) => {
+        const id = toast.loading("Please wait...", { position: toast.POSITION.TOP_CENTER });
+        sendsmstoclient({
+            message: `שלום ${people.firstName}, הוזמנתם לחתונה של  ${groom} & ${bride}
+            הזמנה דיגיטלית לחתונה: https://crmsms.netlify.app/invitation/${eventId} 
+            לפרטים ואישור הגעה >>  https://crmsms.netlify.app/event/${eventId}/${people.phoneNumber}
+                        נשמח לראותכם בחתונתנו ${groom} & ${bride}`, phone: `+972${editphone(people.phoneNumber)}`, eventId: eventId as string
+        }, sessionStorage.getItem("Authorization") as string)
+            .then(() => {
+                toast.update(id, {
+                    render: "SMS sent", type: "success", isLoading: false,
+                    autoClose: 5000,
+                });
 
+            }).catch(err => {
+                toast.update(id, { render: "Something went wrong", type: "error", isLoading: false, autoClose: 5000, });
+                console.log(err);
+            });
+    }
 
     return (<>
         <h5 className="">{peopleArr.length}  Guest list for the event</h5>
