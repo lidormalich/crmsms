@@ -1,0 +1,164 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,400;1,400;1,500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bellefair&family=Orbitron&family=Solitreo&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bona+Nova&display=swap');
+
+@font-face {
+    font-family: yiddishkeit;
+    /* font-weight: ; */
+    src: url("../../Font/yiddishkeit.otf") format("opentype");
+}
+
+@font-face {
+    font-family: Marker;
+    src: url("../../Font/Marker.otf");
+}
+
+@font-face {
+    font-family: shofardemi;
+    src: url("../../Font/shofardemi.ttf");
+}
+
+@font-face {
+    font-family: Keter;
+    src: url("../../Font/Keter.ttf");
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+}
+
+.body {
+    background-color: #f2f2f2;
+}
+
+.basad {
+    font-family: 'Bona Nova';
+}
+
+.invitation-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+}
+
+.invitation {
+    box-shadow: 0 0.5rem 1rem rgb(0 0 0 / 15%);
+    width: 100%;
+    height: 100%;
+    max-width: 528px;
+    position: relative;
+    background-image: url(https://i.hizliresim.com/isC2JF.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: #f9f5f3;
+    /* text-align: center; */
+}
+
+.invite-body {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 90%;
+    flex-direction: column;
+    gap: 16px;
+    padding: 16px;
+}
+
+.invite-title {
+    font-weight: 700;
+    color: #b16908;
+    font-size: 3.5rem;
+    font-family: rubik;
+    opacity: 0.87;
+}
+
+.title-curved-text {
+    font-family: Arial, Helvetica, sans-serif;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    right: 50%;
+    transform: translateX(50%);
+}
+
+.subtitle {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: Marker;
+    font-size: 18px;
+}
+
+.time-hour {
+    font-family: Orbitron;
+    font-size: 1.7rem;
+    position: relative;
+}
+
+.time-hour::after {
+    content: "";
+    position: absolute;
+    background-color: #e0dcda;
+    width: 100%;
+    bottom: 15px;
+    left: 0;
+    height: 2px;
+}
+
+.time {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    gap: 22px;
+    flex-direction: row-reverse;
+}
+
+.details {
+    font-size: 14px;
+}
+
+.opposite {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    transform: rotate(-90deg);
+    position: relative;
+    font-weight: 600;
+    font-size: 12px;
+}
+
+
+
+/* .opposite::after {
+    content: "";
+    position: absolute;
+    background-color: #e0dcda;
+    width: 100%;
+    bottom: 15px;
+    left: 0;
+    height: 2px;
+} */
+
+.times {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+}
+
+.parents {
+    color: #9381FF;
+    font-family: Keter;
+    font-weight: 400;
+    display: flex;
+    justify-content: space-between;
+    width: 90%;
+    margin-top: 20px;
+    font-size: 25px;
+}
+
+.parentsdetails {
+    text-align: center;
+}

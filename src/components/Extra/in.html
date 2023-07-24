@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+</head>
+
+<body>
+    <style>
+        @import url(https://fonts.googleapis.com/css?family=Orbitron);
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+        }
+
+        body {
+            background-color: #f2f2f2;
+        }
+
+        .invitation-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100vh;
+        }
+
+        .invitation {
+            box-shadow: 0 0.5rem 1rem rgb(0 0 0 / 15%);
+            width: 100%;
+            height: 100%;
+            max-width: 528px;
+
+            background-image: url(https://i.hizliresim.com/isC2JF.png);
+            background-repeat: no-repeat;
+            background-position: center;
+            background-color: #f9f5f3;
+            text-align: right;
+        }
+
+        .invite-body {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 90%;
+            flex-direction: column;
+            gap: 16px;
+            padding: 16px;
+        }
+
+        .invite-title {
+            font-weight: 500;
+            color: #b16908;
+            font-size: 3.5rem;
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .title-curved-text {
+            font-family: Arial, Helvetica, sans-serif;
+            width: 100%;
+            position: absolute;
+            top: 0;
+        }
+
+        .subtitle {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .time-hour {
+            font-family: Orbitron;
+            font-size: 1.7rem;
+            position: relative;
+        }
+
+        .time-hour::after {
+            content: "";
+            position: absolute;
+            background-color: #e0dcda;
+            width: 100%;
+            bottom: 15px;
+            left: 0;
+            height: 2px;
+        }
+
+        .time {
+            display: flex;
+            justify-content: center;
+            width: 100%;
+            gap: 22px;
+            flex-direction: row-reverse;
+        }
+
+        .details {
+            font-size: 14px;
+        }
+
+        .opposite {
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            transform: rotate(-90deg);
+            position: relative;
+            font-weight: 600;
+            font-size: 26px;
+        }
+
+        .opposite::after {
+            content: "";
+            position: absolute;
+            background-color: #e0dcda;
+            width: 100%;
+            bottom: 15px;
+            left: 0;
+            height: 2px;
+        }
+
+        .times {
+            display: flex;
+            flex-direction: column;
+            gap: 28px;
+        }
+
+        .parents {
+            color: #18ed66;
+            font-weight: 400;
+            display: flex;
+            justify-content: space-between;
+            width: 90%;
+            margin-top: 20px;
+        }
+
+        .parentsdetails {
+            text-align: center;
+        }
+    </style>
+    <div class="invitation-container">
+        <div class="invitation">
+            בס"ד
+            <div class="invite-body">
+                <svg viewBox="0 0 500 500" class="title-curved-text">
+                    <path fill="transparent" id="curve"
+                        d="M73.2,148.6c4-6.1,65.5-96.8,178.6-95.6c111.3,1.2,170.8,90.3,175.1,97" />
+                    <text fill="black">
+                        <textPath startOffset="50%" text-anchor="middle" xlink:href="#curve">עוד ישמע בהרי יהודה בלה בלה
+                            בלה בלה</textPath>
+                    </text>
+                </svg>
+                <h1 class="invite-title">
+                    לידור
+                    <img src="https://e.unicode-table.com/orig/c8/8d8213fdfc319115454d1a34b7b36e.png" alt=""
+                        height="35" />
+                    טליה
+                </h1>
+                <div class="subtitle">
+                    <img src="https://em-content.zobj.net/source/noto-emoji-animations/344/revolving-hearts_1f49e.gif"
+                        alt="" height="20" />
+                    מזמינים אתכם לחתונתם
+                    <img src="https://em-content.zobj.net/source/noto-emoji-animations/344/revolving-hearts_1f49e.gif"
+                        alt="" height="20" />
+                </div>
+                <div class="times">
+                    <div class="time">
+                        <div class="opposite">הגעה</div>
+                        <div class="time-hour">10:00</div>
+                        <div class="details">יום שישי, יוני 2021 שעה: 19:00 - 23:00<br />אולם החתונות SIMAY<br />כתובת
+                            אולם</div>
+                    </div>
+                    <div class="time">
+                        <div class="opposite">חופה</div>
+                        <div class="time-hour">10:00</div>
+                        <div class="details">יום שישי, יוני 2021 שעה: 19:00 - 23:00<br />אולם החתונות SIMAY<br />כתובת
+                            אולם</div>
+                    </div>
+                    <div class="time">
+                        <div class="opposite">אוכל</div>
+                        <div class="time-hour">10:00</div>
+                        <div class="details">יום שישי, יוני 2021 שעה: 19:00 - 23:00<br />אולם החתונות SIMAY<br />כתובת
+                            אולם</div>
+                    </div>
+                </div>
+                ❤נשמח לראותכם בין אורחינו❤
+                <div class="parents">
+                    <div class="parentsdetails">הורי הכלה<br />שלמה ומזל<br />אנג'ל</div>
+                    <div class="parentsdetails">הורי החתן<br />אהרון ואורה<br />מליח</div>
+                </div>
+            </div>
+        </div>
+    </div>
+     
+</body>
+
+</html>
