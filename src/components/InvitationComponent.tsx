@@ -27,7 +27,6 @@ const InvitationComponent: FunctionComponent<InvitationComponentProps> = ({ setI
         getEventDateByID(eventId as string).then((res) => {
             setEventDate(res.data[0].weddingDate)
             setEventDate(res.data[0].weddingDate)
-            console.log(Date.now());
 
         }).catch(e => console.log(e));
         getPeopleInEventByID(eventId as string).then((res) => {

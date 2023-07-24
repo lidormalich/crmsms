@@ -45,7 +45,7 @@ const Dashboard: FunctionComponent<DashboardProps> = ({ peopleArr, userRefresh }
 
             // return <span>{days} <span style={{ color: "rgb(136,108,228)", fontSize: "0.5em" }}>ימים</span>:{hours}<span style={{ color: "rgb(136,108,228)", fontSize: "0.5em" }}>שעות</span>:{minutes}<span style={{ color: "rgb(136,108,228)", fontSize: "0.5em" }}>דק</span></span>;
             return <span style={{ color: "rgb(136,108,228)" }}>{days}:{hours}:{minutes}</span>
-        }
+        } else return <div style={{ color: "rgb(136,108,228)" }}>Just Married</div>
     };
     useEffect(() => {
         counter(peopleArr);
@@ -58,12 +58,8 @@ const Dashboard: FunctionComponent<DashboardProps> = ({ peopleArr, userRefresh }
         getEventDateByID(eventId as string).then(res => { seteventdate(res.data[0].weddingDate) }).catch(e => console.log(e));
     }, []);
     return (<>
-        {console.log(eventdate.slice(eventdate.indexOf("-")))}
         <div className="d-flex justify-content-center align-items-center ">
             <div className="dashCards">
-
-
-
                 <div className="dashCard">
                     {/* צבע ירוק לאישור */}
                     <div className="cardtitle" style={{ color: "rgb(136,108,228)", fontWeight: "bold" }}>Timer for Love</div>
@@ -75,8 +71,8 @@ const Dashboard: FunctionComponent<DashboardProps> = ({ peopleArr, userRefresh }
                                 zeroPadDays={2}
                                 precision={3}
                                 renderer={renderer}
-                                onComplete={() => <div>Just Mirred</div>}
-                            /> : <></>}
+                                onComplete={() => <div>Just Married</div>}
+                            /> : <>Not Have Date</>}
                             <div style={{ fontSize: ".5em" }}>💜 Days 💜</div>
                         </div>
                     </div>
@@ -91,7 +87,7 @@ const Dashboard: FunctionComponent<DashboardProps> = ({ peopleArr, userRefresh }
                     <div className="cardtitle">Confirmed Arrival</div>
                     <div className="cardbody">
                         <div className="icon"><i className="fa-regular fa-circle-check" style={{ color: "green" }} ></i></div>
-                        <div className="value">{counter(peopleArr).appect}<span style={{ fontSize: ".5em" }}>/{counter(peopleArr).come}</span>
+                        <div className="value" ><small style={{ color: "green" }}>{counter(peopleArr).appect}</small><span style={{ fontSize: ".5em" }}>/{counter(peopleArr).come}</span>
                         </div>
                     </div>
                 </div>
