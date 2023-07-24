@@ -64,7 +64,7 @@ const Dashboard: FunctionComponent<DashboardProps> = ({ peopleArr, userRefresh }
                     {/* צבע ירוק לאישור */}
                     <div className="cardtitle" style={{ color: "rgb(136,108,228)", fontWeight: "bold" }}>Timer for Love</div>
                     <div className="cardbody">
-                        <div dir="rtl" className="value" style={{ fontWeight: "bold", fontSize: "3vw" }}>
+                        <div dir="rtl" className="value" style={{ fontWeight: "bold", fontSize: "3rem" }}>
                             {eventdate != "" ? <Countdown date={eventdate}
                                 intervalDelay={1000}
                                 zeroPadTime={2}

@@ -1,7 +1,7 @@
 import { FunctionComponent, useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { getEventInfoByID, getPeopleInEventByID } from "../Services/eventServices";
-import { sendsmstoclient } from "../Services/SMSservices";
+import { getData, sendsmstoclient } from "../Services/SMSservices";
 import DeleteModal from "./DeleteModal";
 import UpdateModal from "./UpdateModal";
 import "./invTable.css";
@@ -63,26 +63,7 @@ const InvitationTable: FunctionComponent<InvitationTableProps> = ({ peopleChange
         return newPhoneStr;
     }
 
-    const getData = (people: People) => {
-        const id = toast.loading("Please wait...", { position: toast.POSITION.TOP_CENTER });
-        sendsmstoclient({
-            message: `שלום ${people.firstName}, הוזמנתם לחתונה של  ${weddingInfo.groom} & ${weddingInfo.bride}
-            הזמנה דיגיטלית לחתונה: https://crmsms.netlify.app/invitation/${eventId} 
-            לפרטים ואישור הגעה >>  https://crmsms.netlify.app/event/${eventId}/${people.phoneNumber}
 
-                        נשמח לראותכם בחתונתנו ${weddingInfo.groom} & ${weddingInfo.bride}`, phone: `+972${editphone(people.phoneNumber)}`, eventId: eventId as string
-        }, sessionStorage.getItem("Authorization") as string)
-            .then(() => {
-                toast.update(id, {
-                    render: "SMS sent", type: "success", isLoading: false,
-                    autoClose: 5000,
-                });
-
-            }).catch(err => {
-                toast.update(id, { render: "Something went wrong", type: "error", isLoading: false, autoClose: 5000, });
-                console.log(err);
-            });
-    }
 
     return (<>
         <h5 className="">{peopleArr.length}  Guest list for the event</h5>
@@ -96,10 +77,10 @@ const InvitationTable: FunctionComponent<InvitationTableProps> = ({ peopleChange
                 <tr>
                     <BrowserView><th>#</th></BrowserView>
                     <th>Name</th>
-                    <th>Group</th>
+                    <BrowserView><th>Group</th></BrowserView>
                     <th>Phone</th>
                     <th> Guests</th>
-                    <th>SMS</th>
+                    <BrowserView><th>SMS</th></BrowserView>
                     <th>Edit / Delete</th>
 
                 </tr>
@@ -109,14 +90,14 @@ const InvitationTable: FunctionComponent<InvitationTableProps> = ({ peopleChange
 
                     {isBrowser && <td>{++counter}</td>}
                     <td>{`${people.firstName} ${people.lastName}`}</td>
-                    <td>{people.eventGroupName}</td>
-                    <td>{isMobile ? `${(people.phoneNumber).slice(0, 5)} ${(people.phoneNumber).slice(5)}` : people.phoneNumber}</td>
+                    {isBrowser && <td>{people.eventGroupName}</td>}
+                    <td>{people.phoneNumber}</td>
                     <td>{people.NumberOfGuestsAccept > 0 ? <span style={{ color: "green" }}>{people.NumberOfGuestsAccept}
                         /{people.NumberOfGuests}</span> : <span style={{ color: "black" }}>{people.NumberOfGuestsAccept}
                         /{people.NumberOfGuests}</span>}
                         { }
                     </td>
-                    <td onClick={() => { getData(people) }}><i className="fa-solid fa-comment-sms"></i></td>
+                    {isBrowser && <td onClick={() => { getData(people, weddingInfo.groom, weddingInfo.bride, eventId as string) }}><i className="fa-solid fa-comment-sms"></i></td>}
                     <td>
                         <i className="fa-solid fa-pen text-success mx-2" onClick={() => {
                             setItemPepole(people.phoneNumber)
