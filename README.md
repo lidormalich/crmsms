@@ -1,5 +1,5 @@
-# [Wedding Event CRM Website ](https://crmsms.netlify.app)  
-### [crmsms.netlify.app](https://crmsms.netlify.app)
+# [Wedding Event CRM Website ](https://crm-sms-39c69c412c78.herokuapp.com/)  
+### [crm-sms-39c69c412c78.herokuapp.com/](https://crm-sms-39c69c412c78.herokuapp.com/)
 
 This website provides a comprehensive solution for managing and creating a wedding event. It comes with advanced options, including sending messages to invitees, editing their personal arrival, displaying invitations according to the data of the bride and groom, managing all invitees, and much more.
 
@@ -29,7 +29,7 @@ For support or questions, please contact us at [lidormalich@gmail.com](mailto:li
 -  Cloudinary API
 -   REST API
 
-### [crmsms.netlify.app](https://crmsms.netlify.app/)
+### [crm-sms-39c69c412c78.herokuapp.com/](https://crm-sms-39c69c412c78.herokuapp.com/)
 
 
 ### SERVER SIDE

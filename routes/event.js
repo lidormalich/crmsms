@@ -1,161 +1,165 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
 const joi = require('joi');
-var express = require("express");
-const auth = require("../middlewares/auth");
+const auth = require('../middlewares/auth');
 const Event = require('../models/event');
 const SMS = require('../models/smsmodel');
 
-
-
-
-
-
-// router.post('/', async function (req, res, next) {
-//     // joi validation
-//     const { email, password } = req.body
-//     const { error } = loginSchema.validate({ email, password });
-//     if (error) return res.status(400).send("Wrong body");
-
 // Create event
-router.post('/', auth, async function (req, res, next) {
+router.post('/', auth, async (req, res) => {
     try {
-        let event = await Event.create({ ...req.body, userId: req.payload._id });
-        let sms = await SMS.create({ eventId: event._id });
+        const event = await Event.create({ ...req.body, userId: req.payload._id });
+        await SMS.create({ eventId: event._id });
         res.status(200).send(event);
     } catch (error) {
         res.status(400).send(error);
     }
 });
-// Add pepole to event
-router.patch('/addpepole/:id', function (req, res, next) {
-    const update = req.body
-    eventy = Event.findOne({ _id: req.params.id })
-        .then((data) => {
-            Event.findOneAndUpdate({ _id: req.params.id }, { pepoleCome: [...data.pepoleCome, req.body] }, { returnDocument: 'after' }, function (err, doc) {
-                res.json(200); //IS OK
-            })
-        })
-        .catch(err => res.json(err))
+
+// Add people to event
+router.patch('/addpepole/:id', async (req, res) => {
+    try {
+        const event = await Event.findById(req.params.id);
+        if (!event) return res.status(404).send("Event not found");
+
+        event.pepoleCome.push(req.body);
+        await event.save();
+        res.status(200).json(event.pepoleCome);
+    } catch (err) {
+        res.status(400).json(err);
+    }
 });
-// get All pepole in event OKKKKKKKKKKKKKKKKKK
-router.get('/getPeople/:id', function (req, res, next) {
-    const id = req.body
-    eventy = Event.findById({ _id: req.params.id })
-        .then((data) => {
-            Event.findById({ _id: req.params.id }, { returnDocument: 'after' }, function (err, doc) {
-                // res.json(data.pepoleCome); 
-            })
-            for (const pepole of data.pepoleCome) {
-                if (pepole.NumberOfGuestsAccept == null) {
-                    pepole.NumberOfGuestsAccept = 0;
-                }
+
+// Get all people in event
+router.get('/getPeople/:id', async (req, res) => {
+    try {
+        const event = await Event.findById(req.params.id);
+        if (!event) return res.status(404).send("Event not found");
+
+        event.pepoleCome.forEach(person => {
+            if (person.NumberOfGuestsAccept == null) {
+                person.NumberOfGuestsAccept = 0;
             }
-            res.json(data.pepoleCome); //IS OK
-        })
-        .catch(err => res.json(err))
+        });
+
+        res.status(200).json(event.pepoleCome);
+    } catch (err) {
+        res.status(400).json(err);
+    }
 });
 
-// Delete Pepole-OK
-router.patch('/deletepepole/:id', function (req, res, next) {
-    const phoneNumToDelete = req.body.phoneNum
-    eventy = Event.findOne({ _id: req.params.id })
-        .then((data) => {
-            let pepoleCome = data.pepoleCome;
-            let index;
-            for (let i = 0; i < pepoleCome.length; i++) {
-                // console.log(pepoleCome[i].phoneNumber);
-                if (pepoleCome[i].phoneNumber === phoneNumToDelete) {
-                    index = i;
-                }
-            }
+// Delete person from event
+router.patch('/deletepepole/:id', async (req, res) => {
+    try {
+        const event = await Event.findById(req.params.id);
+        if (!event) return res.status(404).send("Event not found");
 
-            // console.log(index + "INDEX");
-            pepoleCome.splice(index, 1)
-            // console.log(pepoleCome);
-            Event.findOneAndUpdate({ _id: req.params.id }, { pepoleCome: pepoleCome }, { returnDocument: 'after' }, function (err, doc) {
-                res.json(200); //IS OK
-            })
-        })
-        .catch(err => res.json(err))
-});
-// get spicific peopole-WORK
-router.get('/getoneepepole/:id/:phone', function (req, res, next) {
-    const phoneNumToGet = req.params.phone
-    // console.log(phoneNumToGet + "Phone");
-    Event.findOne({ _id: req.params.id })
-        .then((data) => {
-            let pepoleCome = data.pepoleCome
-            const found = pepoleCome.find((e) => e.phoneNumber == phoneNumToGet);
+        const index = event.pepoleCome.findIndex(person => person.phoneNumber === req.body.phoneNum);
+        if (index === -1) return res.status(404).send("Person not found");
 
-            res.json(found);
-            // console.log(found);
-        })
-        .catch(err => res.json(err))
+        event.pepoleCome.splice(index, 1);
+        await event.save();
+        res.status(200).json(event.pepoleCome);
+    } catch (err) {
+        res.status(400).json(err);
+    }
 });
 
-// update Pepole
-router.patch('/updatepepole/:id', function (req, res, next) {
-    const update = req.body
-    Event.findOne({ _id: req.params.id })
-        .then((data) => {
-            let pepoleCome = data.pepoleCome;
-            let index;
+// Get specific person
+router.get('/getoneepepole/:id/:phone', async (req, res) => {
+    try {
+        const event = await Event.findById(req.params.id);
+        if (!event) return res.status(404).send("Event not found");
 
-            for (let arryIndex in pepoleCome) {
-                if (pepoleCome[arryIndex].phoneNumber === update.phoneNumber) {
-                    index = arryIndex;
-                    break;
-                }
-            }
-            pepoleCome.splice(index, 1)
-            pepoleCome.push(update)
-            Event.findOneAndUpdate({ _id: req.params.id }, { pepoleCome: pepoleCome }, { returnDocument: 'after' }, function (err, doc) {
-                res.json(data); //IS OK
-            })
-        })
-        .catch(err => res.json(err))
+        const person = event.pepoleCome.find(p => p.phoneNumber === req.params.phone);
+        if (!person) return res.status(404).send("Person not found");
+
+        res.status(200).json(person);
+    } catch (err) {
+        res.status(400).json(err);
+    }
 });
 
-router.patch('/img/:id', function (req, res, next) {
-    const update = req.body.data.coupleImage
-    eventy = Event.findOne({ _id: req.params.id })
-        .then((data) => {
-            Event.findOne({ _id: req.params.id }, { coupleImage: update }, { returnDocument: 'after' }, function (err, doc) {
-                res.json(data); //IS OK
-            })
-        })
-        .catch(err => res.json(err))
-});
-router.get('/date/:id', function (req, res, next) {
-    Event.find({ _id: req.params.id }, ["weddingDate"])
-        .then((data) => {
-            res.json(data)
-            // console.log(data);
-        })
-        .catch(err => res.json(err))
-});
-// get couple Image
-router.get('/img/:id', function (req, res, next) {
-    eventy = Event.findOne({ _id: req.params.id }, ["_id", "coupleImage"])
-        .then((data) => {
-            res.json(data); //IS OK    
-        })
-        .catch(err => res.json(err))
-});
-// get all event id and info
-router.get('/allEvent', auth, async (req, res, next) => {
-    Event.find({ userId: req.payload._id }, ["_id", "uuid", "campaignName", "ownerName", "phone", "bride", "groom", "brideParents", "groomParents", "coupleImage"])
-        .then((data) => {
-            res.json(data)
-        })
-        .catch(err => res.json(err))
+// Update person in event
+router.patch('/updatepepole/:id', async (req, res) => {
+    try {
+        const event = await Event.findById(req.params.id);
+        if (!event) return res.status(404).send("Event not found");
+
+        const index = event.pepoleCome.findIndex(person => person.phoneNumber === req.body.phoneNumber);
+        if (index === -1) return res.status(404).send("Person not found");
+
+        event.pepoleCome[index] = req.body;
+        await event.save();
+        res.status(200).json(event.pepoleCome);
+    } catch (err) {
+        res.status(400).json(err);
+    }
 });
 
-// delete event
-router.delete('/deleteEvent/:id', function (req, res, next) {
-    Event.findOneAndDelete({ _id: req.params.id })
-        .then(() => res.json("Evenet delteed"))
-        .catch(err => res.json(err))
+// Update couple image
+router.patch('/img/:id', async (req, res) => {
+    try {
+        const event = await Event.findByIdAndUpdate(
+            req.params.id,
+            { coupleImage: req.body.data.coupleImage },
+            { new: true }
+        );
+        if (!event) return res.status(404).send("Event not found");
+
+        res.status(200).json(event);
+    } catch (err) {
+        res.status(400).json(err);
+    }
 });
+
+// Get wedding date
+router.get('/date/:id', async (req, res) => {
+    try {
+        const event = await Event.findById(req.params.id, "weddingDate");
+        if (!event) return res.status(404).send("Event not found");
+
+        res.status(200).json(event);
+    } catch (err) {
+        res.status(400).json(err);
+    }
+});
+
+// Get couple image
+router.get('/img/:id', async (req, res) => {
+    try {
+        const event = await Event.findById(req.params.id, "_id coupleImage");
+        if (!event) return res.status(404).send("Event not found");
+
+        res.status(200).json(event);
+    } catch (err) {
+        res.status(400).json(err);
+    }
+});
+
+// Get all events for user
+router.get('/allEvent', auth, async (req, res) => {
+    try {
+        const events = await Event.find(
+            { userId: req.payload._id },
+            "_id uuid campaignName ownerName phone bride groom brideParents groomParents coupleImage"
+        );
+        res.status(200).json(events);
+    } catch (err) {
+        res.status(400).json(err);
+    }
+});
+
+// Delete event
+router.delete('/deleteEvent/:id', async (req, res) => {
+    try {
+        const event = await Event.findByIdAndDelete(req.params.id);
+        if (!event) return res.status(404).send("Event not found");
+
+        res.status(200).send("Event deleted");
+    } catch (err) {
+        res.status(400).json(err);
+    }
+});
+
 module.exports = router;
