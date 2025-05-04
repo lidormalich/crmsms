@@ -2,15 +2,12 @@ import { FunctionComponent, useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { isLoginGlobal } from "../App";
 import EventInterface from "../interfaces/EventInterface";
-import { deleteEvent, getAllEvent } from "../Services/eventServices";
+import { getAllEvent } from "../Services/eventServices";
 import Loading from "./Extra/Loading";
 import NotHaveAccess from "./Extra/NotHaveAccess";
-import { isBrowser } from 'react-device-detect';
 import DeleteCMP from "./DeleteCMP";
 
-
 interface AllCampaignProps {}
-
 
 const AllCampaign: FunctionComponent<AllCampaignProps> = () => {
     let [allEvent, setAllEvent] = useState<EventInterface[]>([]);
