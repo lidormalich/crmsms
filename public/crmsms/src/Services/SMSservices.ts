@@ -3,12 +3,11 @@ import smsInterface from "../interfaces/smsInterface";
 import { toast } from "react-toastify";
 import People from "../interfaces/People";
 
-const api: string = `${process.env.REACT_APP_API}` || "";
 
 
 // send sms
 export function sendsmstoclient(sms: smsInterface, auth: string) {
-    return axios.post(`${api}/sendsms`, sms, { headers: { 'Authorization': auth } });
+    return axios.post(`/api/sendsms`, sms, { headers: { 'Authorization': auth } });
 }
 
 

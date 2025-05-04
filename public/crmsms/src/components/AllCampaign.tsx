@@ -9,9 +9,7 @@ import { isBrowser } from 'react-device-detect';
 import DeleteCMP from "./DeleteCMP";
 
 
-interface AllCampaignProps {
-
-}
+interface AllCampaignProps {}
 
 const AllCampaign: FunctionComponent<AllCampaignProps> = () => {
     let [allEvent, setAllEvent] = useState<EventInterface[]>([]);
