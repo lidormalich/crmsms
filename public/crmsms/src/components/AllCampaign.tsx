@@ -11,6 +11,7 @@ import DeleteCMP from "./DeleteCMP";
 
 interface AllCampaignProps {}
 
+
 const AllCampaign: FunctionComponent<AllCampaignProps> = () => {
     let [allEvent, setAllEvent] = useState<EventInterface[]>([]);
     let [opendeleteModal, setOpendeleteModal] = useState<boolean>(false);
