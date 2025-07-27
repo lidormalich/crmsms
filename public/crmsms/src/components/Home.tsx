@@ -4,18 +4,16 @@ import InvitationManager from "./InvitationManager";
 import Login from "./Login";
 import { isLoginGlobal } from "../App";
 
-
 interface HomeProps {
-    setIsLogIn: Function;
+  setIsLoggedIn: (isLoggedIn: boolean) => void;
 }
 
-const Home: FunctionComponent<HomeProps> = ({ setIsLogIn }) => {
-    let isLogin = useContext<boolean>(isLoginGlobal);
+const Home: FunctionComponent<HomeProps> = ({ setIsLoggedIn }) => {
+  let isLogin = useContext<boolean>(isLoginGlobal);
 
-    return (<>
-        {isLogin ? <AllCampaign /> : <Login setIsLogIn={setIsLogIn} />}
-
-    </>);
-}
+  return (
+    <>{isLogin ? <AllCampaign /> : <Login setIsLoggedIn={setIsLoggedIn} />}</>
+  );
+};
 
 export default Home;

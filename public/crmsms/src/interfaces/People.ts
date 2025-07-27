@@ -6,4 +6,5 @@ export default interface People {
     NumberOfGuests: number, //מספר אורחים מוזמנים
     NumberOfGuestsAccept: number, //מספר אורחים שמגיעים
     eventGroupName: string,
+    tableId?: string; // מזהה שולחן
 }
