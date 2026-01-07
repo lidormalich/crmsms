@@ -195,18 +195,18 @@ const NewCampaign: FunctionComponent<NewCampaignProps> = () => {
 
 
                 <div className="form-floating mb-3">
-
-                    <select defaultValue={'DEFAULT'}
-
+                    <select
+                        defaultValue={"DEFAULT"}
                         className="form-control"
                         id="weddingSentence"
-                        placeholder="textme"
                         name="weddingSentence"
                         value={formik.values.weddingSentence}
                         onChange={formik.handleChange}
-                        onBlur={formik.handleBlur}>
-
-                        <option hidden >Choose a Wedding Sentence...</option>
+                        onBlur={formik.handleBlur}
+                    >
+                        <option value="DEFAULT" disabled hidden>
+                            Choose a Wedding Sentence...
+                        </option>
                         {allweddingSentence.map((sentence: any) => <option key={sentence.weddingSentence} value={sentence.weddingSentence}> {sentence.weddingSentence}</option>)}
 
                     </select>

@@ -100,15 +100,18 @@ const AddPeople: FunctionComponent<AddPeopleProps> = ({ setpeopleChanged, people
                 <div className="form-floating mb-3">
                     <span >
                         <button className="w-25 btn btn-outline-primary " onClick={() => { setOpenSecModal(true) }}>add Group</button>
-                        <select defaultValue={'DEFAULT'}
+                        <select
+                            defaultValue={"DEFAULT"}
                             className="form-control"
                             id="eventGroupName"
-                            placeholder="textme"
                             name="eventGroupName"
                             value={formik.values.eventGroupName}
                             onChange={formik.handleChange}
-                            onBlur={formik.handleBlur}>
-                            <option hidden >Choose a Group...</option>
+                            onBlur={formik.handleBlur}
+                        >
+                            <option value="DEFAULT" disabled hidden>
+                                Choose a Group...
+                            </option>
                             {allGroup.map((groupname: Group) => <option key={counter++} value={groupname.eventGroupName}> {groupname.eventGroupName}</option>)}
                             {/* <option onClick={() => setOpenSecModal(true)} >add Group</option> */}
                         </select>
