@@ -5,18 +5,18 @@ import * as yup from "yup";
 import Group from "../../interfaces/Group";
 import { successMessage } from "../../Services/FeedbackService";
 import { addNewGroup } from "../../Services/GroupServices";
-
+import FormField from "../ui/FormField";
+import UIButton from "../ui/Button";
+import Card from "../ui/Card";
+import { useTranslation } from "../../i18n/useTranslation";
 
 interface AddGroupProps {
-    // setGroupChanged: Function;
-    // groupChanged: boolean;
     onHide: Function;
 }
 
-const AddGroup: FunctionComponent<AddGroupProps> = ({
-    // setGroupChanged, groupChanged,
-    onHide }) => {
+const AddGroup: FunctionComponent<AddGroupProps> = ({ onHide }) => {
     let { eventId } = useParams();
+    const t = useTranslation();
 
     let formik = useFormik({
         initialValues: { eventGroupName: "" },
@@ -25,47 +25,48 @@ const AddGroup: FunctionComponent<AddGroupProps> = ({
         }),
         onSubmit: (values: any, { resetForm }) => {
             addNewGroup(eventId as string, values).then((res) => {
-                successMessage("Group Added");
+                successMessage(t.modals.groupAdded);
                 resetForm();
-                // רענון
-                // setGroupChanged(!groupChanged);
                 onHide();
-            })
-                .catch((e) => console.log(e))
-
+            }).catch((e) => console.log(e));
         }
-    })
-    return (<>
-        <div>
+    });
 
-            <form onSubmit={formik.handleSubmit}>
+    return (
+        <Card
+            title={t.modals.addGroup}
+            icon={<i className="fa-solid fa-users" />}
+            iconColor="purple"
+        >
+            <form onSubmit={formik.handleSubmit} className="space-y-5">
+                <FormField
+                    label={t.guests.group}
+                    id="eventGroupName"
+                    placeholder={t.guests.group}
+                    name="eventGroupName"
+                    value={formik.values.eventGroupName}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    error={
+                        formik.touched.eventGroupName && formik.errors.eventGroupName
+                            ? String(formik.errors.eventGroupName)
+                            : undefined
+                    }
+                    leftIcon={<i className="fa-solid fa-users text-slate-400" />}
+                />
 
-                <div className="form-floating mb-3">
-                    <input
-                        type="text"
-                        className="form-control"
-                        id="eventGroupName"
-                        placeholder="textme"
-                        name="eventGroupName"
-                        value={formik.values.eventGroupName}
-                        onChange={formik.handleChange}
-                        onBlur={formik.handleBlur}
-                    />
-                    <label htmlFor="eventGroupName">Group Name</label>
-
-                </div>
-
-
-
-
-
-                <button type="submit" className="btn btn-warning w-100 my-3"
-                    disabled={!formik.isValid || !formik.dirty}><i className="fa-solid fa-plus"></i>  ADD</button>
+                <UIButton
+                    type="submit"
+                    className="w-full"
+                    variant="primary"
+                    disabled={!formik.isValid || !formik.dirty}
+                    leftIcon={<i className="fa-solid fa-plus" />}
+                >
+                    {t.modals.addGroup}
+                </UIButton>
             </form>
-        </div >
-
-
-    </>);
-}
+        </Card>
+    );
+};
 
 export default AddGroup;

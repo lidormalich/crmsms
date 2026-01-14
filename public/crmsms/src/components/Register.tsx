@@ -6,12 +6,17 @@ import * as yup from "yup";
 import User from "../interfaces/User";
 import { errorMessage, successMessage as successMsg } from "../Services/FeedbackService";
 import { addUser } from "../Services/userServices";
+import FormField from "./ui/FormField";
+import UIButton from "./ui/Button";
+import { useTranslation } from "../i18n/useTranslation";
 interface RegisterProps {
     setIsLogIn: Function;
 }
 
 const Register: FunctionComponent<RegisterProps> = ({ setIsLogIn }) => {
     let navigate = useNavigate();
+    const t = useTranslation();
+    
     let formik = useFormik({
         initialValues: { email: "", password: "", first_name: "", last_name: "" },
         validationSchema: yup.object({
@@ -21,13 +26,13 @@ const Register: FunctionComponent<RegisterProps> = ({ setIsLogIn }) => {
             password: yup.string().required().min(8),
         }),
         onSubmit: (values: User) => {
-            const id = toast.loading("Please wait...", { position: toast.POSITION.TOP_CENTER });
+            const id = toast.loading(t.common.loading, { position: toast.POSITION.TOP_CENTER });
             addUser(values)
                 .then((res) => {
                     navigate("/");
                     sessionStorage.setItem("IsLoggedIn", "false");
                     toast.update(id, {
-                        render: "You registered successfully!", type: "success", isLoading: false,
+                        render: t.auth.registeredSuccessfully, type: "success", isLoading: false,
                         autoClose: 3000,
                     });
 
@@ -39,82 +44,76 @@ const Register: FunctionComponent<RegisterProps> = ({ setIsLogIn }) => {
         },
     });
     return (
-        <div className="container mt-3 col-md-4 text-center">
-            <h3 className="display-3">REGISTER</h3>
-            <form onSubmit={formik.handleSubmit}>
-                <div className="form-floating mb-3">
-                    <input
-                        type="text"
-                        className="form-control"
+        <div className="mx-auto mt-12 max-w-md px-4">
+            <div className="rounded-2xl border border-slate-200 bg-white px-6 py-7 shadow-sm">
+                <h3 className="mb-1 text-center text-2xl font-semibold text-slate-900">
+                    {t.auth.createAccount}
+                </h3>
+                <p className="mb-6 text-center text-sm text-slate-500">
+                    {t.auth.registerToStart}
+                </p>
+                <form onSubmit={formik.handleSubmit} className="space-y-4">
+                    <FormField
+                        label={t.auth.firstName}
                         id="floatingInputfirstName"
                         placeholder="John"
                         name="first_name"
                         onChange={formik.handleChange}
                         value={formik.values.first_name}
                         onBlur={formik.handleBlur}
+                        error={formik.touched.first_name && formik.errors.first_name ? String(formik.errors.first_name) : undefined}
+                        leftIcon={<i className="fa-solid fa-user" />}
                     />
-                    <label htmlFor="floatingInputfirstName">First Name</label>
-                    {formik.touched.first_name && formik.errors.first_name && (
-                        <p className="text-danger">{formik.errors.first_name}</p>
-                    )}
-                </div>
-                <div className="form-floating mb-3">
-                    <input
-                        type="text"
-                        className="form-control"
+                    <FormField
+                        label={t.auth.lastName}
                         id="floatingInputlastName"
-                        placeholder="John"
+                        placeholder="Doe"
                         name="last_name"
                         onChange={formik.handleChange}
                         value={formik.values.last_name}
                         onBlur={formik.handleBlur}
+                        error={formik.touched.last_name && formik.errors.last_name ? String(formik.errors.last_name) : undefined}
+                        leftIcon={<i className="fa-solid fa-user" />}
                     />
-                    <label htmlFor="floatingInputlastName">Last Name</label>
-                    {formik.touched.last_name && formik.errors.last_name && (
-                        <p className="text-danger">{formik.errors.last_name}</p>
-                    )}
-                </div>
-                <div className="form-floating mb-3">
-                    <input
-                        type="email"
-                        className="form-control"
+                    <FormField
+                        label={t.auth.email}
                         id="floatingInput"
+                        type="email"
                         placeholder="name@example.com"
                         name="email"
                         onChange={formik.handleChange}
                         value={formik.values.email}
                         onBlur={formik.handleBlur}
+                        error={formik.touched.email && formik.errors.email ? String(formik.errors.email) : undefined}
+                        leftIcon={<i className="fa-solid fa-envelope" />}
                     />
-                    <label htmlFor="floatingInput">Email address</label>
-                    {formik.touched.email && formik.errors.email && (
-                        <p className="text-danger">{formik.errors.email}</p>
-                    )}
-                </div>
-                <div className="form-floating">
-                    <input
-                        type="password"
-                        className="form-control"
+                    <FormField
+                        label={t.auth.password}
                         id="floatingPassword"
-                        placeholder="Password"
+                        type="password"
+                        placeholder={t.auth.password}
                         name="password"
                         onChange={formik.handleChange}
                         value={formik.values.password}
                         onBlur={formik.handleBlur}
+                        error={formik.touched.password && formik.errors.password ? String(formik.errors.password) : undefined}
+                        leftIcon={<i className="fa-solid fa-lock" />}
                     />
-                    <label htmlFor="floatingPassword">Password</label>
-                    {formik.touched.password && formik.errors.password && (
-                        <p className="text-danger">{formik.errors.password}</p>
-                    )}
-                </div>
-                <button
-                    type="submit"
-                    className="btn btn-secondary w-100 my-3"
-                    disabled={!formik.dirty || !formik.isValid}
-                >
-                    Register
-                </button>
-            </form>
-            <Link to="/">Already have user? Login here</Link>
+                    <UIButton
+                        type="submit"
+                        className="w-full"
+                        disabled={!formik.dirty || !formik.isValid}
+                    >
+                        {t.auth.register}
+                    </UIButton>
+                </form>
+            </div>
+            <div className="mt-4 text-center text-sm text-slate-600">
+                <span>{t.auth.alreadyHaveAccount} </span>
+                <Link to="/" className="font-medium text-blue-600 hover:text-blue-700">
+                    {t.auth.loginHere}
+                </Link>
+            </div>
         </div>
     );
 };

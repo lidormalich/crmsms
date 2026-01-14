@@ -1,20 +1,76 @@
 import { FunctionComponent } from "react";
 import Footer from "./Footer";
+import { useTranslation } from "../../i18n/useTranslation";
 
 interface AboutProps {
 
 }
 
 const About: FunctionComponent<AboutProps> = () => {
+    const t = useTranslation();
+    
     return (<>
-        <div className="container" >
-            <h1 className="display-1">Created By Lidor Maliach</h1>
-            <h5 className="display-5">The Team Behind Wedding Event CRM Website</h5>
-            <p className="lead">Our team is made up of experienced event planners, developers, and designers who are passionate about creating innovative solutions that make event planning easier and more efficient. We understand the importance of a well-planned and executed event, and we strive to provide our clients with the highest level of service and support.</p>
+        <div className="w-full px-4 py-8 sm:px-6 lg:px-8">
+            <div className="mx-auto max-w-3xl space-y-6 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+                <div className="flex items-center gap-3">
+                    <span className="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-blue-600 text-white">
+                        <i className="fa-solid fa-message" />
+                    </span>
+                    <div>
+                        <h1 className="text-2xl font-semibold text-slate-900">
+                            {t.about.title}
+                        </h1>
+                        <p className="text-sm text-slate-500">
+                            {t.about.createdBy}
+                        </p>
+                    </div>
+                </div>
 
-            <h2 className="display-4">Contact Us</h2>
-            <p className="lead">If you have any questions or feedback about Wedding Event CRM Website, please don't hesitate to contact us. You can reach us by email at <a className="lead" href="mailto:lidormalich@gmail.com">lidormalich@gmail.com</a> or by phone at <a className="lead" href="tel:972526761204"> 052-676-1204</a> . We are always happy to hear from our clients and are committed to providing the best possible experience.</p>
-            <p>Thank you for choosing Wedding Event CRM Website for your event planning needs. We hope our system helps make your event planning experience a success!</p>
+                <section className="space-y-2 text-sm leading-relaxed text-slate-700">
+                    <h2 className="text-base font-semibold text-slate-900">
+                        {t.about.teamBehind}
+                    </h2>
+                    <p>
+                        Our product is built by experienced event planners, developers and
+                        designers who love creating tools that make planning easier and
+                        more efficient. We know how important a well organized event is,
+                        and we work hard to give you a smooth, reliable experience.
+                    </p>
+                </section>
+
+                <section className="space-y-2 text-sm leading-relaxed text-slate-700">
+                    <h2 className="text-base font-semibold text-slate-900">
+                        {t.about.contact}
+                    </h2>
+                    <p>
+                        {t.about.haveQuestion}
+                    </p>
+                    <ul className="space-y-1 text-sm">
+                        <li className="flex items-center gap-2">
+                            <i className="fa-solid fa-envelope text-slate-500" />
+                            <a
+                                href="mailto:lidormalich@gmail.com"
+                                className="text-blue-600 hover:text-blue-700"
+                            >
+                                lidormalich@gmail.com
+                            </a>
+                        </li>
+                        <li className="flex items-center gap-2">
+                            <i className="fa-solid fa-phone text-slate-500" />
+                            <a
+                                href="tel:972526761204"
+                                className="text-blue-600 hover:text-blue-700"
+                            >
+                                052-676-1204
+                            </a>
+                        </li>
+                    </ul>
+                </section>
+
+                <p className="text-sm text-slate-600">
+                    {t.about.thankYou}
+                </p>
+            </div>
             <Footer />
         </div>
     </>);

@@ -1,11 +1,12 @@
 import { FunctionComponent, useContext, useEffect, useState } from "react";
-import { Button } from "react-bootstrap";
 import { useNavigate, useParams } from "react-router-dom";
 import { getCoupleImageInEvent, getEventDateByID } from "../../Services/eventServices";
-import "./Dashboard.css";
 import People from "../../interfaces/People";
 import Countdown from "react-countdown";
 import { globalContext } from "../../App";
+import UIButton from "../ui/Button";
+import Card from "../ui/Card";
+import { useTranslation } from "../../i18n/useTranslation";
 
 interface DashboardProps {
     peopleArr: People[];
@@ -25,6 +26,7 @@ const Dashboard: FunctionComponent<DashboardProps> = ({ peopleArr, userRefresh }
     let [coupleImage, setCoupleImage] = useState<string>("");
     let { eventId } = useParams();
     let navigate = useNavigate();
+    const t = useTranslation();
 
 
     let counter = (peopleArr: People[]) => {
@@ -45,7 +47,7 @@ const Dashboard: FunctionComponent<DashboardProps> = ({ peopleArr, userRefresh }
 
             // return <span>{days} <span style={{ color: "rgb(136,108,228)", fontSize: "0.5em" }}>ימים</span>:{hours}<span style={{ color: "rgb(136,108,228)", fontSize: "0.5em" }}>שעות</span>:{minutes}<span style={{ color: "rgb(136,108,228)", fontSize: "0.5em" }}>דק</span></span>;
             return <span style={{ color: "rgb(136,108,228)" }}>{days}:{hours}:{minutes}</span>
-        } else return <div style={{ color: "rgb(136,108,228)" }}>Just Married</div>
+        } else return <div style={{ color: "rgb(136,108,228)" }}>{t.dashboard.justMarried}</div>
     };
     useEffect(() => {
         counter(peopleArr);
@@ -56,50 +58,97 @@ const Dashboard: FunctionComponent<DashboardProps> = ({ peopleArr, userRefresh }
         getCoupleImageInEvent(eventId as string).then((res) => setCoupleImage(res.data.coupleImage)).catch((e) => console.log(e));
         counter(peopleArr);
         getEventDateByID(eventId as string).then(res => { seteventdate(res.data[0].weddingDate) }).catch(e => console.log(e));
-    }, []);
-    return (<>
-        <div className="d-flex justify-content-center align-items-center ">
-            <div className="dashCards">
-                <div className="dashCard">
-                    {/* צבע ירוק לאישור */}
-                    <div className="cardtitle" style={{ color: "rgb(136,108,228)", fontWeight: "bold" }}>Timer for Love</div>
-                    <div className="cardbody">
-                        <div dir="rtl" className="value" style={{ fontWeight: "bold", fontSize: "3rem" }}>
-                            {eventdate != "" ? <Countdown date={eventdate}
-                                intervalDelay={1000}
-                                zeroPadTime={2}
-                                zeroPadDays={2}
-                                precision={3}
-                                renderer={renderer}
-                                onComplete={() => <div>Just Married</div>}
-                            /> : <>Not Have Date</>}
-                            <div style={{ fontSize: ".5em" }}>💜 Days 💜</div>
+    }, [eventId]);
+    
+    const stats = counter(peopleArr);
+    
+    return (
+        <div className="flex flex-wrap items-center justify-center gap-6 px-4 py-6">
+            {/* Timer Card */}
+            <Card
+                className="min-w-[280px] max-w-[320px]"
+                title={t.dashboard.timerForLove}
+                icon={<i className="fa-solid fa-heart" />}
+                iconColor="purple"
+            >
+                <div className="flex flex-col items-center justify-center py-4">
+                    {eventdate !== "" ? (
+                        <div className="text-center">
+                            <div className="text-4xl font-bold text-purple-600">
+                                <Countdown
+                                    date={eventdate}
+                                    intervalDelay={1000}
+                                    zeroPadTime={2}
+                                    zeroPadDays={2}
+                                    precision={3}
+                                    renderer={renderer}
+                                    onComplete={() => <div>{t.dashboard.justMarried}</div>}
+                                />
+                            </div>
+                            <div className="mt-2 text-sm text-purple-500">{t.dashboard.days}</div>
+                        </div>
+                    ) : (
+                        <div className="text-slate-500">{t.dashboard.noDateSet}</div>
+                    )}
+                </div>
+            </Card>
+
+            {/* Couple Image Card */}
+            <Card
+                className="min-w-[280px] max-w-[320px]"
+                title={t.dashboard.couplePhoto}
+                icon={<i className="fa-solid fa-image" />}
+                iconColor="blue"
+            >
+                <div className="flex flex-col items-center justify-center py-4">
+                    {coupleImage !== "" ? (
+                        <img
+                            src={coupleImage}
+                            alt="Couple"
+                            className="h-36 w-full rounded-xl object-cover shadow-md"
+                        />
+                    ) : (
+                        <div className="flex flex-col items-center gap-4">
+                            <img
+                                src="https://cdn-icons-png.flaticon.com/512/3875/3875433.png"
+                                alt="Placeholder"
+                                className="h-24 w-24 opacity-50"
+                            />
+                            <UIButton
+                                onClick={() => navigate(`/uploadimage/${eventId}`)}
+                                leftIcon={<i className="fa-solid fa-upload" />}
+                            >
+                                {t.dashboard.addImage}
+                            </UIButton>
+                        </div>
+                    )}
+                </div>
+            </Card>
+
+            {/* Confirmed Arrival Card */}
+            <Card
+                className="min-w-[280px] max-w-[320px]"
+                title={t.dashboard.confirmedArrival}
+                icon={<i className="fa-regular fa-circle-check" />}
+                iconColor="green"
+            >
+                <div className="flex flex-col items-center justify-center py-4">
+                    <div className="flex items-center gap-3">
+                        <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-green-500 to-green-600 shadow-lg shadow-green-500/30">
+                            <i className="fa-regular fa-circle-check text-2xl text-white" />
+                        </div>
+                        <div className="text-center">
+                            <div className="text-3xl font-bold text-green-600">
+                                {stats.appect}
+                                <span className="text-lg text-slate-500">/{stats.come}</span>
+                            </div>
+                            <div className="text-xs text-slate-500">{t.dashboard.guestsConfirmed}</div>
                         </div>
                     </div>
                 </div>
-                <div className="dashCard">
-                    {coupleImage != "" ? (<img src={coupleImage} alt="" className="imageSmall" />) : (<>
-                        <img src={"https://cdn-icons-png.flaticon.com/512/3875/3875433.png"} alt="" className="imageSmallWithBTN" />
-                        <Button onClick={() => navigate(`/uploadimage/${eventId}`)}>Add Image</Button>
-
-                    </>)}</div>
-                <div className="dashCard">
-                    <div className="cardtitle">Confirmed Arrival</div>
-                    <div className="cardbody">
-                        <div className="icon"><i className="fa-regular fa-circle-check" style={{ color: "green" }} ></i></div>
-                        <div className="value" ><small style={{ color: "green" }}>{counter(peopleArr).appect}</small><span style={{ fontSize: ".5em" }}>/{counter(peopleArr).come}</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-
+            </Card>
         </div>
-
-
-
-
-    </>);
+    );
 }
 
 export default Dashboard;
