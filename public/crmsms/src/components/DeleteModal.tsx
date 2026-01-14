@@ -1,8 +1,9 @@
 import { FunctionComponent } from "react";
-import { Button, Modal } from "react-bootstrap";
-import People from "../interfaces/People";
 import { deletePepoleFromEvent } from "../Services/eventServices";
 import { errorMessage, successMessage } from "../Services/FeedbackService";
+import Modal from "./ui/Modal";
+import UIButton from "./ui/Button";
+import { useTranslation } from "../i18n/useTranslation";
 
 interface DeleteModalProps {
     show: boolean;
@@ -10,45 +11,44 @@ interface DeleteModalProps {
     eventId: string;
     onHide: Function;
     refresh: Function;
-
-
 }
 
 const DeleteModal: FunctionComponent<DeleteModalProps> = ({ show, onHide, phoneNum, refresh, eventId, }) => {
+    const t = useTranslation();
+    
+    const handleDelete = () => {
+        deletePepoleFromEvent(phoneNum, eventId).then(() => {
+            successMessage(t.guests.guestDeleted);
+            refresh();
+            onHide();
+        }).catch((e) => {
+            errorMessage(t.errors.somethingWentWrong);
+            console.log(e);
+        });
+    };
 
-    return (<>
+    return (
         <Modal
             show={show}
             onHide={() => onHide()}
-            refresh={() => refresh()}
             size="sm"
-            aria-labelledby="contained-modal-title-vcenter"
-            centered
+            title={t.modals.deleteGuestQuestion}
+            icon={<i className="fa-solid fa-trash-can" />}
+            iconColor="red"
+            footer={
+                <div className="flex justify-end gap-3">
+                    <UIButton variant="outline" onClick={() => onHide()}>
+                        {t.common.cancel}
+                    </UIButton>
+                    <UIButton variant="danger" onClick={handleDelete}>
+                        {t.common.yes}, {t.modals.deleteItem}
+                    </UIButton>
+                </div>
+            }
         >
-            <Modal.Header closeButton>
-                <Modal.Title id="contained-modal-title-vcenter" >
-                    Delete Item?
-                </Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-                <h5>Are You Sure?</h5>
-            </Modal.Body>
-            <Modal.Footer>
-                <Button onClick={() => onHide()}>Cancle</Button>
-                <Button variant="danger" onClick={() => {
-                    deletePepoleFromEvent(phoneNum, eventId).then(() => {
-                        successMessage("Men Deleted");
-                        refresh();
-                    }).catch((e) => {
-                        errorMessage("Sorry! Something went wrong...");
-                        console.log(e)
-                    });
-                    onHide()
-                }}
-                >Yes, Delete It</Button>
-            </Modal.Footer>
+            <p className="text-slate-700">{t?.modals?.deleteEventConfirm||t?.guests?.deleteGuestConfirm}</p>
         </Modal>
-    </>);
+    );
 }
 
 export default DeleteModal;

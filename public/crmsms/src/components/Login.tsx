@@ -6,6 +6,9 @@ import * as yup from "yup";
 import User from "../interfaces/User";
 import { errorMessage, successMessage } from "../Services/FeedbackService";
 import { checkUser } from "../Services/userServices";
+import FormField from "./ui/FormField";
+import UIButton from "./ui/Button";
+import { useTranslation } from "../i18n/useTranslation";
 
 interface LoginProps {
     setIsLogIn: Function;
@@ -13,6 +16,8 @@ interface LoginProps {
 
 const Login: FunctionComponent<LoginProps> = ({ setIsLogIn }) => {
     let navigate = useNavigate();
+    const t = useTranslation();
+    
     let formik = useFormik({
         initialValues: { email: "admin@gmail.com", password: "adminadmin" },
         enableReinitialize: true,
@@ -21,10 +26,7 @@ const Login: FunctionComponent<LoginProps> = ({ setIsLogIn }) => {
             password: yup.string().required().min(8)
         }),
         onSubmit: (values: User) => {
-
-
-
-            const id = toast.loading("Please wait...", { position: toast.POSITION.TOP_CENTER });
+            const id = toast.loading(t.common.loading, { position: toast.POSITION.TOP_CENTER });
             checkUser(values)
                 .then((res) => {
                     setIsLogIn(true);
@@ -33,65 +35,70 @@ const Login: FunctionComponent<LoginProps> = ({ setIsLogIn }) => {
                     sessionStorage.setItem("Authorization", `${res.data.Authorization}`);
                     navigate('/');
                     toast.update(id, {
-                        render: "You Loged-In :)", type: "success", isLoading: false,
+                        render: t.auth.loggedIn, type: "success", isLoading: false,
                         autoClose: 3000,
                     });
 
                 }).catch(e => {
                     navigate('/'); console.log(e);
-                    toast.update(id, { render: "Wrong info", type: "error", isLoading: false, autoClose: 5000, });
+                    toast.update(id, { render: t.auth.wrongInfo, type: "error", isLoading: false, autoClose: 5000, });
 
                 });
         }
     })
 
-    return (<>
-        <div className="container mt-5 col-md-4">
-            <h5 className="display-5">Login</h5>
-            <form onSubmit={formik.handleSubmit}>
-                <div className="form-floating mb-3">
-                    <input
+    return (
+        <div className="mx-auto mt-12 max-w-md px-4">
+            <div className="rounded-2xl border border-slate-200 bg-white px-6 py-7 shadow-sm">
+                <h2 className="mb-1 text-center text-2xl font-semibold text-slate-900">
+                    {t.auth.login}
+                </h2>
+                <p className="mb-6 text-center text-sm text-slate-500">
+                    {t.auth.signInToManage}
+                </p>
+                <form onSubmit={formik.handleSubmit} className="space-y-4">
+                    <FormField
+                        label={t.auth.email}
                         type="email"
-                        className="form-control"
                         id="floatingInput"
                         placeholder="name@example.com"
                         name="email"
                         value={formik.values.email}
                         onChange={formik.handleChange}
                         onBlur={formik.handleBlur}
+                        error={formik.touched.email && formik.errors.email ? String(formik.errors.email) : undefined}
+                        leftIcon={<i className="fa-solid fa-envelope" />}
                     />
-                    <label htmlFor="floatingInput">Email address</label>
-                    {formik.touched.email && formik.errors.email && (
-                        <small className="text-danger">{formik.errors.email}</small>
-                    )}
-                </div>
 
-                <div className="form-floating">
-                    <input
+                    <FormField
+                        label={t.auth.password}
                         type="password"
-                        className="form-control"
                         id="floatingPassword"
-                        placeholder="Password"
+                        placeholder={t.auth.password}
                         name="password"
                         value={formik.values.password}
                         onChange={formik.handleChange}
                         onBlur={formik.handleBlur}
+                        error={formik.touched.password && formik.errors.password ? String(formik.errors.password) : undefined}
+                        leftIcon={<i className="fa-solid fa-lock" />}
                     />
-                    <label htmlFor="floatingPassword">Password</label>
-                    {formik.touched.password && formik.errors.password && (
-                        <small className="text-danger">{formik.errors.password}</small>
-                    )}
-                </div>
-                <button type="submit" className="btn btn-success w-100 my-3"
-                    disabled={!formik.isValid
-                        // || !formik.dirty
-                    }>Login</button>
-            </form>
-            <Link to={"/register"}>It took a moment for her to register the truth. <i className="fa-solid fa-face-smile-wink"></i></Link>
 
+                    <UIButton type="submit" className="w-full" disabled={!formik.isValid}>
+                        {t.auth.login}
+                    </UIButton>
+                </form>
+            </div>
+            <div className="mt-4 text-center text-sm text-slate-600">
+                <span>{t.auth.dontHaveAccount} </span>
+                <Link
+                    to={"/register"}
+                    className="font-medium text-blue-600 hover:text-blue-700"
+                >
+                    {t.auth.registerHere}
+                </Link>
+            </div>
         </div>
-
-    </>);
+    );
 }
 
 export default Login;

@@ -26,8 +26,8 @@ export function getDataNew(people: People, groom: string, bride: string, eventId
     const id = toast.loading("Please wait...", { position: toast.POSITION.TOP_CENTER });
     sendsmstoclient({
         message: `שלום ${people.firstName}, הוזמנתם לחתונה של  ${groom} & ${bride}
-            הזמנה דיגיטלית לחתונה: https://crmsms.netlify.app/invitation/${eventId} 
-            לפרטים ואישור הגעה >>  https://crmsms.netlify.app/event/${eventId}/${people.phoneNumber}
+            הזמנה דיגיטלית לחתונה: https://crm-sms-39c69c412c78.herokuapp.com/invitation/${eventId} 
+            לפרטים ואישור הגעה >>  https://crm-sms-39c69c412c78.herokuapp.com/event/${eventId}/${people.phoneNumber}
                         נשמח לראותכם בחתונתנו ${groom} & ${bride}`, phone: `+972${editphone(people.phoneNumber)}`, eventId: eventId as string
     }, sessionStorage.getItem("Authorization") as string)
         .then(() => {

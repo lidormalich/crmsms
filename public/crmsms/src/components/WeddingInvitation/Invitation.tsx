@@ -5,9 +5,7 @@ import { getEventInfoByID } from "../../Services/eventServices";
 import Loading from "../Extra/Loading";
 import WeddingInvitation from "./WeddingInvitation";
 
-interface InvitationProps {
-
-}
+interface InvitationProps {}
 
 const Invitation: FunctionComponent<InvitationProps> = () => {
     let { eventId } = useParams();
@@ -16,16 +14,21 @@ const Invitation: FunctionComponent<InvitationProps> = () => {
         _id: "", uuid: "", campaignName: "", ownerName: "", phone: "", bride: "", groom: "", groomParents: "", brideParents: "", coupleImage: "", weddingSentence: "", weddingDate: "", eventsHall: ""
     });
     let [flage, setFlage] = useState<boolean>(false);
+    
     useEffect(() => {
         getEventInfoByID(eventId as string).then((res) => {
             setInfo(res.data);
             res.data._id != null ? setFlage(true) : setFlage(false);
         }).catch((error) => { console.log(error) });
-    }, []);
+    }, [eventId]);
 
-    return (<>
-        {flage ? <WeddingInvitation eventInfo={info} /> : <Loading stringToShow={"No Data To Show"} />}
-    </>);
-}
+    return (
+        <div className="w-full max-w-2xl p-4">
+            <div className="w-full max-w-2xl">
+                {flage ? <WeddingInvitation eventInfo={info} /> : <Loading stringToShow={"No Data To Show"} />}
+            </div>
+        </div>
+    );
+};
 
 export default Invitation;

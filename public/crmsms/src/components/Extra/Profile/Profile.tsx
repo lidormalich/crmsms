@@ -1,72 +1,83 @@
-import { FunctionComponent, useContext, useEffect, useState } from "react";
+import { FunctionComponent, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { isLoginGlobal } from "../../../App";
 import NotHaveAccess from "../NotHaveAccess";
-// import { isLoginGlobal } from "../../App";
-// import UserInterface from "../../interface/UserInterface";
-// import { getAllUserCards } from "../../services/cardServices";
-// import { getUserInfo } from "../../services/usersservices";
-// import NotHaveAccess from "../Extra/NotHaveAccess/NotHaveAccess";
-import "./Profile.css";
+import UIButton from "../../ui/Button";
+import Card from "../../ui/Card";
+import { useTranslation } from "../../../i18n/useTranslation";
 
-interface ProfileProps {
-    // setIsLogIn: Function;
-}
+interface ProfileProps {}
 
 const Profile: FunctionComponent<ProfileProps> = () => {
     let navigate = useNavigate();
     let isLogin = useContext<boolean>(isLoginGlobal);
+    const t = useTranslation();
 
-    useEffect(() => {
+    if (!isLogin) {
+        return <NotHaveAccess />;
+    }
 
-
-        // try {
-        //     let userId: number = JSON.parse(
-        //         sessionStorage.getItem("userData") as string
-        //     ).userID;
-
-        //     getAllUserCards(userId).then((res) => setLength(res.data.length));
-
-        //     getUserInfo(userId).then((res) => {
-        //         // console.log(res.data);
-        //         setUser(res.data)
-        //     });
-        // } catch (error) {
-        //     console.log(error);
-        // }
-
-
-    }, []);
-
-    return (<>
-        {isLogin ? <>
-            <div className="container my-3">
-                <div className="card-container mx-auto">
-                    <span className="pro"> Free Account</span>
-                    <img src="https://images.nightcafe.studio//assets/profile.png?tr=w-1600,c-at_max" alt="ANONYMOUS USER" className="round mx-auto d-block my-3" style={{ width: "17em" }} />
-                    <h3>{sessionStorage.getItem("userName")}</h3>
-                    <h6></h6>
-                    <p>Can make and edit all Event <br /> Can Send free sms from web</p>
-                    <div className="buttons mx-2 my-3">
-
-                        {/* <div className=" button primary ghost my-3">
-                            You have E Events
-                        </div> */}
-                        <button className="primary" onClick={() => {
-                            navigate("/allcampaign")
-                        }}>
-                            Make More Events
-                        </button>
+    return (
+        <div className="mx-auto max-w-md px-4 py-6">
+            <Card
+                className="relative overflow-hidden"
+                icon={<i className="fa-solid fa-user" />}
+                iconColor="blue"
+            >
+                <div className="relative">
+                    {/* Badge */}
+                    <div className="absolute right-0 top-0 rounded-bl-xl bg-gradient-to-br from-yellow-400 to-yellow-500 px-3 py-1 text-xs font-bold text-slate-900 shadow-md">
+                        {t.profile.freeAccount}
                     </div>
-                    <div className="by">
-                        <p className="">Free Account</p>
+
+                    {/* Profile Image */}
+                    <div className="mb-6 flex justify-center">
+                        <div className="relative">
+                            <img
+                                src="https://images.nightcafe.studio//assets/profile.png?tr=w-1600,c-at_max"
+                                alt="Profile"
+                                className="h-40 w-40 rounded-full border-4 border-blue-500 object-cover shadow-lg"
+                            />
+                            <div className="absolute inset-0 rounded-full border-4 border-blue-200 opacity-50"></div>
+                        </div>
                     </div>
-                </div >
 
-            </div >
-        </> : (<NotHaveAccess />)}
-    </>);
-}
+                    {/* User Name */}
+                    <div className="mb-4 text-center">
+                        <h3 className="text-2xl font-bold text-slate-900">
+                            {sessionStorage.getItem("userName") || "User"}
+                        </h3>
+                    </div>
 
+                    {/* Description */}
+                    <div className="mb-6 text-center">
+                        <p className="text-sm leading-relaxed text-slate-600">
+                            {t.profile.canMakeEdit}
+                            <br />
+                            {t.profile.canSendFree}
+                        </p>
+                    </div>
+
+                    {/* Button */}
+                    <div className="mb-4">
+                        <UIButton
+                            className="w-full"
+                            variant="primary"
+                            onClick={() => navigate("/allcampaign")}
+                            leftIcon={<i className="fa-solid fa-plus" />}
+                        >
+                            {t.profile.makeMoreEvents}
+                        </UIButton>
+                    </div>
+
+                    {/* Footer Badge */}
+                    <div className="rounded-xl bg-gradient-to-br from-slate-100 to-slate-200 p-4 text-center">
+                        <p className="text-sm font-medium text-slate-700">{t.profile.freeAccount}</p>
+                    </div>
+                </div>
+            </Card>
+        </div>
+    );
+};
 
 export default Profile;

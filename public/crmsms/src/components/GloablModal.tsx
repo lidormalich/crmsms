@@ -1,7 +1,9 @@
 import { FunctionComponent, useEffect, useState } from "react";
-import { Button, Modal } from "react-bootstrap";
 import AddPeople from "./AddPeople";
 import GloabSeclModal from "./GloabSeclModal";
+import Modal from "./ui/Modal";
+import UIButton from "./ui/Button";
+import { useTranslation } from "../i18n/useTranslation";
 
 interface GloablModalProps {
     show: boolean;
@@ -13,34 +15,30 @@ interface GloablModalProps {
 
 const GloablModal: FunctionComponent<GloablModalProps> = ({ show, onHide, setpeopleChanged, refresh, peopleChange, }) => {
     let [groupChange, setGroupChanged] = useState<boolean>(false);
+    const t = useTranslation();
 
     useEffect(() => {
 
     }, [groupChange]);
-    return (<>
+    return (
         <Modal
             show={show}
             onHide={() => onHide()}
-            refresh={() => refresh()}
             size="lg"
-            aria-labelledby="contained-modal-title-vcenter"
-            centered >
-            <Modal.Header closeButton>
-                <Modal.Title id="contained-modal-title-vcenter" >
-                    <h5>Add Guest</h5>
-                </Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-                <AddPeople setpeopleChanged={setpeopleChanged} peopleChange={peopleChange} />
-            </Modal.Body>
-            <Modal.Footer>
-                <Button onClick={() => onHide()}>Close</Button>
-
-            </Modal.Footer>
+            title={t.modals.addGuest}
+            icon={<i className="fa-solid fa-user-plus" />}
+            iconColor="blue"
+            footer={
+                <div className="flex justify-end gap-3">
+                    <UIButton variant="outline" onClick={() => onHide()}>
+                        {t.common.close}
+                    </UIButton>
+                </div>
+            }
+        >
+            <AddPeople setpeopleChanged={setpeopleChanged} peopleChange={peopleChange} />
         </Modal>
-
-
-    </>);
+    );
 }
 
 export default GloablModal;

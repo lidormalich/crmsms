@@ -1,6 +1,5 @@
 import { FunctionComponent } from "react";
 import { Link } from "react-router-dom";
-import './404.css';
 
 
 interface PagenotFoundProps {
@@ -8,31 +7,32 @@ interface PagenotFoundProps {
 }
 
 const PagenotFound: FunctionComponent<PagenotFoundProps> = () => {
-    return (<><section className="page_404">
-        <div className="container">
-            <div className="row">
-                <div className="col-sm-12 ">
-                    <div className="col-sm-10 col-sm-offset-1  text-center">
-                        <div className="four_zero_four_bg">
-                            <h1 className="text-center ">404</h1>
-
-
-                        </div>
-
-                        <div className="contant_box_404">
-                            <h3 className="h2">
-                                Look like you're lost
-                            </h3>
-
-                            <p>הבחור רעב, הוא אכל בטעות את הכבל- והשרת לא נמצא</p>
-                            <p>אולי נסה לחזור למקום שכן עובד באתר?</p>
-                            <Link to="/" className="link_404">לחזרה למסך הראשי</Link>
-                        </div>
-                    </div>
+    return (
+        <div className="flex min-h-[60vh] items-center justify-center px-4">
+            <div className="max-w-md rounded-2xl border border-slate-200 bg-white p-6 text-center shadow-sm">
+                <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-slate-900 text-white">
+                    <i className="fa-solid fa-circle-question text-xl" />
                 </div>
+                <h1 className="text-3xl font-bold tracking-tight text-slate-900">
+                    404
+                </h1>
+                <p className="mt-2 text-sm text-slate-600">
+                    The page you are looking for could not be found. It may have been
+                    moved or deleted.
+                </p>
+                <p className="mt-1 text-sm text-slate-500">
+                    Try going back to the main dashboard and navigating from there.
+                </p>
+                <Link
+                    to="/"
+                    className="mt-4 inline-flex items-center gap-2 rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-blue-700"
+                >
+                    <i className="fa-solid fa-house" />
+                    Back to home
+                </Link>
             </div>
         </div>
-    </section></>);
+    );
 }
 
 export default PagenotFound;

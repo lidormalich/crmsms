@@ -1,7 +1,8 @@
-import { FunctionComponent, useEffect, useState } from "react";
-import { Button, Modal } from "react-bootstrap";
-import AddPeople from "./AddPeople";
+import { FunctionComponent } from "react";
 import AddGroup from "./MangeGroup/AddGroup";
+import Modal from "./ui/Modal";
+import UIButton from "./ui/Button";
+import { useTranslation } from "../i18n/useTranslation";
 
 interface GloabSeclModalProps {
     show: boolean;
@@ -11,31 +12,30 @@ interface GloabSeclModalProps {
 }
 
 const GloabSeclModal: FunctionComponent<GloabSeclModalProps> = ({ show, onHide, setGroupChanged, groupChange, }) => {
-
-
-    return (<>
+    const t = useTranslation();
+    
+    return (
         <Modal
             show={show}
             onHide={() => onHide()}
-
             size="sm"
-            aria-labelledby="contained-modal-title-vcenter"
-            centered >
-            <Modal.Header closeButton>
-                <Modal.Title id="contained-modal-title-vcenter" >
-                    Add Group interface
-                </Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-                <AddGroup
-                    // setGroupChanged={setGroupChanged} groupChanged={groupChange} 
-                    onHide={onHide} />
-            </Modal.Body>
-            <Modal.Footer>
-                <Button onClick={() => onHide()}>Close</Button>
-            </Modal.Footer>
+            title={t.modals.addGroup}
+            icon={<i className="fa-solid fa-users" />}
+            iconColor="purple"
+            footer={
+                <div className="flex justify-end gap-3">
+                    <UIButton variant="outline" onClick={() => onHide()}>
+                        {t.common.close}
+                    </UIButton>
+                </div>
+            }
+        >
+            <AddGroup
+                // setGroupChanged={setGroupChanged} groupChanged={groupChange} 
+                onHide={onHide} 
+            />
         </Modal>
-    </>);
+    );
 }
 
 export default GloabSeclModal;

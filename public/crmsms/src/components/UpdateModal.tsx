@@ -1,7 +1,7 @@
 import { FunctionComponent } from "react";
-import { Button, Modal } from "react-bootstrap";
-import People from "../interfaces/People";
 import UpdatePeopleToInvitation from "./UpdatePeopleToInvitation";
+import Modal from "./ui/Modal";
+import { useTranslation } from "../i18n/useTranslation";
 
 interface UpdateModalProps {
     show: boolean;
@@ -9,32 +9,23 @@ interface UpdateModalProps {
     refresh: Function;
     phoneNum: string;
     eventId: string;
-
 }
 
 const UpdateModal: FunctionComponent<UpdateModalProps> = ({ show, onHide, phoneNum, eventId, refresh }) => {
-    return (<>
+    const t = useTranslation();
+    
+    return (
         <Modal
             show={show}
             onHide={() => onHide()}
             size="lg"
-            aria-labelledby="contained-modal-title-vcenter"
-            centered
+            title={t.modals.updateGuest}
+            icon={<i className="fa-solid fa-user-pen" />}
+            iconColor="blue"
         >
-            <Modal.Header closeButton>
-                <Modal.Title id="contained-modal-title-vcenter">
-
-                </Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-                <UpdatePeopleToInvitation phoneNum={phoneNum} eventId={eventId} refresh={() => refresh()} onHide={onHide} />
-            </Modal.Body>
-
+            <UpdatePeopleToInvitation phoneNum={phoneNum} eventId={eventId} refresh={() => refresh()} onHide={onHide} />
         </Modal>
-
-
-
-    </>);
+    );
 }
 
 export default UpdateModal;
